@@ -1,0 +1,132 @@
+// If you want a responsive design, you can add media queries in your CSS.
+// To use media queries, you must have this line in the <head> of your html. 👇
+// ---> <meta name="viewport" content="width=device-width, initial-scale=1">
+
+// Smallest device
+@media (min-width: 100px) and (max-width: 575px) {
+.cards {
+      grid-template-columns: 1fr;
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+    .cards {
+    grid-template-columns: 1fr;
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+.cards {
+    grid-template-columns: 1fr 1fr;
+}
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+.cards {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+.cards {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+}
+
+a {
+color: $neutral-600;
+}
+
+a:link {
+text-decoration: none;
+}
+
+
+// div {
+// border: 1px solid rgb(0, 0, 0);
+// background: white; /* White background */
+// padding: 20px; /* Internal space */
+// border-radius: 4px;
+// box-shadow: 0 10px 30px rgba(0,0,0,.1);
+// }
+
+.container {
+width: auto;   /* This sets the width */
+margin: 0 auto; /* This automatically sets left/right margins */
+}
+
+.container-small {
+width: 500px;
+display: flex;
+}
+
+.card-category {
+background-size: cover;
+background-position: center;
+height: 180px;
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+font-size: 24px;
+font-weight: bold;
+text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+box-shadow: 0 0 15px rgba(0,0,0,0.2);
+margin-bottom: 20px;
+}
+
+.cards {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-gap: 16px;
+flex-grow: 1;
+}
+
+.card {
+border-radius: 8px;
+}
+
+.card-body {
+display: grid;
+justify-content: center;
+font-family: $body-font;
+}
+
+.card-text {
+height: 240px;
+overflow: auto;
+}
+
+img {
+border-radius: 8px;
+max-width: 100%;
+}
+
+.outer-container.col-md-6 {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.inner-container {
+width: 530px;
+height: 280px;
+position: relative;
+top: 100px;
+box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+text-align: center;
+}
+
+
+.col-4.my-2.align .card-deck .card.card-effect {
+height: 700px;
+}
+
+
+.card-footer.d-flex.justify-content-space-evenly {
+justify-content: space-between;
+}
