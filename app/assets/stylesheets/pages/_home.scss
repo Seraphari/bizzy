@@ -1,4 +1,17 @@
 // Specific CSS for your home-page
 body {
   background-color: #F1F5F9;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.banners {
+  width: auto;
+  height: 600px;
+  padding-top: 150px;
 }
