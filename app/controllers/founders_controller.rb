@@ -1,13 +1,12 @@
 class FoundersController < ApplicationController
   before_action :set_founder, only: [:show, :edit, :update]
-  before_action :set_user, only: [:new, :create]
 
   def index
     @founders = Founder.all
   end
 
   def show
-   @founder = Founder.find(params[:id])
+
   end
 
   def new
@@ -16,8 +15,8 @@ class FoundersController < ApplicationController
 
   def create
     @founder = Founder.new(founder_params)
-    raise
-    if @founder.save
+    @founder.user = current_user
+    if @founder.save!
         redirect_to  founder_path(@founder) #go to the recommendation page
     else
         render :new, status: :unprocessable_entity
@@ -43,8 +42,8 @@ class FoundersController < ApplicationController
 
   private
 
-  def set_user
-    @user = current_user
+  def set_founder
+    @founder = Founder.find(params[:id])
   end
 
   def founder_params

@@ -1,11 +1,12 @@
-<div class="container">
+<div class="container" data-controller="tom-select">
   <%= simple_form_for [@founder] do |f| %>
     <%= f.input :company_name, placeholder: ''%>
     <%= f.input :company_description, placeholder: ''%>
     <%= f.input :company_UEN, placeholder: '123456789H' %>
+    <%= f.input :company_email, placeholder: 'abcd_1234@gmail.com' %>
     <%= f.input :funding_stage, placeholder: '' %>
-    <%= f.input :date_incorporated, placeholder: '' %>
-    <%= f.association :sectors, collection: Sector.all, include_hidden: false, input_html: {multiple: true, data: {controller: "tom-select", tom_select_options_value: {tags: true}}} %>
+    <%= f.input :date_incorporated, as: :string, input_html: {type: :date}, collection: 0..Time.now.year %>
+    <%= f.association :sectors, include_hidden: false%>
     <%= f.submit class: 'btn btn-primary text-dark fw-bold' %>
   <% end %>
   <a href="/">Back</a>
