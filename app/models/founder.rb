@@ -6,7 +6,7 @@ class Founder < ApplicationRecord
   too_long: "%{count} characters is the maximum allowed" }
   validates :company_UEN, uniqueness: true
   validates :company_email, :company_UEN, confirmation: true
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   has_many :founder_sectors
   has_many :sectors, through: :founder_sectors
 end
