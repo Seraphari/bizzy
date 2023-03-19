@@ -1,8 +1,48 @@
-<h1>This is founder/show</h1>
+<div class="container">
+  <div class="row">
+    <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
+    <p><strong>Description:</strong> <%= @founder.company_description %></p>
+  </div>
 
- <%= @founder.company_name %>
- <%= @founder.company_description %>
- <%= @founder.company_email %>
- <%= @founder.company_UEN %>
- <%= @founder.funding_stage %>
- <%= @founder.date_incorporated %>
+  <div class="row">
+    <div class="col d-flex justify-content-between">
+      <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
+      <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
+      <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
+      <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="container">
+  <div class="row text-center">
+    <h3>Recommendations (Investors'profile) based on your sectors below:</h3>
+      <div class="col d-flex justify-content-around">
+        <% @founder.sectors.each do |sector| %>
+          <a class="btn btn-ghost" href="#"><%= sector.name %></a>
+        <% end %>
+      </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
+    <% @filter_investors.each do |investor| %>
+    <div class="col">
+      <div class="card h-100">
+        <%# <img src="..." class="card-img-top" alt="..."> %>
+        <div class="card-body">
+          <h5 class="card-title"><%= investor.company_name %></h5>
+          <p class="card-text"><%= investor.company_description %></p>
+          <ul>
+          <% investor.sectors.each do |sector| %>
+            <li><p><%= sector.name %></p></li>
+          <% end %>
+          </ul>
+          <a class="btn btn-flat" href="#">Read more</a>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

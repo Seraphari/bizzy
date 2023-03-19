@@ -6,11 +6,24 @@ class FoundersController < ApplicationController
   end
 
   def show
-
+    recommendations = []
+    @founder.sectors.each do |sector|
+      sector.investors.each do |investor|
+        recommendations << investor
+      end
+      recommendations
+    end
+    @filter_investors = recommendations.uniq
   end
 
   def new
-    @founder= Founder.new
+    @user = current_user
+    if @user.founder.nil?
+      @founder= Founder.new
+    else
+      @founder = @user.founder
+      redirect_to founder_path(@founder)
+    end
   end
 
   def create

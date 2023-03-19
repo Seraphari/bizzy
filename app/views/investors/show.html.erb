@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <h2><strong>Company:</strong> <%= @investor.company_name %></h2>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col flex justify-content-between">
+      <p><strong>Investor's name:</strong> <%= @investor.first_name %> <%= @investor.last_name %></p>
+      <p><strong>Company Email:</strong> <%= @investor.company_email %></p>
+      <p><strong>Description:</strong> <%= @investor.company_description %></p>
+    </div>
+    <div class="col flex justify-content-between">
+      <p><strong>Company UEN: </strong> <%= @investor.company_UEN %></p>
+      <p><strong>Company Funding Stage:</strong> <%= @investor.funding_stage %></p>
+      <p><strong>Company Ticket:</strong> <%= @investor.ticket_size %></p>
+    </div>
+    <div class="col flex justify-content-between">
+      <p><strong>Company's sectors: </strong></p>
+      <% @investor.sectors.each do |sector| %>
+        <a class="btn btn-ghost m-1" href="#"><%= sector.name %></a>
+      <% end %>
+    </div>
+  </div>
+</div>
