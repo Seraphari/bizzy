@@ -9,6 +9,10 @@ class InvestorsController < ApplicationController
     else
       @investors = Investor.all
     end
+
+    respond_to do |format|
+      format.html
+      format.text { render}
   end
 
   def show

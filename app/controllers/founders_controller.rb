@@ -22,7 +22,7 @@ class FoundersController < ApplicationController
       @founder= Founder.new
     else
       @founder = @user.founder
-      redirect_to founder_path(@founder)
+      render :new
     end
   end
 
@@ -39,7 +39,7 @@ class FoundersController < ApplicationController
   def edit
 
   end
-
+``
   def update
     if @founder.update(founder_params)
       redirect_to founder_path(@founder)
