@@ -1,16 +1,93 @@
 // Import Google fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script&family=East+Sea+Dokdo&family=Merriweather+Sans&family=Phudu&family=Public+Sans&family=Satisfy&family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-// Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
+// :root {
+//     --primary: blue
+//     --dark:
+//     --body: #888;
+//     --box-shadow: 0, 8px, 22px, rgba(0,0,0,0.1);
 
-// To use a font file (.woff) uncomment following lines
-// @font-face {
-//   font-family: "Font Name";
-//   src: font-url('FontFile.eot');
-//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
-//        font-url('FontFile.woff') format('woff'),
-//        font-url('FontFile.ttf') format('truetype')
 // }
-// $my-font: "Font Name";
+
+$body-font: "Inter", "sans-serif";
+$headers-font: "Inter", "sans-serif";
+
+
+
+footer, footer.semi-bold, .display-1, .display-1-bold,
+ .display-2, .display-2-bold, h1, h1.bold, h2, h2.bold, h3, h3.bold, h4, h4.bold,
+  h5 {
+    font-family: $headers-font;
+    font-style: normal;
+    color: #000000;
+}
+
+body {
+    font-family: $body-font;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+// body.small {
+//     font-weight: 400;
+//     font-size: 14px;
+//     line-height: 17px;
+// }
+
+footer {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.display-1 {
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 73px;
+}
+
+.display-2 {
+    font-weight: 600;
+    font-size: 52px;
+    line-height: 63px;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 58px;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 41px;
+}
+
+
+h3 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+
+h4 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+
+h5 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+}
