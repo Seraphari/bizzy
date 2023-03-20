@@ -1,12 +1,18 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [ :show ]
+  before_action :set_investor, only: [ :show, :edit, :update]
 
   def index
-    @investors = Investor.all
+    if params[:query].present?
+      # sql_query = "company_name @@ :query OR company_description @@ :query"
+      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
+      @investors = Investor.search_by_company_name_and_company_description(params[:query])
+    else
+      @investors = Investor.all
+    end
   end
 
   def show
-   @investor = Investor.find(params[:id])
+
   end
 
   # def new
@@ -23,17 +29,17 @@ class InvestorsController < ApplicationController
   #   end
   # end
 
-  # def edit
+  def edit
 
-  # end
+  end
 
-  # def update
-  #   if @investor.update(investor_params)
-  #     redirect_to investor_path(@investor)
-  #   else
-  #     render :edit, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    if @investor.update(investor_params)
+      redirect_to investor_path(@investor)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   # def destroy
   #   @listing.destroy
@@ -42,7 +48,12 @@ class InvestorsController < ApplicationController
 
   private
 
-  def founder_params
-    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, :sector_ids: [] )
+
+  def set_investor
+    @investor = Investor.find(params[:id])
+  end
+
+  def investor_params
+    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, sector_ids: [] )
   end
 end
