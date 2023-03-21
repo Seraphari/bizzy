@@ -1,5 +1,5 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [ :show, :edit, :update]
+  before_action :set_investor, only: [:show, :edit, :update]
 
   def index
     if params[:query].present?
@@ -9,10 +9,6 @@ class InvestorsController < ApplicationController
     else
       @investors = Investor.all
     end
-
-    respond_to do |format|
-      format.html
-      format.text { render}
   end
 
   def show

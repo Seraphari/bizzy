@@ -1,0 +1,45 @@
+<div class="container">
+  <h1 class="text-center">Sector: <%= @sector.name %></h1>
+  <div class="row">
+    <h2>Founders of <strong><%= @sector.name %></strong></h2>
+    <% if @sector.founders.empty? %>
+      <h4 class="text-center fw-bold text-warning">Oh no! It's empty!</h4>
+    <% else %>
+      <% @sector.founders.each do |founder| %>
+        <div class="col-sm-4 g-2">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Founder: <strong><%= founder.user.first_name %></strong></h5>
+              <h5 class="card-title">Founder's company: <strong><%= founder.company_name %></strong></h5>
+              <hr>
+              <p class="card-text">Company Description: <%= founder.company_description %></p>
+              <div class="card-bottom flex text-center">
+                <a href= <%= "/investors/#{founder.id}" %> class="btn btn-primary">Know more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+<hr>
+  <div class="row p-5">
+    <h2>Investors of <strong><%= @sector.name %></strong></h2>
+    <% @sector.investors.each do |investor| %>
+      <div class="col-sm-4 g-2">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><strong>Investor: <%= investor.first_name %></strong></h5>
+            <h5 class="card-title"><strong>Investor's company: <%= investor.company_name %></strong></h5>
+            <hr>
+            <p class="card-text">Company Description: <%= investor.company_description %></p>
+            <div class="card-bottom flex text-center">
+              <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

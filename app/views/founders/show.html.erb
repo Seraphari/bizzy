@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+    <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
     <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
     <p><strong>Description:</strong> <%= @founder.company_description %></p>
   </div>
@@ -15,31 +16,58 @@
 </div>
 
 <hr>
+<% if @founder.user == current_user %>
+  <div class="container">
+    <div class="row text-center">
+      <h3>Recommendations (Investors'profile) based on your sectors below:</h3>
+        <div class="col d-flex justify-content-around">
+          <% @founder.sectors.each do |sector| %>
+            <a class="btn btn-ghost" href="#"><%= sector.name %></a>
+          <% end %>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
+      <% @filter_investors.take(6).each do |investor| %>
+      <div class="col">
+        <div class="card h-100">
+          <%# <img src="..." class="card-img-top" alt="..."> %>
+          <div class="card-body">
+            <h5 class="card-title"><%= investor.company_name %></h5>
+            <p class="card-text"><%= investor.company_description %></p>
+            <ul>
+            <% investor.sectors.each do |sector| %>
+              <li><p><%= sector.name %></p></li>
+            <% end %>
+            </ul>
+            <a class="btn btn-flat" href=<%= "/investors/#{investor.id}" %>>Read more</a>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<hr>
 
 <div class="container">
-  <div class="row text-center">
-    <h3>Recommendations (Investors'profile) based on your sectors below:</h3>
-      <div class="col d-flex justify-content-around">
-        <% @founder.sectors.each do |sector| %>
-          <a class="btn btn-ghost" href="#"><%= sector.name %></a>
-        <% end %>
-      </div>
-  </div>
-
+  <h3>Recommendations | Others' founder profile</h3>
   <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
-    <% @filter_investors.each do |investor| %>
+    <% @founders = Founder.all %>
+    <%# <% @founders.to_a.keep_if { |founder| founder.id != current_user.founder.id} %>
+    <% @founders.each do |founder| %>
     <div class="col">
       <div class="card h-100">
         <%# <img src="..." class="card-img-top" alt="..."> %>
         <div class="card-body">
-          <h5 class="card-title"><%= investor.company_name %></h5>
-          <p class="card-text"><%= investor.company_description %></p>
+          <h5 class="card-title"><%= founder.company_name %></h5>
+          <p class="card-text"><%= founder.company_description %></p>
           <ul>
-          <% investor.sectors.each do |sector| %>
+          <% founder.sectors.each do |sector| %>
             <li><p><%= sector.name %></p></li>
           <% end %>
           </ul>
-          <a class="btn btn-flat" href="#">Read more</a>
+          <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Read more</a>
         </div>
       </div>
     </div>

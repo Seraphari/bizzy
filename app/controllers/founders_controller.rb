@@ -39,7 +39,7 @@ class FoundersController < ApplicationController
   def edit
 
   end
-``
+
   def update
     if @founder.update(founder_params)
       redirect_to founder_path(@founder)
