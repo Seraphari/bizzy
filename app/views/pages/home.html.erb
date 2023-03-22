@@ -1,25 +1,17 @@
 <div class="container">
-  <div class="row flex justify-content-between my-3">
-    <div class="col-md-6">
-      <a href=<%= "/founders/#{@founder.id}" %> class="btn btn-success">Founder's profile</a>
-      <a href=<%= "/investors" %> class="btn btn-success">All Investors</a>
-    </div>
-  </div>
-
   <div class="row">
-  <% @investors.each do |investor| %>
-    <div class="col-sm-4 g-2">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-          <p class="card-text"><%= investor.company_description %></p>
-          <div class="card-bottom flex text-center">
-            <a href="#" class="btn btn-primary">Know more</a>
+    <% @sectors.each do |sector| %>
+      <div class="col-sm-4 g-2">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><strong><%= sector.name %></strong></h5>
+            <div class="card-bottom flex text-center">
+              <a href="#" class="btn btn-primary">Know more</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -61,4 +53,3 @@
   exact original form, accompanied by English versions from the 1914
   translation by H. Rackham.</p>
 </div>
-
