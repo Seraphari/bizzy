@@ -1,5 +1,5 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [ :show, :edit, :update]
+  before_action :set_investor, only: [:show, :edit, :update]
 
   def index
     if params[:query].present?

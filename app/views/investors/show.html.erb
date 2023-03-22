@@ -3,6 +3,11 @@
     <h2><strong>Company:</strong> <%= @investor.company_name %></h2>
   </div>
   <hr>
+  <div class="row g-2">
+    <div class="col flex text-end">
+      <a href= <%= "/investors" %> class="btn btn-primary">Back to all investors</a>
+    </div>
+  </div>
   <div class="row">
     <div class="col flex justify-content-between">
       <p><strong>Investor's name:</strong> <%= @investor.first_name %> <%= @investor.last_name %></p>
