@@ -1,15 +1,20 @@
 <% content_for(:navbar_class, "navbar-home") %>
 
 <div class="container">
+  <br>
+  <div class="row d-flex w-25">
+    <a href="/investors" class="btn btn-primary">All Investors</a>
+  </div>
+  <br>
   <div class="row">
-
+  <h2>All sectors:</h2>
   <% @sectors.each do |sector| %>
     <div class="col-sm-4 g-2">
       <div class="card h-100">
         <div class="card-body">
           <h5 class="card-title"><strong><%= sector.name %></strong></h5>
           <div class="card-bottom flex text-center">
-            <a href="#" class="btn btn-primary">Know more</a>
+            <a href= <%= "/sectors/#{sector.id}" %> class="btn btn-primary">Know more</a>
           </div>
         </div>
       </div>
