@@ -3,6 +3,7 @@ class PagesController < ApplicationController
 
   def home
     @investors = Investor.all
-    @founder = current_user.founder
+    # @founder = current_user.founder
+    @sectors = Sector.all
   end
 end
