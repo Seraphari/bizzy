@@ -1,5 +1,14 @@
 <div class="container">
   <div class="row">
+    <% if @founder != current_user.founder %>
+      <% if current_user.following?(@founder.user)%>
+        <%= button_to "Unfollow", unfollow_path(@founder.user) %>
+      <% elsif current_user.sent_follow_request_to?(@founder.user) %>
+        <%= button_to "Cancel follow request", cancel_path(@founder.user) %>
+      <% else %>
+        <%= button_to "Follow", follow_path(@founder.user) %>
+      <% end %>
+    <% end %>
     <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
     <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
     <p><strong>Description:</strong> <%= @founder.company_description %></p>
@@ -48,13 +57,13 @@
     </div>
   </div>
 <% end %>
+
 <hr>
 
+<% if @founder.user == current_user %>
 <div class="container">
   <h3>Recommendations | Others' founder profile</h3>
   <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
-    <% @founders = Founder.all %>
-    <%# <% @founders.to_a.keep_if { |founder| founder.id != current_user.founder.id} %>
     <% @founders.each do |founder| %>
     <div class="col">
       <div class="card h-100">
@@ -73,4 +82,5 @@
     </div>
     <% end %>
   </div>
+  <% end %>
 </div>

@@ -6,6 +6,7 @@ class FoundersController < ApplicationController
   end
 
   def show
+    @user = @founder.user
     recommendations = []
     @founder.sectors.each do |sector|
       sector.investors.each do |investor|
@@ -14,12 +15,15 @@ class FoundersController < ApplicationController
       recommendations
     end
     @filter_investors = recommendations.uniq
+
+    founders = Founder.all
+    @founders = founders.to_a.keep_if { |founder| founder != current_user.founder}
   end
 
   def new
     @user = current_user
     if @user.founder.nil?
-      @founder= Founder.new
+      @founder = Founder.new
     else
       @founder = @user.founder
       render :new
@@ -48,12 +52,50 @@ class FoundersController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @listing.destroy
-  #   redirect_to founders_path, status: :see_other, alert: "Listing was deleted successfully"
-  # end
+  def follow
+    make_it_a_friend_request
+    redirect_to founder_path(@user.founder)
+  end
+
+  def unfollow
+    make_it_a_unfriend_request
+    current_user.unfollow(@user)
+    redirect_to founder_path(@user.founder)
+  end
+
+  def accept
+    @user = @founder.user
+    current_user.accept_follow_request_of(@user)
+    make_it_a_friend_request
+    redirect_to root_path
+  end
+
+  def decline
+    @user = @founder.user
+    current_user.decline_follow_request_of(@user)
+    redirect_to root_path
+  end
+
+  def cancel
+    @user = @founder.user
+    current_user.remove_follow_request_for(@user)
+    redirect_to root_path
+  end
 
   private
+
+  def make_it_a_friend_request
+    @founder = Founder.find(params[:id])
+    @user = @founder.user
+    current_user.send_follow_request_to(@user)
+    @user.accept_follow_request_of(@current_user)
+  end
+
+  def make_it_a_unfriend_request
+    @founder = Founder.find(params[:id])
+    @user = @founder.user
+    @user.unfollow(current_user) if @user.mutual_following_with?(current_user)
+  end
 
   def set_founder
     @founder = Founder.find(params[:id])
