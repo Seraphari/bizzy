@@ -5,14 +5,14 @@
   </div>
   <br>
   <div class="row">
-  <h2>All sectors:</h2>
-  <% @sectors.each do |sector| %>
+  <% @investors.each do |investor| %>
     <div class="col-sm-4 g-2">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="card-title"><strong><%= sector.name %></strong></h5>
+          <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+          <p class="card-text"><%= investor.company_description %></p>
           <div class="card-bottom flex text-center">
-            <a href= <%= "/sectors/#{sector.id}" %> class="btn btn-primary">Know more</a>
+            <a href="#" class="btn btn-primary">Know more</a>
           </div>
         </div>
       </div>
@@ -59,4 +59,3 @@
   exact original form, accompanied by English versions from the 1914
   translation by H. Rackham.</p>
 </div>
-
