@@ -1,0 +1,23 @@
+// Use this .scss for CSS that affects pages
+
+// .max-width-container {
+//   max-width: 1440px;
+// }
+
+// Founder `new` page sectioning CSS
+.founder-form-wrapper {
+  background: white;
+  max-width: 1080px;
+  padding: 10px 20px 48px 20px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 3px;
+  border-bottom-width: thick;
+}
+
+.founder-form-wrapper h1 {
+  padding-top: 24px;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: center;
+}
