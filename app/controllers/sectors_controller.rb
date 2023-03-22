@@ -1,9 +1,6 @@
 class SectorsController < ApplicationController
-  def index
-    @sectors = Sector.all
-  end
 
-  def index
+  def show
     @sector = Sector.find(params[:id])
   end
 end

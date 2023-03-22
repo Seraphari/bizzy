@@ -22,7 +22,7 @@ class FoundersController < ApplicationController
       @founder= Founder.new
     else
       @founder = @user.founder
-      redirect_to founder_path(@founder)
+      render :new
     end
   end
 
