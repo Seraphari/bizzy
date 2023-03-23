@@ -54,10 +54,12 @@ text-decoration: none;
 // box-shadow: 0 10px 30px rgba(0,0,0,.1);
 // }
 
-.container {
-width: auto;   /* This sets the width */
-margin: 0 auto; /* This automatically sets left/right margins */
-}
+// (Jufri comment this .container because it causes conflict with bootstrap
+// width behaviour in users/sign_in & sign_up form)
+// .container {
+// width: auto;   /* This sets the width */
+// margin: 0 auto; /* This automatically sets left/right margins */
+// }
 
 .container-small {
 width: 500px;
