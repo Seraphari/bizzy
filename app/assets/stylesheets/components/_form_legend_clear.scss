@@ -1,3 +1,4 @@
+
 // In bootstrap 5 legend floats left and requires the following element
 // to be cleared. In a radio button or checkbox group the element after
 // the legend will be the automatically generated hidden input; the fix
@@ -7,4 +8,10 @@
 // or checkbox.
 legend ~ div.form-check:first-of-type {
   clear: left;
+}
+
+
+.form-inputs {
+  margin-top: 70px;
+  margin-bottom: 30px;
 }
