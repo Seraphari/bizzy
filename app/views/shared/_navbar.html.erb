@@ -24,7 +24,7 @@
             <% if current_user.founder.nil? %>
               <%= link_to "CreateFounder", "/founders/new", class: "nav-link text-bold text-danger" %>
             <% else %>
-              <%= link_to "myFounder", "/founders/#{current_user.founder.id}", class: "nav-link text-bold text-primary" %>
+              <%= link_to "#{current_user.first_name}'s Founder", "/founders/#{current_user.founder.id}", class: "nav-link text-bold text-primary" %>
             <% end %>
           </li>
           <li class="nav-item dropdown">
