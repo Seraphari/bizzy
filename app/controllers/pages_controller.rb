@@ -1,12 +1,9 @@
 class PagesController < ApplicationController
-  include Pagy::Backend
   skip_before_action :authenticate_user!, only: :home
 
   def home
-    @investors = Investor.all
+    @pagy, @investors = pagy(Investor.all)
     # @founder = current_user.founder
-    @sectors = Sector.all
+    @pagy, @sectors = pagy(Sector.all)
   end
 end
-
-# @pagy, @records = pagy(Product.some_scope, items: 5)
