@@ -1,5 +1,5 @@
 <%# <div class="container"> %>
-<div class="container">
+<!-- <div class="container">
     <div class="row">
       <h2><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h2>
       <h2><strong>Company:</strong> <%= @founder.company_name %></h2><br><br><br>
@@ -14,30 +14,30 @@
         <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
       </div>
     </div>
-</div><hr>
+</div><hr> -->
 
 <div class="main-container">
   <div class="row">
     <div class="col-md-4 founder">
       <%# <div class="cards-founders"> %>
-      <h2>Own Profile Related Info.....</h2>
-      <p>Contrary to popular belief, Lorem Ipsum is not simply random text.
-      It has roots in a piece of classical Latin literature from 45 BC,
-      making it over 2000 years old. Richard McClintock, a Latin professor at
-      Hampden-Sydney College in Virginia, looked up one of the more obscure Latin
-      words, consectetur, from a Lorem Ipsum passage, and going through the cites
-      of the word in classical literature, discovered the undoubtable source.
-      This book is a treatise on the theory of ethics, very popular during the
-      Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..",
-      comes from a line in section 1.10.32.</p>
+      <h3><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h3>
+      <h3><strong>Company:</strong> <%= @founder.company_name %></h3><br>
+      <p><strong>Description:</strong> <%= @founder.company_description %></p>
 
-      <h2>My Favourites</h2>
+      <div class="d-flex flex-column">
+        <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
+        <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
+        <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
+        <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
+      </div><hr>
+
+      <h3><strong>My Favourites</strong></h3>
       <p>It is a long established fact that a reader will be distracted by the
       readable content of a page when looking at its layout. The point of using
       Lorem Ipsum is that it has a more-or-less normal distribution of letters,
       as opposed to using 'Content here, content here', making it look like
       readable English. Many desktop publishing packages and web page editors
-    </p>
+      </p><br><br>
     </div>
 
 
@@ -45,7 +45,7 @@
       <% if @founder.user == current_user %>
         <div class="container">
           <div class="row text-center">
-            <h3>Recommendations (Investors'profile) based on your sectors below:</h3>
+            <h3>Recommendations (Investors'profile) based on your sectors below:</h3><br><br>
               <div class="col d-flex justify-content-around">
                 <% @founder.sectors.each do |sector| %>
                   <a class="btn btn-ghost" href="#"><%= sector.name %></a>
@@ -53,7 +53,7 @@
               </div>
           </div>
 
-          <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
+          <div class="row row-cols-1 row-cols-md-3 g-3 m-2">
             <% @filter_investors.take(6).each do |investor| %>
               <div class="col">
                 <div class="card h-100">
@@ -75,8 +75,10 @@
         </div>
       <% end %>
 
+      <div style="text-align: center;">
         <h3>Recommendations | Others' founder profile</h3>
-        <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
+      </div>
+        <div class="row row-cols-1 row-cols-md-3 g-3 m-2">
           <% @founders = Founder.all %>
           <%# <% @founders.to_a.keep_if { |founder| founder.id != current_user.founder.id} %>
           <% @founders.each do |founder| %>
@@ -92,7 +94,10 @@
                     <li><p><%= sector.name %></p></li>
                   <% end %>
                   </ul>
+                  <div class="button-row">
                   <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Read more</a>
+                  <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Connect</a>
+                  </div>
                 </div>
               </div>
             </div>
