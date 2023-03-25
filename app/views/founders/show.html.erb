@@ -10,6 +10,7 @@
           <%= button_to "Follow", follow_path(@founder) %>
         <% end %>
     <% end %>
+
       <hr>
     <% if current_user.founder %>
       <% current_user.founder.follow_requests.each do |request| %>
@@ -18,6 +19,7 @@
         <%= button_to "Decline", decline_path(request.followerable) %>
       <% end %>
     <% end %>
+
       <hr>
     <% if @founder.user == current_user %>
       <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
@@ -50,25 +52,25 @@
 <hr>
 
 <% if @founder.user == current_user %>
-  <div class="container">
-    <div class="row text-center">
-      <h3>Recommendations (Investors'profile) based on your sectors below:</h3>
-        <div class="col d-flex justify-content-around">
-          <% @founder.sectors.each do |sector| %>
-            <a class="btn btn-ghost" href="#"><%= sector.name %></a>
-          <% end %>
-        </div>
+<div class="container">
+  <div class="row text-center">
+    <h3>Recommendations (Investors'profile) based on your sectors below:</h3>
+    <div class="col d-flex justify-content-around">
+      <% @founder.sectors.each do |sector| %>
+        <a class="btn btn-ghost" href="#"><%= sector.name %></a>
+      <% end %>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="col d-flex justify-content-between">
-        <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
-        <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
-        <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
-        <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
-      </div>
+  <div class="row">
+    <div class="col d-flex justify-content-between">
+      <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
+      <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
+      <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
+      <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
     </div>
-</div><hr> 
+  </div>
+</div>
 
 <div class="main-container">
   <div class="row">
@@ -130,6 +132,7 @@
       <% end %>
     </div>
   </div>
+</div>
 <% end %>
 
 <hr>
@@ -153,32 +156,33 @@
           <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Read more</a>
         </div>
       </div>
-        <div class="row row-cols-1 row-cols-md-3 g-3 m-2">
-          <% @founders = Founder.all %>
-          <%# <% @founders.to_a.keep_if { |founder| founder.id != current_user.founder.id} %>
-          <% @founders.each do |founder| %>
-            <div class="col">
-              <div class="card h-100">
-                <%# <img src="..." class="card-img-top" alt="..."> %>
-                <%= image_tag(asset_path('avatarm.png'), class:"avatar") %>
-                <div class="card-body">
-                  <h5 class="card-title"><%= founder.company_name %></h5>
-                  <p class="card-text"><%= founder.company_description %></p>
-                    <ul>
-                    <% founder.sectors.each do |sector| %>
-                      <li><p><%= sector.name %></p></li>
-                    <% end %>
-                    </ul>
-                  <div class="button-founder">
-                    <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Read more</a>
-                    <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Connect</a>
-                  </div>
+      <div class="row row-cols-1 row-cols-md-3 g-3 m-2">
+        <% @founders = Founder.all %>
+        <%# <% @founders.to_a.keep_if { |founder| founder.id != current_user.founder.id} %>
+        <% @founders.each do |founder| %>
+          <div class="col">
+            <div class="card h-100">
+              <%# <img src="..." class="card-img-top" alt="..."> %>
+              <%= image_tag(asset_path('avatarm.png'), class:"avatar") %>
+              <div class="card-body">
+                <h5 class="card-title"><%= founder.company_name %></h5>
+                <p class="card-text"><%= founder.company_description %></p>
+                  <ul>
+                  <% founder.sectors.each do |sector| %>
+                    <li><p><%= sector.name %></p></li>
+                  <% end %>
+                  </ul>
+                <div class="button-founder">
+                  <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Read more</a>
+                  <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Connect</a>
                 </div>
               </div>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
+      </div>
     </div>
+    <% end %>
   </div>
-  <% end %>
 </div>
+<% end %>
