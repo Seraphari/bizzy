@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import FlatpickrController from "./flatpickr_controller"
-application.register("flatpickr", FlatpickrController)
+import FavoriteController from "./favorite_controller"
+application.register("favorite", FavoriteController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
