@@ -8,4 +8,16 @@ Rails.application.routes.draw do
   resources :founders, except: [:destroy]
   resources :investors, only: [:index, :show, :edit, :update]
   resources :sectors, only: [:index, :show]
+
+  resources :investors, only: :index do
+    member do
+      post 'favorite', to: "investors#toggle_favorite"
+    end
+  end
+
+  resources :founders, only: :index do
+    member do
+      post 'favorite', to: "founders#toggle_favorite"
+    end
+  end
 end
