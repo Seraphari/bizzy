@@ -61,7 +61,8 @@ investors.each do |investor|
     company_email: "#{investor["Name"].gsub(/\s/, "").downcase}@gmail.com",
     company_UEN: "202#{rand(2...3)}#{rand(9)}#{rand(9)}#{rand(9)}#{rand(9)}#{rand(9)}X",
     funding_stage: investor["Stages"],
-    ticket_size: investor["Minimum Check Size"].empty? ? "$100,000" : investor["Minimum Check Size"]
+    ticket_size: investor["Minimum Check Size"].empty? ? "$100,000" : investor["Minimum Check Size"],
+    sectors: ["Education", "Enterprise", "SaaS", "Big Data & Analytics", "Productivity", "Cybersecurity", "Supply Chain & Logistics", "Consumer", "Food & Beverage", "Future of Work", "Transportation", "Travel & Hospitality", "Healthcare", "AR & VR", "Health & Wellness", "Insuretech", "Aerospace & Space", "Climate & Sustainability"].sample(3)
   )
 
   puts "#{first_name} created!"

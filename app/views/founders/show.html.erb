@@ -1,76 +1,108 @@
-<div class="container">
-  <div class="row">
-    <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
-    <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
-    <p><strong>Description:</strong> <%= @founder.company_description %></p>
-  </div>
-
-  <div class="row">
-    <div class="col d-flex justify-content-between">
-      <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
-      <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
-      <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
-      <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
-    </div>
-  </div>
-</div>
-
-<hr>
-<% if @founder.user == current_user %>
-  <div class="container">
-    <div class="row text-center">
-      <h3>Recommendations (Investors'profile) based on your sectors below:</h3>
-        <div class="col d-flex justify-content-around">
-          <% @founder.sectors.each do |sector| %>
-            <a class="btn btn-ghost" href="#"><%= sector.name %></a>
-          <% end %>
-        </div>
+<%# <div class="container"> %>
+<!-- <div class="container">
+    <div class="row">
+      <h2><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h2>
+      <h2><strong>Company:</strong> <%= @founder.company_name %></h2><br><br><br>
+      <p><strong>Description:</strong> <%= @founder.company_description %></p>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
-      <% @filter_investors.take(6).each do |investor| %>
-      <div class="col">
-        <div class="card h-100">
-          <%# <img src="..." class="card-img-top" alt="..."> %>
-          <div class="card-body">
-            <h5 class="card-title"><%= investor.company_name %></h5>
-            <p class="card-text"><%= investor.company_description %></p>
-            <ul>
-            <% investor.sectors.each do |sector| %>
-              <li><p><%= sector.name %></p></li>
+    <div class="row">
+      <div class="col d-flex justify-content-between">
+        <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
+        <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
+        <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
+        <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
+      </div>
+    </div>
+</div><hr> -->
+
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-4 founder">
+      <%# <div class="cards-founders"> %>
+      <h3><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h3>
+      <h3><strong>Company:</strong> <%= @founder.company_name %></h3><br>
+      <p><strong>Description:</strong> <%= @founder.company_description %></p>
+
+      <div class="d-flex flex-column">
+        <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
+        <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
+        <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
+        <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
+      </div><hr>
+
+      <h3><strong>My Favourites</strong></h3>
+      <p>It is a long established fact that a reader will be distracted by the
+      readable content of a page when looking at its layout. The point of using
+      Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+      as opposed to using 'Content here, content here', making it look like
+      readable English. Many desktop publishing packages and web page editors
+      </p><br><br>
+    </div>
+
+
+    <div class="col-md-8 founder">
+      <% if @founder.user == current_user %>
+        <div class="container">
+          <div class="row text-center">
+            <h3>Recommendations (Investors'profile) based on your sectors below:</h3><br><br>
+              <div class="col d-flex justify-content-around">
+                <% @founder.sectors.each do |sector| %>
+                  <a class="btn btn-ghost" href="#"><%= sector.name %></a>
+                <% end %>
+              </div>
+          </div>
+
+          <div class="row row-cols-1 row-cols-md-3 g-3 m-2">
+            <% @filter_investors.take(6).each do |investor| %>
+              <div class="col">
+                <div class="card h-100">
+                  <%# <img src="..." class="card-img-top" alt="..."> %>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= investor.company_name %></h5>
+                    <p class="card-text"><%= investor.company_description %></p>
+                    <ul>
+                    <% investor.sectors.each do |sector| %>
+                      <li><p><%= sector.name %></p></li>
+                    <% end %>
+                    </ul>
+                    <a class="btn btn-flat" href=<%= "/investors/#{investor.id}" %>>Read more</a>
+                  </div>
+                </div>
+              </div>
             <% end %>
-            </ul>
-            <a class="btn btn-flat" href=<%= "/investors/#{investor.id}" %>>Read more</a>
           </div>
         </div>
-      </div>
       <% end %>
-    </div>
-  </div>
-<% end %>
-<hr>
 
-<div class="container">
-  <h3>Recommendations | Others' founder profile</h3>
-  <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
-    <% @founders = Founder.all %>
-    <%# <% @founders.to_a.keep_if { |founder| founder.id != current_user.founder.id} %>
-    <% @founders.each do |founder| %>
-    <div class="col">
-      <div class="card h-100">
-        <%# <img src="..." class="card-img-top" alt="..."> %>
-        <div class="card-body">
-          <h5 class="card-title"><%= founder.company_name %></h5>
-          <p class="card-text"><%= founder.company_description %></p>
-          <ul>
-          <% founder.sectors.each do |sector| %>
-            <li><p><%= sector.name %></p></li>
-          <% end %>
-          </ul>
-          <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Read more</a>
-        </div>
+      <div style="text-align: center;">
+        <h3>Recommendations | Others' founder profile</h3>
       </div>
+        <div class="row row-cols-1 row-cols-md-3 g-3 m-2">
+          <% @founders = Founder.all %>
+          <%# <% @founders.to_a.keep_if { |founder| founder.id != current_user.founder.id} %>
+          <% @founders.each do |founder| %>
+            <div class="col">
+              <div class="card h-100">
+                <%# <img src="..." class="card-img-top" alt="..."> %>
+                <%= image_tag(asset_path('avatarm.png'), class:"avatar") %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= founder.company_name %></h5>
+                  <p class="card-text"><%= founder.company_description %></p>
+                    <ul>
+                    <% founder.sectors.each do |sector| %>
+                      <li><p><%= sector.name %></p></li>
+                    <% end %>
+                    </ul>
+                  <div class="button-founder">
+                    <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Read more</a>
+                    <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Connect</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
     </div>
-    <% end %>
   </div>
 </div>
