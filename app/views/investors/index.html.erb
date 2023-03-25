@@ -26,8 +26,6 @@
     <div class="col-sm-4 g-2">
       <div class="card h-100">
         <div class="card-body" data-controller="favorite">
-
-
           <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
             <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
           <% end %>
