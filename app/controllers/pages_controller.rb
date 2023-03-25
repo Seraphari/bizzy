@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def home
     @investors = Investor.all
     # @founder = current_user.founder
+    @founders = Founder.all
     @sectors = Sector.all
   end
 end

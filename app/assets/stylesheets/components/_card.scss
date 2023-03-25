@@ -108,7 +108,7 @@ font-family: $body-font;
 }
 
 .card-text {
-height: 240px;
+// height: 240px;
 overflow: auto;
 }
 
@@ -158,6 +158,10 @@ justify-content: space-between;
 }
 
 .card-featured {
-  padding: 16px;
+  padding: 0px 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card-body h5 {
+  padding-bottom: 16px;
 }
