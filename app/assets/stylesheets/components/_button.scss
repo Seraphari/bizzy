@@ -3,8 +3,9 @@
   border: 1px solid #4A4A4A;
   padding: 8px 24px;
   border-radius: 50px;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: opacity 0.3s ease;
+  margin-top: 10px;
 }
 
 .btn-ghost:hover {
@@ -40,7 +41,7 @@
 }
 
 .btn {
-  background-color: $secondary-700;
+  background-color: $secondary-500;
   margin-bottom: 20px;
   color: black;
 }
@@ -51,4 +52,18 @@
 
 .btn.btn-primary {
   margin-left: 20px;
+}
+
+.button-founder {
+  display: inline-block;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-flat.founder {
+  color: black;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: #670BFF;
+  transition: background 0.3s ease;
 }
