@@ -1,5 +1,6 @@
 class FoundersController < ApplicationController
   before_action :set_founder, only: [:show, :edit, :update]
+  # before_action :authenticate_user!, only: :toggle_favorite
 
   def index
     @founders = Founder.all
@@ -52,6 +53,11 @@ class FoundersController < ApplicationController
   #   @listing.destroy
   #   redirect_to founders_path, status: :see_other, alert: "Listing was deleted successfully"
   # end
+
+  def toggle_favorite
+    @founder = Founder.find(params[:id])
+    current_user.favorited?(@founder) ? current_user.unfavorite(@founder) : current_user.favorite(@founder)
+  end
 
   private
 

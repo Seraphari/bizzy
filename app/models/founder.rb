@@ -1,4 +1,6 @@
 class Founder < ApplicationRecord
+  # acts_as_favoritable
+
   validates :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :date_incorporated, presence: true
   validates :company_UEN, format: { with: /[1-2]\d\d\d\d\d\d\d\d[A-Z]/,
              message: "please follow format here" }
