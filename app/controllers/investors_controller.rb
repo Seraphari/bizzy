@@ -1,8 +1,11 @@
 class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show, :edit, :update]
-  # before_action :authenticate_user!, only: :toggle_favorite
+  before_action :authenticate_user!, only: :toggle_favorite
 
   def index
+    @investors = Investor.all
+    @favorite_investors = current_user.favorited_by_type('Investor')
+
     if params[:query].present?
       # sql_query = "company_name @@ :query OR company_description @@ :query"
       # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")

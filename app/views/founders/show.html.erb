@@ -31,13 +31,14 @@
         <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
       </div><hr>
 
-      <h3><strong>My Favourites</strong></h3>
-      <p>It is a long established fact that a reader will be distracted by the
-      readable content of a page when looking at its layout. The point of using
-      Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-      as opposed to using 'Content here, content here', making it look like
-      readable English. Many desktop publishing packages and web page editors
-      </p><br><br>
+        <h3><strong>My Favourites</strong></h3>
+        <p>It is a long established fact that a reader will be distracted by the
+        readable content of a page when looking at its layout. The point of using
+        Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+        as opposed to using 'Content here, content here', making it look like
+        readable English. Many desktop publishing packages and web page editors
+        </p><br><br>
+      </div>
     </div>
 
 
@@ -46,11 +47,11 @@
         <div class="container">
           <div class="row text-center">
             <h3>Recommendations (Investors'profile) based on your sectors below:</h3><br><br>
-              <div class="col d-flex justify-content-around">
-                <% @founder.sectors.each do |sector| %>
-                  <a class="btn btn-ghost" href="#"><%= sector.name %></a>
-                <% end %>
-              </div>
+            <div class="col d-flex justify-content-around">
+              <% @founder.sectors.each do |sector| %>
+                <a class="btn btn-ghost" href="#"><%= sector.name %></a>
+              <% end %>
+            </div>
           </div>
 
           <div class="row row-cols-1 row-cols-md-3 g-3 m-2">
@@ -59,12 +60,17 @@
                 <div class="card h-100">
                   <%# <img src="..." class="card-img-top" alt="..."> %>
                   <div class="card-body">
+
+                    <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                    <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="bookmark"></i>
+                    <% end %>
+
                     <h5 class="card-title"><%= investor.company_name %></h5>
                     <p class="card-text"><%= investor.company_description %></p>
                     <ul>
-                    <% investor.sectors.each do |sector| %>
-                      <li><p><%= sector.name %></p></li>
-                    <% end %>
+                      <% investor.sectors.each do |sector| %>
+                        <li><p><%= sector.name %></p></li>
+                      <% end %>
                     </ul>
                     <a class="btn btn-flat" href=<%= "/investors/#{investor.id}" %>>Read more</a>
                   </div>
