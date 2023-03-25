@@ -63,7 +63,7 @@ class FoundersController < ApplicationController
 
     @founder.unfollow(current_user.founder) if @founder.mutual_following_with?(current_user.founder)
     current_user.founder.unfollow(@founder)
-    redirect_to founder_path(@founder)
+    redirect_to founder_path(current_user.founder)
   end
 
   def accept
@@ -82,7 +82,7 @@ class FoundersController < ApplicationController
     @user = @founder.user
     current_user.founder.decline_follow_request_of(@founder)
     current_user.founder.decline_follow_request_of(@user)
-    redirect_to founder_path(@founder)
+    redirect_to founder_path(current_user.founder)
   end
 
   def cancel
