@@ -1,17 +1,39 @@
 <div class="container">
   <div class="row">
     <% if @founder != current_user.founder %>
-      <% if current_user.following?(@founder.user)%>
-        <%= button_to "Unfollow", unfollow_path(@founder.user) %>
-      <% elsif current_user.sent_follow_request_to?(@founder.user) %>
-        <%= button_to "Cancel follow request", cancel_path(@founder.user) %>
-      <% else %>
-        <%= button_to "Follow", follow_path(@founder.user) %>
+      <p>Current_connection between you and <%= @founder.user.first_name %>:</p>
+        <% if current_user.founder.following?(@founder)%>
+          <%= button_to "Unfollow", unfollow_path(@founder) %>
+        <% elsif current_user.founder.sent_follow_request_to?(@founder) %>
+          <%= button_to "Cancel follow request", cancel_path(@founder) %>
+        <% else %>
+          <%= button_to "Follow", follow_path(@founder) %>
+        <% end %>
+    <% end %>
+      <hr>
+    <% if current_user.founder %>
+      <% current_user.founder.follow_requests.each do |request| %>
+        <%= request.followerable.user.email %> wants to follow you
+        <%= button_to "Accept", accept_path(request.followerable) %>
+        <%= button_to "Decline", decline_path(request.followerable) %>
       <% end %>
     <% end %>
+      <hr>
+
+  <% if current_user.founder %>
     <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
     <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
     <p><strong>Description:</strong> <%= @founder.company_description %></p>
+      <p><strong><%= @founder.user.first_name%>'s followers:</strong></p>
+        <% current_user.founder.followers.each do |founder| %>
+          <p><%= link_to founder.user.email, founder_path(founder) %>
+          <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
+        <% end %>
+  <% else%>
+    <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
+    <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
+    <p><strong>Description:</strong> <%= @founder.company_description %></p>
+  <% end %>
   </div>
 
   <div class="row">
@@ -64,7 +86,7 @@
 <div class="container">
   <h3>Recommendations | Others' founder profile</h3>
   <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
-    <% @founders.each do |founder| %>
+    <%  @filter_founders.each do |founder| %>
     <div class="col">
       <div class="card h-100">
         <%# <img src="..." class="card-img-top" alt="..."> %>
