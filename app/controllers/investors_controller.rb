@@ -1,5 +1,6 @@
 class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show, :edit, :update]
+  # before_action :authenticate_user!, only: :toggle_favorite
 
   def index
     if params[:query].present?
@@ -13,6 +14,11 @@ class InvestorsController < ApplicationController
 
   def show
 
+  end
+
+  def toggle_favorite
+    @investor = Investor.find(params[:id])
+    current_user.favorited?(@investor) ? current_user.unfavorite(@investor) : current_user.favorite(@investor)
   end
 
   # def new

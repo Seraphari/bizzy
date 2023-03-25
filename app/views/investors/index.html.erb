@@ -25,7 +25,13 @@
   <% @investors.each do |investor| %>
     <div class="col-sm-4 g-2">
       <div class="card h-100">
-        <div class="card-body">
+        <div class="card-body" data-controller="favorite">
+
+
+          <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+            <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+          <% end %>
+
           <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
           <p class="card-text"><%= investor.company_description %></p>
           <p class="card-text text-warning">
