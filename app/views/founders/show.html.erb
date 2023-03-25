@@ -19,21 +19,22 @@
       <% end %>
     <% end %>
       <hr>
-
-  <% if current_user.founder %>
-    <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
-    <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
-    <p><strong>Description:</strong> <%= @founder.company_description %></p>
+    <% if @founder.user == current_user %>
+      <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
+      <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
+      <p><strong>Description:</strong> <%= @founder.company_description %></p>
       <p><strong><%= @founder.user.first_name%>'s followers:</strong></p>
         <% current_user.founder.followers.each do |founder| %>
           <p><%= link_to founder.user.email, founder_path(founder) %>
           <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
         <% end %>
-  <% else%>
-    <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
-    <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
-    <p><strong>Description:</strong> <%= @founder.company_description %></p>
-  <% end %>
+    <% end %>
+
+    <% if @founder.user != current_user %>
+      <h4><strong>Founder's user_name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h4>
+      <h2><strong>Company:</strong> <%= @founder.company_name %></h2>
+      <p><strong>Description:</strong> <%= @founder.company_description %></p>
+    <% end %>
   </div>
 
   <div class="row">
@@ -47,6 +48,7 @@
 </div>
 
 <hr>
+
 <% if @founder.user == current_user %>
   <div class="container">
     <div class="row text-center">
