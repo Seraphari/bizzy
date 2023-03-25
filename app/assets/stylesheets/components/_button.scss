@@ -41,7 +41,7 @@
 }
 
 .btn {
-  background-color: $secondary-700;
+  background-color: $secondary-500;
   margin-bottom: 20px;
   color: black;
 }
@@ -54,6 +54,16 @@
   margin-left: 20px;
 }
 
-.button-row a {
+.button-founder {
   display: inline-block;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-flat.founder {
+  color: black;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: #670BFF;
+  transition: background 0.3s ease;
 }

@@ -89,14 +89,14 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= founder.company_name %></h5>
                   <p class="card-text"><%= founder.company_description %></p>
-                  <ul>
-                  <% founder.sectors.each do |sector| %>
-                    <li><p><%= sector.name %></p></li>
-                  <% end %>
-                  </ul>
-                  <div class="button-row">
-                  <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Read more</a>
-                  <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Connect</a>
+                    <ul>
+                    <% founder.sectors.each do |sector| %>
+                      <li><p><%= sector.name %></p></li>
+                    <% end %>
+                    </ul>
+                  <div class="button-founder">
+                    <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Read more</a>
+                    <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Connect</a>
                   </div>
                 </div>
               </div>
