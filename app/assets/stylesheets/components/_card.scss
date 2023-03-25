@@ -81,6 +81,15 @@ box-shadow: 0 0 15px rgba(0,0,0,0.2);
 margin-bottom: 20px;
 }
 
+.cards-founders {
+  display: grid;
+  grid-template-columns: 400px auto;
+  grid-gap: 16px;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+
 .cards {
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
@@ -131,4 +140,19 @@ height: 700px;
 
 .card-footer.d-flex.justify-content-space-evenly {
 justify-content: space-between;
+}
+
+
+.col-md-8.founder {
+  padding-top: 30px;
+  padding-left: 40px;
+}
+
+.col-md-4.founder {
+  padding-top: 30px;
+  padding-left: 40px;
+}
+
+.container {
+  margin-bottom: 20px;
 }
