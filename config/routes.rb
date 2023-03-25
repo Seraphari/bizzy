@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :investors, only: [:index, :show, :edit, :update]
   resources :sectors, only: [:index, :show]
+  resources :chatrooms, only: :show do
+    resources :messages, only: :create
+  end
 
   resources :investors, only: :index do
     member do
