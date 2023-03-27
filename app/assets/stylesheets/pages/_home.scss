@@ -30,3 +30,9 @@ h1.home {
 p.home {
   letter-spacing: 1.5px;
 }
+
+.pagination {
+  margin-top: 20px;
+  display: flexbox;
+  justify-content: flex-end;
+}

@@ -2,9 +2,8 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: :home
 
   def home
-    @investors = Investor.all
+    @pagy, @investors = pagy(Investor.all)
     # @founder = current_user.founder
-    @founders = Founder.all
-    @sectors = Sector.all
+    @pagy, @sectors = pagy(Sector.all)
   end
 end

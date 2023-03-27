@@ -1,5 +1,5 @@
 class FoundersController < ApplicationController
-  before_action :set_founder, only: [:show, :edit, :update, :follow, :unfollow, :accept, :decline, :cancel]
+  before_action :set_founder, only: [:show, :edit, :update]
 
   def index
     @founders = Founder.all
@@ -89,11 +89,6 @@ class FoundersController < ApplicationController
     @founder = Founder.find(params[:id])
     current_user.founder.remove_follow_request_for(@founder)
     redirect_to founder_path(@founder)
-  end
-
-  def toggle_favorite
-    @founder = Founder.find(params[:id])
-    current_user.favorited?(@founder) ? current_user.unfavorite(@founder) : current_user.favorite(@founder)
   end
 
   private
