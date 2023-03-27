@@ -1,7 +1,7 @@
 <%# <div class="navbar-wagon <%= yield(:navbar_class) %>
 
-  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-    <div class="container-fluid">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
       <%= link_to "#", class: "navbar-brand" do %>
         <%# <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
         <%= image_tag(asset_path('bizzy-logo3.png'), class: "logo-small", style:"width:20%") %>
@@ -24,7 +24,7 @@
             <% if current_user.founder.nil? %>
               <%= link_to "CreateFounder", "/founders/new", class: "nav-link text-bold text-danger" %>
             <% else %>
-              <%= link_to "myFounder", "/founders/#{current_user.founder.id}", class: "nav-link text-bold text-primary" %>
+              <%= link_to "#{current_user.first_name}'s Founder", "/founders/#{current_user.founder.id}", class: "nav-link text-bold text-primary" %>
             <% end %>
           </li>
           <li class="nav-item dropdown">

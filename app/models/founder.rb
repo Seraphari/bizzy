@@ -14,4 +14,10 @@ class Founder < ApplicationRecord
   belongs_to :user, dependent: :destroy
   has_many :founder_sectors, dependent: :destroy
   has_many :sectors, through: :founder_sectors
+
+  followability
+
+  def unfollow(founder)
+    followerable_relationships.where(followable_id: founder.id).destroy_all
+  end
 end
