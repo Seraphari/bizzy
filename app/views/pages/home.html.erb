@@ -35,12 +35,12 @@
   </div>
   <%# YL: Sector WIP - ignore for now %>
   <div class="row">
-    <% @sectors.each do |sector| %>
+    <% @founders.each do |founder| %>
       <div class="col-sm-6 g-3">
         <div class="card text-center card-featured">
           <div class="card-body">
-            <h5 class="card-title"><%= sector.name %></h5>
-            <a href= <%= sector_path(sector) %> class="btn btn-primary">Know more</a>
+            <h5 class="card-title"><%= founder.company_name %></h5>
+            <a href= <%= founder_path(founder) %> class="btn btn-primary">Know more</a>
           </div>
         </div>
       </div>
