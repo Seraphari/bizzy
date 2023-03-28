@@ -1,21 +1,30 @@
-<%# <div class="container"> %>
-<!-- <div class="container">
-    <div class="row">
-      <h2><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h2>
-      <h2><strong>Company:</strong> <%= @founder.company_name %></h2><br><br><br>
-      <p><strong>Description:</strong> <%= @founder.company_description %></p>
-    </div>
+<div class="container">
+  <div class="row">
+    <%# SHOW ON @FOUNDER %>
+    <% if @founder != current_user.founder %>
+      <p>Current_connection between you and <%= @founder.user.first_name %>:</p>
+        <% if current_user.founder.following?(@founder)%>
+          <%= button_to "Unfollow", unfollow_path(@founder) %>
+        <% elsif current_user.founder.sent_follow_request_to?(@founder) %>
+          <%= button_to "Cancel follow request", cancel_path(@founder) %>
+        <% else %>
+          <%= button_to "Follow", follow_path(@founder) %>
+        <% end %>
+    <% end %>
 
-    <div class="row">
-      <div class="col d-flex justify-content-between">
-        <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
-        <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
-        <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
-        <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
-      </div>
-    </div>
-</div><hr> -->
+    <%# SHOW ON CURRENT_USER.FOUNDER %>
+    <% if current_user.founder %>
+      <% current_user.founder.follow_requests.each do |request| %>
+        <%= request.followerable.user.email %> wants to follow you
+        <%= button_to "Accept", accept_path(request.followerable) %>
+        <%= button_to "Decline", decline_path(request.followerable) %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
+<%# PLEASE DONT REMOVE THIS LINE %>
+<% if @founder.user == current_user %>
 <div class="main-container">
   <div class="row">
     <div class="col-md-4 founder">
@@ -31,6 +40,11 @@
         <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
       </div><hr>
 
+      <p><strong><%= @founder.user.first_name%>'s followers:</strong></p>
+        <% current_user.founder.followers.each do |founder| %>
+        <p><%= link_to founder.user.email, founder_path(founder) %> <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
+        <% end %>
+
       <h3><strong>My Favourites</strong></h3>
       <p>It is a long established fact that a reader will be distracted by the
       readable content of a page when looking at its layout. The point of using
@@ -39,10 +53,10 @@
       readable English. Many desktop publishing packages and web page editors
       </p><br><br>
     </div>
-
-
+<% end %>
+<%# PLEASE DONT REMOVE THIS LINE %>
+<% if @founder.user == current_user %>
     <div class="col-md-8 founder">
-      <% if @founder.user == current_user %>
         <div class="container">
           <div class="row text-center">
             <h3>Recommendations (Investors'profile) based on your sectors below:</h3><br><br>
@@ -73,8 +87,13 @@
             <% end %>
           </div>
         </div>
-      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
 
+<%# PLEASE DONT REMOVE THIS LINE %>
+<% if @founder.user == current_user %>
       <div style="text-align: center;">
         <h3>Recommendations | Others' founder profile</h3>
       </div>
@@ -94,15 +113,43 @@
                       <li><p><%= sector.name %></p></li>
                     <% end %>
                     </ul>
-                  <div class="button-founder">
-                    <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Read more</a>
-                    <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Connect</a>
-                  </div>
+                <div class="button-founder">
+                  <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Read more</a>
+                  <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Connect</a>
                 </div>
-              </div>
-            </div>
-          <% end %>
-        </div><br><br>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<%# PLEASE DONT REMOVE THIS LINE %>
+<% if @founder.user != current_user %>
+<div class="main-container">
+  <div class="row">
+    <div class="col-md-4 founder">
+      <%# <div class="cards-founders"> %>
+      <h3><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h3>
+      <h3><strong>Company:</strong> <%= @founder.company_name %></h3><br>
+      <p><strong>Description:</strong> <%= @founder.company_description %></p>
+
+      <div class="d-flex flex-column">
+        <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
+        <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
+        <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
+        <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
+      </div><hr>
+
+      <h3><strong>My Favourites</strong></h3>
+      <p>It is a long established fact that a reader will be distracted by the
+      readable content of a page when looking at its layout. The point of using
+      Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+      as opposed to using 'Content here, content here', making it look like
+      readable English. Many desktop publishing packages and web page editors
+      </p><br><br>
     </div>
   </div>
 </div>
+<% end %>
