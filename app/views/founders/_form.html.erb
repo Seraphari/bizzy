@@ -9,6 +9,7 @@
                                     end_year: Date.today.year, discard_day: false,
                                     order: [:day, :month, :year]  %>
     <%= f.association :sectors, include_hidden: false, input_html: { data: { controller: "tom-select" }} %>
+    <%= f.input :photo, as: :file %>
     <div class="submission-field">
     <%= f.submit class: "btn btn-outline-primary fw-bold" %>
   <% end %>
