@@ -18,19 +18,41 @@
   </div>
   <br>
   <div class="row">
-  <% @investors.each do |investor| %>
-    <div class="col-sm-4 g-2">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-          <p class="card-text"><%= investor.company_description %></p>
-          <div class="card-bottom flex text-center">
-            <a href="#" class="btn btn-primary">Know more</a>
+    <% @investors.each do |investor| %>
+      <div class="col-sm-4 g-2">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+            <p class="card-text"><%= investor.company_description %></p>
+            <div class="card-bottom flex text-center">
+              <a href="#" class="btn btn-primary">Know more</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+<%== pagy_bootstrap_nav(@pagy) %>
+</div>
+
+<div class="container home">
+  <div class="row d-flex w-25">
+    <a href="/sectors" class="btn btn-primary">All Sectors</a>
+  </div>
+  <br>
+  <div class="row">
+    <% @sectors.each do |sector| %>
+      <div class="col-sm-4 g-2">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><strong><%= sector.name %></strong></h5>
+            <div class="card-bottom flex text-center">
+              <a href="#" class="btn btn-primary">Know more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 <%== pagy_bootstrap_nav(@pagy) %>
 </div>
