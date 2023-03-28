@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :investors, only: [:index, :show, :edit, :update]
   resources :sectors, only: [:index, :show]
-  
-  resources :chatrooms, only: :show do
+
+  resources :chatrooms, only: [:index, :show] do
     resources :messages, only: :create
   end
 

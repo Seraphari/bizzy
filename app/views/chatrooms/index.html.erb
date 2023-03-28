@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <div class="row mx-auto">
+    <% @chatrooms.each do |chatroom| %>
+      <div class="col-md-6">
+          <p># <%= link_to chatroom.name, chatroom_path(chatroom) %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

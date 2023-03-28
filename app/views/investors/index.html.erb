@@ -32,11 +32,9 @@
 
           <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
           <p class="card-text"><%= investor.company_description %></p>
-          <p class="card-text text-warning">
+          <%# <p class="card-text text-warning">
           <% investor.sectors.take(1).each do |sector| %>
-            <strong><%= sector.name %></strong>
-          <% end %>
-          </p>
+            <%# <strong><%= sector.name %>
           <div class="card-bottom flex text-center">
             <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
             <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
@@ -48,4 +46,4 @@
   </div>
 </div>
 
-<%= pagy_nav(@pagy) %>
+<%# <%= pagy_nav(@pagy) %>
