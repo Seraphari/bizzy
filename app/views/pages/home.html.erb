@@ -19,6 +19,8 @@
         <div class="card-body">
           <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
           <p class="card-text"><%= investor.company_description %></p>
+        </div>
+        <div class="card-footer">
           <a href= <%= investor_path(investor) %> class="btn btn-primary card-button">Know more</a>
         </div>
       </div>
@@ -28,7 +30,7 @@
 <%== pagy_bootstrap_nav(@pagy) %>
 </div>
 
-<div class="container">
+<div class="container featured-startups">
   <div class="d-flex justify-content-between align-items-center">
     <h2>Featured startups</h2>
     <%= link_to "See all startups >", founders_path %>
@@ -38,13 +40,80 @@
     <% @founders.each do |founder| %>
       <div class="col-sm-6 g-3">
         <div class="card text-center card-featured">
-          <div class="card-body">
+          <div class="card-body sector-card">
             <h5 class="card-title"><%= founder.company_name %></h5>
+          </div>
+          <div class="card-bottom">
             <a href= <%= founder_path(founder) %> class="btn btn-primary">Know more</a>
           </div>
         </div>
       </div>
     <% end %>
   </div>
+</div>
 
+<div class="container">
+  <div class="row">
+    <div class="d-flex align-items-center justify-content-between">
+      <h2>Featured resources for startups</h2>
+      <a href="#">View all resources ></a>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card">
+        <img src="/y_combinator_logo.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Card Title</h5>
+          <p class="card-text">
+            This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src= <%= image_tag("y_combinator_logo.png") %> class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Card Title</h5>
+          <p class="card-text">
+            This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="/y_combinator_logo.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Card Title</h5>
+          <p class="card-text">
+            This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="/y_combinator_logo.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Card Title</h5>
+          <p class="card-text">
+            This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="/y_combinator_logo.png" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Card Title</h5>
+          <p class="card-text">
+            This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
