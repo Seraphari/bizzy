@@ -14,6 +14,7 @@ class Founder < ApplicationRecord
   belongs_to :user, dependent: :destroy
   has_many :founder_sectors, dependent: :destroy
   has_many :sectors, through: :founder_sectors
+  has_one_attached :photo
 
   followability
 

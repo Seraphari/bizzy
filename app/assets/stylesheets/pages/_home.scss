@@ -18,7 +18,7 @@ footer {
 
 .container.home {
   margin-top: 50px;
-  margin-bottom: 80px;
+  margin-bottom: 64px;
 }
 
 h1.home {
@@ -29,4 +29,10 @@ h1.home {
 
 p.home {
   letter-spacing: 1.5px;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flexbox;
+  justify-content: flex-end;
 }

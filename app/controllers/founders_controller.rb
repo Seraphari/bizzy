@@ -1,5 +1,5 @@
 class FoundersController < ApplicationController
-  before_action :set_founder, only: [:show, :edit, :update, :follow, :unfollow, :accept, :decline, :cancel]
+  before_action :set_founder, only: [:show, :edit, :update]
 
   def index
     @founders = Founder.all
@@ -91,6 +91,7 @@ class FoundersController < ApplicationController
     redirect_to founder_path(@founder)
   end
 
+<<<<<<< HEAD
   def toggle_favorite
     @founder = Founder.find(params[:id])
     current_user.favorited?(@founder) ? current_user.unfavorite(@founder) : current_user.favorite(@founder)
@@ -106,6 +107,8 @@ class FoundersController < ApplicationController
     end
   end
 
+=======
+>>>>>>> master
   private
   # def make_it_a_friend_request
   #     current_user.send_follow_request_to(@user)
@@ -121,6 +124,6 @@ class FoundersController < ApplicationController
   end
 
   def founder_params
-    params.require(:founder).permit(:company_name, :company_description, :company_email, :company_UEN, :funding_stage, :date_incorporated, sector_ids: [] )
+    params.require(:founder).permit(:company_name, :company_description, :company_email, :company_UEN, :funding_stage, :date_incorporated, :photo, sector_ids: [] )
   end
 end
