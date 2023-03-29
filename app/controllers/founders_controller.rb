@@ -91,7 +91,6 @@ class FoundersController < ApplicationController
     redirect_to founder_path(@founder)
   end
 
-<<<<<<< HEAD
   def toggle_favorite
     @founder = Founder.find(params[:id])
     current_user.favorited?(@founder) ? current_user.unfavorite(@founder) : current_user.favorite(@founder)
@@ -107,8 +106,6 @@ class FoundersController < ApplicationController
     end
   end
 
-=======
->>>>>>> master
   private
   # def make_it_a_friend_request
   #     current_user.send_follow_request_to(@user)
