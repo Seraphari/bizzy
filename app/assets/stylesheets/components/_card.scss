@@ -105,6 +105,7 @@ border-radius: 8px;
 display: grid;
 justify-content: center;
 font-family: $body-font;
+text-align: center;
 }
 
 .card-text {
@@ -146,11 +147,16 @@ justify-content: space-between;
 .col-md-8.founder {
   padding-top: 30px;
   padding-left: 40px;
+  overflow-y: scroll;
+  max-height: 700px;
 }
 
 .col-md-4.founder {
   padding-top: 30px;
   padding-left: 40px;
+  height: 700px;
+  overflow-y: auto;
+
 }
 
 .container {
