@@ -106,6 +106,6 @@ class FoundersController < ApplicationController
   end
 
   def founder_params
-    params.require(:founder).permit(:company_name, :company_description, :company_email, :company_UEN, :funding_stage, :date_incorporated, sector_ids: [] )
+    params.require(:founder).permit(:company_name, :company_description, :company_email, :company_UEN, :funding_stage, :date_incorporated, :photo, sector_ids: [] )
   end
 end
