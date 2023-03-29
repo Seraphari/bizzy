@@ -15,10 +15,12 @@
   <div class="row d-flex align-self-stretch">
   <% @investors.first(3).each do |investor| %>
     <div class="col-sm-4 g-3">
-      <div class="card text-center card-featured">
+      <div class="card text-center card-featured h-100">
         <div class="card-body">
           <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
           <p class="card-text"><%= investor.company_description %></p>
+        </div>
+        <div class="card-footer">
         </div>
         <div class="card-footer">
           <a href= <%= investor_path(investor) %> class="btn btn-primary card-button">Know more</a>
