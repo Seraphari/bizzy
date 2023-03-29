@@ -10,6 +10,9 @@ application.register("favorite", FavoriteController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import InsertInListController from "./insert_in_list_controller"
+application.register("insert-in-list", InsertInListController)
+
 import SearchInvestorsController from "./search_investors_controller"
 application.register("search-investors", SearchInvestorsController)
 

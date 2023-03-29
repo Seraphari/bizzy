@@ -25,9 +25,9 @@
 
 <%# PLEASE DONT REMOVE THIS LINE %>
 <% if @founder.user == current_user %>
-<div class="main-container">
+<div class="main-container" data_controller="insert-in-list" >
   <div class="row">
-    <div class="col-md-4 founder">
+    <div class="col-md-4 founder" data-insert-in-list-target="favourite investors" data-insert-in-list-position-value="beforebegin">
       <%# <div class="cards-founders"> %>
       <h3><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h3>
       <h3><strong>Company:</strong> <%= @founder.company_name %></h3><br>
@@ -72,7 +72,7 @@
               <div class="col">
                 <div class="card h-100">
                   <%# <img src="..." class="card-img-top" alt="..."> %>
-                  <div class="card-body">
+                  <div class="card-body" data-controller="favorite">
 
                     <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
                     <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="bookmark"></i>
@@ -150,7 +150,14 @@
       Lorem Ipsum is that it has a more-or-less normal distribution of letters,
       as opposed to using 'Content here, content here', making it look like
       readable English. Many desktop publishing packages and web page editors
-      </p><br><br>
+      </p>
+      <div class="favorites">
+        <% @favorite_investors.each do |investor| %>
+          <%= render 'investor', investor: investor %>
+        <% end %>
+      </div>
+
+      <br><br>
     </div>
   </div>
 </div>
