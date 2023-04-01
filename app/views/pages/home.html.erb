@@ -1,48 +1,49 @@
 <% content_for(:navbar_class, "navbar-home") %>
 <div class="banner">
-  <div class="banner-content text-center">
-    <h1 class="home">Discover, Identify and Connect!</h1>
-    <p class="home">Browse Through Our Network Today</p>
-    <%= link_to "Start now", new_user_session_path, class: "btn btn-lg btn-primary"  %>
+  <div class="banner-content">
+    <h1 class="home">Be the next unicorn in Singapore</h1><br><br>
+    <p class="home">We'll help you discover opportunities that await you</p>
   </div>
 </div>
 
-<div class="container home">
-  <div class="container investor-header">
-    <h2 id="hover">Featured investors</h2>
-    <%= link_to "View all investors >", investors_path %>
-  </div>
-  <div class="row d-flex align-self-stretch">
-  <% @investors.first(3).each do |investor| %>
-    <div class="col-sm-4 g-3">
-      <div class="card text-center card-featured h-100">
-        <div class="card-body">
-          <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-          <p class="card-text"><%= investor.company_description %></p>
-        </div>
-        <div class="card-footer">
-          <a href= <%= investor_path(investor) %> class="btn btn-primary card-button">Know more</a>
-        </div>
-      </div>
+<div class="container d-flex justify-content-center">
+  <div class="container-investor">
+    <div class="container investor-header">
+      <h2 id="hover">Featured investors</h2>
+      <%= link_to "View all investors >", investors_path %>
     </div>
-  <% end %>
-  </div>
-<%== pagy_bootstrap_nav(@pagy) %>
-</div>
+    <div class="row d-flex align-self-stretch">
+      <% @investors.first(3).each do |investor| %>
+        <div class="col-sm-4 g-3">
+          <div class="card text-center card-featured h-100">
+            <img class="card-img-top" src="<%= asset_path('featured-investor1.jpg')%>" alt="Card image">
 
-<div class="container">
+            <div class="card-body">
+              <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+              <p class="card-text"><%= investor.company_description %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <!--<%== pagy_bootstrap_nav(@pagy) %>-->
+  </div>
+ </div>
+
+
+<div class="container-fluid startups">
   <div class="d-flex justify-content-between align-items-center">
-    <h2 id="hover">Featured startups</h2>
+    <h2 id="hover">Browse our startups</h2>
     <%= link_to "See all startups >", founders_path %>
   </div>
   <%# YL: Sector WIP - ignore for now %>
   <div class="row">
     <% @sectors.each do |sector| %>
-      <div class="col-sm-6 g-3">
+      <div class="col-sm-4 g-3">
         <div class="card text-center card-featured">
           <div class="card-body">
             <h5 class="card-title"><%= sector.name %></h5>
-            <a href= <%= sector_path(sector) %> class="btn btn-primary">Know more</a>
+           <!--<a href= <%= sector_path(sector) %> class="btn btn-primary">Know more</a>-->
           </div>
         </div>
       </div>
