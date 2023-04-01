@@ -5,5 +5,6 @@ class PagesController < ApplicationController
     @pagy, @investors = pagy(Investor.all)
     # @founder = current_user.founder
     @pagy, @sectors = pagy(Sector.all)
+    @chatrooms = Chatroom.all
   end
 end
