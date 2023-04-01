@@ -108,6 +108,10 @@ font-family: $body-font;
 text-align: center;
 }
 
+.card-body:hover {
+  background-color: #EFF6FF;
+}
+
 .card-text {
 // height: 240px;
 overflow: auto;

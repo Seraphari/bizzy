@@ -37,6 +37,33 @@ p.home {
   justify-content: flex-end;
 }
 
+#hover {
+  --s: 0.1em;   /* the thickness of the line */
+  --c: #0D6EFD; /* the color */
+
+  color: #0000;
+  padding-bottom: var(--s);
+  background:
+    linear-gradient(90deg,var(--c) 50%,#000 0) calc(100% - var(--_p,0%))/200% 100%,
+    linear-gradient(var(--c) 0 0) 0% 100%/var(--_p,0%) var(--s) no-repeat;
+  -webkit-background-clip: text,padding-box;
+          background-clip: text,padding-box;
+  transition: 0.8s;
+}
+
+#hover:hover {--_p: 100%}
+
+
+
+
+
+
+
+
+
+
+
+
 // .col-md-4.founder {
 //   position: fixed;
 //   left: 0;
