@@ -21,6 +21,8 @@
           <p class="card-text"><%= investor.company_description %></p>
         </div>
         <div class="card-footer">
+        </div>
+        <div class="card-footer">
           <a href= <%= investor_path(investor) %> class="btn btn-primary card-button">Know more</a>
         </div>
       </div>
@@ -30,19 +32,21 @@
 <%== pagy_bootstrap_nav(@pagy) %>
 </div>
 
-<div class="container">
+<div class="container featured-startups">
   <div class="d-flex justify-content-between align-items-center">
     <h2>Featured startups</h2>
     <%= link_to "See all startups >", founders_path %>
   </div>
   <%# YL: Sector WIP - ignore for now %>
   <div class="row">
-    <% @sectors.each do |sector| %>
+    <% @founders.each do |founder| %>
       <div class="col-sm-6 g-3">
         <div class="card text-center card-featured">
-          <div class="card-body">
-            <h5 class="card-title"><%= sector.name %></h5>
-            <a href= <%= sector_path(sector) %> class="btn btn-primary">Know more</a>
+          <div class="card-body sector-card">
+            <h5 class="card-title"><%= founder.company_name %></h5>
+          </div>
+          <div class="card-bottom">
+            <a href= <%= founder_path(founder) %> class="btn btn-primary">Know more</a>
           </div>
         </div>
       </div>
