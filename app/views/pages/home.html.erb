@@ -54,11 +54,13 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="d-flex align-items-center justify-content-between">
-      <h2>Featured resources for startups</h2>
-      <a href="#">View all resources ></a>
-    </div>
+<div class="container-fluid">
+  <h2>Channels</h2>
+  <div class="row mx-auto">
+    <% @chatrooms.each do |chatroom| %>
+      <div class="col-md-6">
+          <p># <%= link_to chatroom.name, chatroom_path(chatroom) %></p>
+      </div>
+    <% end %>
   </div>
 </div>

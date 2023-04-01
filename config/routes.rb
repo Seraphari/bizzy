@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
-  root to: "pages#home"
+  root to: "investors#index"
+  get '/home', to: 'pages#home'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :founders, except: [:destroy]
 
@@ -11,22 +12,24 @@ Rails.application.routes.draw do
   post 'founders/:id/cancel', to: 'founders#cancel', as: 'cancel'
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :investors, only: [:index, :show, :edit, :update]
   resources :sectors, only: [:index, :show]
 
   resources :chatrooms, only: [:index, :show] do
     resources :messages, only: :create
   end
 
-  resources :investors, only: :index do
+  resources :investors do
+    resource :chatrooms, only: :show
+  end
+
+  resources :investors do
     member do
       post 'favorite', to: "investors#toggle_favorite"
     end
   end
-
-  resources :founders, only: :index do
-    member do
-      post 'favorite', to: "founders#toggle_favorite"
-    end
-  end
+  # resources :founders do
+  #   member do
+  #     post 'favorite', to: "founders#toggle_favorite"
+  #   end
+  # end
 end
