@@ -95,15 +95,15 @@ class FoundersController < ApplicationController
     @founder = Founder.find(params[:id])
     current_user.favorited?(@founder) ? current_user.unfavorite(@founder) : current_user.favorite(@founder)
 
-    respond_to do |format|
-      if toggle_favorite.save
-        format.html { redirect_to founder_path(@founder) }
-        format.json
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json
-      end
-    end
+    # respond_to do |format|
+    #   if toggle_favorite.save
+    #     format.html { redirect_to founder_path(@founder) }
+    #     format.json
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json
+    #   end
+    # end
   end
 
   private

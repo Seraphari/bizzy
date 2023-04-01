@@ -1,6 +1,6 @@
 <div class="container" data-controller="search-investors">
-  <div class="row flex justify-content-between my-3">
-    <div class="col-md-6">
+  <div class="row d-flex justify-content-end my-3">
+    <div class="col-md-4">
       <%= form_with url: investors_path, method: :get, html: {class:
           "d-flex w-80", data: {search_investors_target: "form"}} do %>
       <%= text_field_tag :query,
@@ -10,7 +10,7 @@
         data: {
           search_investors_target: "input",}
       %>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
+      <%= submit_tag "Search", class: "btn btn-outline-primary" %>
       <% end %>
     </div>
     <% if params[:query].present? %>
@@ -21,10 +21,10 @@
     <% end %>
   </div>
 
-  <div class="row" data-search-investors-target="list">
+  <div class="row row-cols-1 row-cols-md-3 g-20" data-search-investors-target="list">
   <% @investors.each do |investor| %>
-    <div class="col-sm-4 g-2">
-      <div class="card h-100">
+    <div class="col-sm-4 g-4">
+      <div class="card h-100 p-3 mb-2">
         <div class="card-body" data-controller="favorite">
           <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
             <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="bookmark"></i>

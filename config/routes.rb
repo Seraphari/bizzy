@@ -30,5 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "favorite", to: "favorite#index"
+  # get "favorite", to: "favorite#index"
+  get '/favorites', to: 'favorites#index', as: :favorites
+
 end

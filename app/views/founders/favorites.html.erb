@@ -1,0 +1,11 @@
+<h1>My Favorites</h1>
+
+<% if @favorites.any? %>
+  <ul>
+  <% @favorites.each do |favorite| %>
+    <li><%= link_to favorite.investor.company_name, investor_path(favorite.investor) %></li>
+  <% end %>
+  </ul>
+<% else %>
+  <p>You haven't favorited any investors yet.</p>
+<% end %>
