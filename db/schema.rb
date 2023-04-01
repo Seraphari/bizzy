@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_28_151920) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_01_092759) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_151920) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.boolean "private"
+    t.bigint "investor_id"
+    t.index ["investor_id"], name: "index_chatrooms_on_investor_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -121,6 +123,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_151920) do
     t.string "ticket_size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_investors_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -131,6 +135,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_151920) do
     t.datetime "updated_at", null: false
     t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "private_rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "private_subscriptions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "privateroom_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["privateroom_id"], name: "index_private_subscriptions_on_privateroom_id"
+    t.index ["user_id"], name: "index_private_subscriptions_on_user_id"
+  end
+
+  create_table "privaterooms", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_privaterooms_on_user_id"
   end
 
   create_table "sectors", force: :cascade do |t|
@@ -155,11 +180,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_151920) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chatrooms", "investors"
   add_foreign_key "founder_sectors", "founders"
   add_foreign_key "founder_sectors", "sectors"
   add_foreign_key "founders", "users"
   add_foreign_key "investor_sectors", "investors"
   add_foreign_key "investor_sectors", "sectors"
+  add_foreign_key "investors", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "private_subscriptions", "privaterooms"
+  add_foreign_key "private_subscriptions", "users"
+  add_foreign_key "privaterooms", "users"
 end
