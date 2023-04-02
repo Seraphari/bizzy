@@ -21,10 +21,9 @@
     <% end %>
   </div>
   <div class="col-md-6 text-end">
-    <a class="btn btn-ghost" href="investors/all">See all investors</a>
+    <a class="btn btn-ghost" href="/investors">See recommendations</a>
   </div>
 
-<% if current_user.nil? %>
   <div class="row" data-search-investors-target="list">
   <% @investors.each do |investor| %>
     <div class="col-sm-4 g-2">
@@ -43,41 +42,7 @@
           </div>
         </div>
       </div>
-  <% end %>
-    </div>
-  </div>
-<% end %>
-
-<% if user_signed_in? %>
- <div class="row" data-search-investors-target="list">
-  <% @current_user.founder.sectors.each do | sector | %>
-    <div class="col-md-4 text-center">
-      <a class="btn btn-ghost" href= <%= "investors/?sector=#{sector.name.downcase}" %>><%= sector.name %></a>
-    </div>
-  <% end %>
-
-  <% @filter_investors.each do |investor| %>
-    <div class="col-sm-4 g-2">
-      <div class="card h-100">
-        <% if user_signed_in? %>
-        <div class="card-body" data-controller="favorite">
-          <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-            <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
-          <% end %>
-        <% end %>
-          <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-          <p class="card-text"><%= investor.company_description %></p>
-          <div class="card-bottom flex text-center">
-            <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
-            <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
-          </div>
-        </div>
-      </div>
     </div>
   <% end %>
   </div>
-<% end %>
 </div>
-
-
-<%# <%= pagy_nav(@pagy) %>

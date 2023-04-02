@@ -3,14 +3,6 @@ class InvestorsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
-    if params[:query].present?
-      # sql_query = "company_name @@ :query OR company_description @@ :query"
-      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
-      @investors = Investor.search_by_company_name_and_company_description(params[:query])
-    else
-      @investors = Investor.all
-    end
-
     if current_user.nil?
       @investors = Investor.all
     else
@@ -20,9 +12,30 @@ class InvestorsController < ApplicationController
           recommendations << investor
         end
         recommendations
-      end
-      @investors = recommendations.uniq
     end
+      @filter_investors = recommendations.uniq
+    end
+
+    @filter_investors
+    if params[:sector].present?
+      @investors = @filter_investors.where(sector: params[:sector])
+    end
+
+    if params[:stage].present?
+      @investors = @filter_investors.where(stage: params[:stage])
+    end
+
+    if params[:query].present?
+      # sql_query = "company_name @@ :query OR company_description @@ :query"
+      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
+      @investors = Investor.search_by_company_name_and_company_description(params[:query])
+    else
+      @investors = Investor.all
+    end
+  end
+
+  def all
+    @investors = Investor.all
   end
 
   def show
@@ -33,20 +46,6 @@ class InvestorsController < ApplicationController
     @investor = Investor.find(params[:id])
     current_user.favorited?(@investor) ? current_user.unfavorite(@investor) : current_user.favorite(@investor)
   end
-
-  # def new
-  #   @investor= Investor.new
-  # end
-
-  # def create
-  #   @investor = Investor.new(investor_params)
-
-  #   if @investor.save
-  #       redirect_to  investor_path(@investor)
-  #   else
-  #       render :new, status: :unprocessable_entity
-  #   end
-  # end
 
   def edit
 
@@ -59,11 +58,6 @@ class InvestorsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
-
-  # def destroy
-  #   @listing.destroy
-  #   redirect_to investors_path, status: :see_other, alert: "Listing was deleted successfully"
-  # end
 
   private
 
