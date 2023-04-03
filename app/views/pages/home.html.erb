@@ -1,7 +1,7 @@
 <% content_for(:navbar_class, "navbar-home") %>
 <div class="banner">
-  <div class="banner-content">
-    <h1 class="home">Be the next unicorn in Singapore</h1><br><br>
+  <div class="container flex">
+    <h1 class="home">Be the next unicorn in Singapore</h1>
     <p class="home">We'll help you discover opportunities that await you</p>
   </div>
 </div>
@@ -31,22 +31,36 @@
  </div>
 
 
-<div class="container-fluid startups">
+<div class="container-startup">
   <div class="d-flex justify-content-between align-items-center">
     <h2 id="hover">Browse our startups</h2>
     <%= link_to "See all startups >", founders_path %>
   </div>
   <%# YL: Sector WIP - ignore for now %>
-  <div class="row">
-    <% @sectors.each do |sector| %>
-      <div class="col-sm-4 g-3">
+  <div class="row align-items-center">
+    <% @sectors.first(3).each do |sector| %>
+      <div class="col-4 col-lg-4 g-3">
         <div class="card text-center card-featured">
-          <div class="card-body">
+          <img class="card-img-top" src="<%= asset_path('featured-startup1.jpg')%>" alt="Card image" style="width: 330px; height: 150px;">
+
+          <div class="card-body startup">
             <h5 class="card-title"><%= sector.name %></h5>
            <!--<a href= <%= sector_path(sector) %> class="btn btn-primary">Know more</a>-->
           </div>
         </div>
       </div>
     <% end %>
+  </div>
+</div>
+
+<div class="container-get-started">
+  <div class="row justify-content-center align-items-center">
+    <h1>Ready to get started?</h1>
+    <p>Join our worldwide community now.</p>
+
+    <form class="example" action="action_page.php">
+    <input type="text" placeholder="Enter your email.." name="Join">
+    <button type="submit" class="btn btn-primary">Join</button>
+    </form>
   </div>
 </div>
