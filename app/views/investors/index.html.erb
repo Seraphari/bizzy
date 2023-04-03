@@ -25,11 +25,15 @@
   <% @investors.each do |investor| %>
     <div class="col-sm-4 g-4">
       <div class="card h-100 p-3 mb-2">
-        <div class="card-body" data-controller="favorite">
+        <div class="card-body d-grid gap-2" data-controller="favorite">
           <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-            <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="bookmark"></i>
+            <i class="fa-bookmark d-grid gap-2 d-md-flex justify-content-md-end <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="bookmark"></i>
           <% end %>
-
+          <% if investor.photo.key.nil? %>
+            <img src="https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+          <% else %>
+            <%= cl_image_tag investor.photo.key, height: 300, width: 530, crop: :fill %>
+          <% end %>
           <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
           <p class="card-text"><%= investor.company_description %></p>
           <%# <p class="card-text text-warning">
