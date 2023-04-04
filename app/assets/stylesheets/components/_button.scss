@@ -12,6 +12,7 @@
   border: 1px solid #000000;
 }
 
+
 .btn-flat {
   color: rgb(255, 254, 254);
   padding: 8px 24px;
@@ -50,6 +51,22 @@
 // .btn:hover {
 //   background-color: $secondary-900;
 // }
+
+//wankoon doing for investors show
+.btn-investor {
+  background-color: #92AC86;
+  margin-bottom: 20px;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+}
+
+.btn-investor:hover {
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+  color: #658457;
+  font-weight: 500;
+}
+//wankoon doing for investors show
 
 .btn.btn-primary {
   margin-left: 20px;

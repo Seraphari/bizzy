@@ -12,19 +12,14 @@ class InvestorsController < ApplicationController
           recommendations << investor
         end
         recommendations
-    end
+      end
       @filter_investors = recommendations.uniq
     end
 
-    @filter_investors
-    if params[:sector].present?
-      @investors = @filter_investors.where(sector: params[:sector])
-    end
-
-    if params[:stage].present?
-      @investors = @filter_investors.where(stage: params[:stage])
-    end
-
+    # if params[:query].present?
+    #   sql_subquery = "name ILIKE :query OR stage ILIKE :query"
+    #   @search_investors = @filter_investors.where(sql_subquery, query: "%#{params[:query]}%")
+    # end
     if params[:query].present?
       # sql_query = "company_name @@ :query OR company_description @@ :query"
       # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
@@ -32,6 +27,18 @@ class InvestorsController < ApplicationController
     else
       @investors = Investor.all
     end
+
+    if params[:sector].present?
+      sector = Sector.find_by("name ILIKE ?", "%#{params[:sector]}%")
+      @sector_investors = @filter_investors.select{ |investor| investor.sectors.include?(sector) }
+    end
+
+    if params[:funding_stage].present?
+      stage = Founder.find_by("funding_stage ILIKE ?", "%#{params[:funding_stage]}%")
+      @stage_investors = @filter_investors.select{ |investor| investor.funding_stage.include?(stage.funding_stage) }
+    end
+
+
   end
 
   def all

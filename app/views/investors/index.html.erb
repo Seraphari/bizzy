@@ -38,7 +38,9 @@
           <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
           <p class="card-text"><%= investor.company_description %></p>
           <div class="card-bottom flex text-center">
-            <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Know more
+            </button>
             <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
           </div>
         </div>
@@ -52,28 +54,182 @@
  <div class="row" data-search-investors-target="list">
   <% @current_user.founder.sectors.each do | sector | %>
     <div class="col-md-4 text-center">
-      <a class="btn btn-ghost" href= <%= "investors/?sector=#{sector.name.downcase}" %>><%= sector.name %></a>
+      <a class="btn btn-ghost" href= <%= "/?sector=#{sector.name}" %>><%= sector.name %></a>
     </div>
   <% end %>
+      <a class="btn btn-ghost" href= <%= "/?funding_stage=#{@current_user.founder.funding_stage}" %>><%= @current_user.founder.funding_stage %></a>
 
-  <% @filter_investors.each do |investor| %>
-    <div class="col-sm-4 g-2">
-      <div class="card h-100">
-        <% if user_signed_in? %>
-        <div class="card-body" data-controller="favorite">
-          <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-            <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+
+  <% if params[:sector].present? %>
+
+    <% @sector_investors.each do |investor| %>
+        <div class="col-sm-4 g-2">
+        <div class="card h-100">
+          <% if user_signed_in? %>
+          <div class="card-body" data-controller="favorite">
+            <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+              <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+            <% end %>
           <% end %>
-        <% end %>
-          <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-          <p class="card-text"><%= investor.company_description %></p>
-          <div class="card-bottom flex text-center">
-            <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
-            <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+            <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+            <p class="card-text"><%= investor.company_description %></p>
+            <div class="card-bottom flex text-center">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Know more
+              </button>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
+
+  <% elsif params[:funding_stage].present? %>
+
+    <% @stage_investors.each do |investor| %>
+      <div class="col-sm-4 g-2">
+        <div class="card h-100">
+          <% if user_signed_in? %>
+          <div class="card-body" data-controller="favorite">
+            <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+              <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+            <% end %>
+          <% end %>
+            <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+            <p class="card-text"><%= investor.company_description %></p>
+            <div class="card-bottom flex text-center">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Know more
+              </button>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  <% else %>
+
+    <% @filter_investors.each do |investor| %>
+      <div class="col-sm-4 g-2">
+        <div class="card h-100">
+          <% if user_signed_in? %>
+            <div class="card-body" data-controller="favorite">
+              <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+              <% end %>
+          <% end %>
+            <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+            <p class="card-text"><%= investor.company_description %></p>
+            <div class="card-bottom flex text-center">
+              <a href=<%= "investors/#{investor.id}" %> type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Know more</a>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                      <div class="modal-header" style="background-color: #92AC86;">
+                        <h5 class="modal-title text-white display-6" id="exampleModalLabel"><%= investor.company_name %></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body" style="background-color: #A7D49B;">
+                        <div class="container mt-4">
+                          <div class="row d-flex align-items-center justify-content-around">
+                              <div class="col-md-4">
+                                <img class="avatar-square w-75" alt="avatar-square" src="https://i.mydramalist.com/6PlYW_5_c.jpg" />
+                                  <div class="row mt-2">
+                                    <button type="button" class="btn btn-dark w-25 mx-auto">Connect</button>
+                                  </div>
+                              </div>
+                              <div class="col-md-8">
+                                <h5 class="fw-bold fw-light" style="color: #214E34;">Company Details</h5>
+                                <div class="row">
+                                  <h4 class="text-white fw-normal"><%= investor.company_description%></h4>
+                                </div>
+                                <br>
+                                <div class="row d-flex align-items-center justify-content-between">
+                                  <div class="col-md-3">
+                                    <h5 class="fw-bold fw-light" style="color: #214E34;">Company UEN</h5>
+                                    <h4 class="text-white fw-normal"><%= investor.company_UEN %></h4>
+                                  </div>
+                                  <div class="col-md-5">
+                                    <h5 class="fw-bold fw-light" style="color: #214E34;">Company Email</h5>
+                                    <h4 class="text-white fw-normal"><%= investor.company_email %></h4>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <h5 class="fw-bold fw-light" style="color: #214E34;">Company Ticket Size</h5>
+                                    <h4 class="text-white fw-normal"><%= investor.ticket_size %></h4>
+                                  </div>
+                                </div>
+                                <br>
+                                <div class="row d-flex align-items-center justify-content-between">
+                                  <div class="col-md-3">
+                                    <h5 class="fw-bold fw-light" style="color: #214E34;">Sectors: </h5>
+                                  </div>
+                                    <% investor.sectors.each do |sector|%>
+                                      <p class="col-md-3"><button type="button" class="btn btn-investor btn-rounded"><%= sector.name %></button></p>
+                                    <% end %>
+                                </div>
+                                <div class="row d-flex align-items-center">
+                                  <div class="col-md-3">
+                                    <h5 class="fw-bold fw-light" style="color: #214E34;">Funding_stages: </h5>
+                                  </div>
+                                    <% investor.funding_stage.split(",").each do |stage|%>
+                                      <p class="col-md-3"><button type="button" class="btn btn-investor btn-rounded"><%= stage %></button></p>
+                                    <% end %>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer" style="background-color: #92AC86;">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
   </div>
 <% end %>
