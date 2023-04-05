@@ -1,16 +1,62 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+      <div class="modal-header" style="background-color: #92AC86;">
+        <h5 class="modal-title text-white display-6" id="exampleModalLabel"><%= investor.company_name %></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" style="background-color: #A7D49B;">
+        <div class="container mt-4">
+          <div class="row d-flex align-items-center justify-content-around">
+              <div class="col-md-4">
+                <img class="avatar-square w-75" alt="avatar-square" src="https://i.mydramalist.com/6PlYW_5_c.jpg" />
+                  <div class="row mt-2">
+                    <button type="button" class="btn btn-dark w-25 mx-auto">Connect</button>
+                  </div>
+              </div>
+              <div class="col-md-8">
+                <h5 class="fw-bold fw-light" style="color: #214E34;">Company Details</h5>
+                <div class="row">
+                  <h4 class="text-white fw-normal"><%= investor.company_description%></h4>
+                </div>
+                <br>
+                <div class="row d-flex align-items-center justify-content-between">
+                  <div class="col-md-3">
+                    <h5 class="fw-bold fw-light" style="color: #214E34;">Company UEN</h5>
+                    <h4 class="text-white fw-normal"><%= investor.company_UEN %></h4>
+                  </div>
+                  <div class="col-md-5">
+                    <h5 class="fw-bold fw-light" style="color: #214E34;">Company Email</h5>
+                    <h4 class="text-white fw-normal"><%= investor.company_email %></h4>
+                  </div>
+                  <div class="col-md-4">
+                    <h5 class="fw-bold fw-light" style="color: #214E34;">Company Ticket Size</h5>
+                    <h4 class="text-white fw-normal"><%= investor.ticket_size %></h4>
+                  </div>
+                </div>
+                <br>
+                <div class="row d-flex align-items-center justify-content-between">
+                  <div class="col-md-3">
+                    <h5 class="fw-bold fw-light" style="color: #214E34;">Sectors: </h5>
+                  </div>
+                    <% investor.sectors.each do |sector|%>
+                      <p class="col-md-3"><button type="button" class="btn btn-investor btn-rounded"><%= sector.name %></button></p>
+                    <% end %>
+                </div>
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-3">
+                    <h5 class="fw-bold fw-light" style="color: #214E34;">Funding_stages: </h5>
+                  </div>
+                    <% investor.funding_stage.split(",").each do |stage|%>
+                      <p class="col-md-3"><button type="button" class="btn btn-investor btn-rounded"><%= stage %></button></p>
+                    <% end %>
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <div class="modal-footer" style="background-color: #92AC86;">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
