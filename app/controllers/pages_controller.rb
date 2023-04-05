@@ -3,7 +3,8 @@ class PagesController < ApplicationController
 
   def home
     @pagy, @investors = pagy(Investor.all)
-    # @founder = current_user.founder
+    @founders = Founder.all
     @pagy, @sectors = pagy(Sector.all)
+    @chatrooms = Chatroom.all
   end
 end

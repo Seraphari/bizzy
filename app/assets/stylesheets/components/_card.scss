@@ -178,4 +178,15 @@ justify-content: space-between;
 
 .card-body.startup {
   height: 250px;
+.card-footer {
+  background-color: white;
+  border-top: 0;
+
+  a {
+    margin-bottom: 8px;
+  }
+}
+
+.sector-card {
+  padding: 0;
 }

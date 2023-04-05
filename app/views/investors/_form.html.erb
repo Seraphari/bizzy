@@ -9,6 +9,7 @@
     <%= f.input :funding_stage, collection: Founder::STAGE, include_hidden: false, input_html: { data: { controller: "tom-select" }}, placeholder: '' %>
     <%= f.input :ticket_size, placeholder: '$2500000'%>
     <%= f.association :sectors, include_hidden: false, input_html: { data: { controller: "tom-select" }} %>
+    <%= f.input :photo, as: :file %>
     <%= f.submit class: 'btn btn-primary text-dark fw-bold' %>
   <% end %>
   <a href="/">Back</a>
