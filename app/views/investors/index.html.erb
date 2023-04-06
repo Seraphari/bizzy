@@ -1,179 +1,108 @@
-<div class="container" data-controller="search-investors">
-  <div class="row flex justify-content-between my-3">
-    <div class="col-md-6">
-      <%= form_with url: investors_path, method: :get, html: {class:
-          "d-flex w-80", data: {search_investors_target: "form"}} do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Find an investor",
-        data: {
-          search_investors_target: "input",}
-      %>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-    <% if params[:query].present? %>
-      <p><%= Investor.search_by_company_name_and_company_description(params[:query]).count %>
-      <%= Investor.search_by_company_name_and_company_description(params[:query]).count > 1 ? "results" : "result" %> for
-      "<%= params[:query] %>"
-      </p>
-    <% end %>
-  </div>
+<%= render "shared/investor_navbar" if user_signed_in? %>
+
+<div class="container">
   <div class="col-md-6 text-end">
     <a class="btn btn-ghost" href="investors/all">See all investors</a>
   </div>
 
-<% if current_user.nil? %>
-  <div class="row" data-search-investors-target="list">
-  <% @investors.each do |investor| %>
-    <div class="col-sm-4 g-2">
-      <div class="card h-100">
-        <% if user_signed_in? %>
-        <div class="card-body" data-controller="favorite">
-          <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-            <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
-          <% end %>
-        <% end %>
-          <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-          <p class="card-text"><%= investor.company_description %></p>
-          <div class="card-bottom flex text-center">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              Know more
-            </button>
-            <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
-          </div>
-        </div>
-      </div>
-  <% end %>
-    </div>
-  </div>
-<% end %>
-
-<% if user_signed_in? %>
- <div class="row" data-search-investors-target="list">
-  <% @current_user.founder.sectors.each do | sector | %>
-    <div class="col-md-4 text-center">
-      <a class="btn btn-ghost" href= <%= "/?sector=#{sector.name}" %>><%= sector.name %></a>
-    </div>
-  <% end %>
-      <a class="btn btn-ghost" href= <%= "/?funding_stage=#{@current_user.founder.funding_stage}" %>><%= @current_user.founder.funding_stage %></a>
-
-
-  <% if params[:sector].present? %>
-
-    <% @sector_investors.each do |investor| %>
+  <% if current_user.nil? %>
+    <div class="row">
+      <% @investors.each do |investor| %>
         <div class="col-sm-4 g-2">
-        <div class="card h-100">
-          <% if user_signed_in? %>
-          <div class="card-body" data-controller="favorite">
-            <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-              <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
-            <% end %>
-          <% end %>
-            <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-            <p class="card-text"><%= investor.company_description %></p>
-            <div class="card-bottom flex text-center">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Know more
-              </button>
-
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-fullscreen">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
-  <% elsif params[:funding_stage].present? %>
-
-    <% @stage_investors.each do |investor| %>
-      <div class="col-sm-4 g-2">
-        <div class="card h-100">
-          <% if user_signed_in? %>
-          <div class="card-body" data-controller="favorite">
-            <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-              <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
-            <% end %>
-          <% end %>
-            <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-            <p class="card-text"><%= investor.company_description %></p>
-            <div class="card-bottom flex text-center">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Know more
-              </button>
-
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-fullscreen">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
-  <% else %>
-
-    <% @filter_investors.each do |investor| %>
-      <div class="col-sm-4 g-2">
-        <div class="card h-100">
-          <div class="card-body" data-controller="favorite">
+          <div class="card h-100">
             <% if user_signed_in? %>
+            <div class="card-body" data-controller="favorite">
               <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
                 <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
               <% end %>
             <% end %>
-            <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-            <p class="card-text"><%= investor.company_description %></p>
-            <div class="card-bottom flex text-center">
-              <a  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Know more</a>
-                <%= render "modal", investor: investor %>
-
-              <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+              <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+              <p class="card-text"><%= investor.company_description %></p>
+              <div class="card-bottom flex text-center">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Know more
+                </button>
+                <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+              </div>
             </div>
           </div>
+      <% end %>
         </div>
-      </div>
-    <% end %>
-
+    </div>
+  <% else %>
+    <div class="row">
+      <% @current_user.founder.sectors.each do | sector | %>
+        <div class="col-md-4 text-center">
+          <a class="btn btn-ghost" href= <%= "/?sector=#{sector.name}" %>><%= sector.name %></a>
+        </div>
+      <% end %>
+          <a class="btn btn-ghost" href= <%= "/?funding_stage=#{@current_user.founder.funding_stage}" %>><%= @current_user.founder.funding_stage %></a>
+      <% if params[:sector].present? %>
+        <% @sector_investors.each do |investor| %>
+            <div class="col-sm-4 g-2">
+            <div class="card h-100">
+              <% if user_signed_in? %>
+              <div class="card-body" data-controller="favorite">
+                <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                  <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+                <% end %>
+              <% end %>
+                <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+                <p class="card-text"><%= investor.company_description %></p>
+                <div class="card-bottom flex text-center">
+                  <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target= <%= "#investor-#{investor.id}" %>>Know more</a>
+                    <%= render "modal", investor: investor %>
+                  <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% elsif params[:funding_stage].present? %>
+        <% @stage_investors.each do |investor| %>
+          <div class="col-sm-4 g-2">
+            <div class="card h-100">
+              <% if user_signed_in? %>
+              <div class="card-body" data-controller="favorite">
+                <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                  <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+                <% end %>
+              <% end %>
+                <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+                <p class="card-text"><%= investor.company_description %></p>
+                <div class="card-bottom flex text-center">
+                  <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target= <%= "#investor-#{investor.id}" %>>Know more</a>
+                    <%= render "modal", investor: investor %>
+                  <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <% @filter_investors.each do |investor| %>
+          <div class="col-sm-4 g-2">
+            <div class="card h-100">
+              <div class="card-body" data-controller="favorite">
+                <% if user_signed_in? %>
+                  <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                    <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+                  <% end %>
+                <% end %>
+                <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+                <p class="card-text"><%= investor.company_description %></p>
+                <div class="card-bottom flex text-center">
+                  <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target= <%= "#investor-#{investor.id}" %>>Know more</a>
+                    <%= render "modal", investor: investor %>
+                  <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
-  </div>
-<% end %>
 </div>
-
 
 <%# <%= pagy_nav(@pagy) %>

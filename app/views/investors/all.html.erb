@@ -1,7 +1,7 @@
 <div class="container" data-controller="search-investors">
   <div class="row flex justify-content-between my-3">
     <div class="col-md-6">
-      <%= form_with url: investors_path, method: :get, html: {class:
+      <%= form_with url: all_path, method: :get, html: {class:
           "d-flex w-80", data: {search_investors_target: "form"}} do %>
       <%= text_field_tag :query,
         params[:query],
@@ -37,7 +37,8 @@
           <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
           <p class="card-text"><%= investor.company_description %></p>
           <div class="card-bottom flex text-center">
-            <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
+            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target= <%= "#investor-#{investor.id}" %>>Know more</a>
+              <%= render "modal", investor: investor %>
             <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
           </div>
         </div>

@@ -16,18 +16,6 @@ class InvestorsController < ApplicationController
       @filter_investors = recommendations.uniq
     end
 
-    # if params[:query].present?
-    #   sql_subquery = "name ILIKE :query OR stage ILIKE :query"
-    #   @search_investors = @filter_investors.where(sql_subquery, query: "%#{params[:query]}%")
-    # end
-    if params[:query].present?
-      # sql_query = "company_name @@ :query OR company_description @@ :query"
-      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
-      @investors = Investor.search_by_company_name_and_company_description(params[:query])
-    else
-      @investors = Investor.all
-    end
-
     if params[:sector].present?
       sector = Sector.find_by("name ILIKE ?", "%#{params[:sector]}%")
       @sector_investors = @filter_investors.select{ |investor| investor.sectors.include?(sector) }
@@ -38,11 +26,25 @@ class InvestorsController < ApplicationController
       @stage_investors = @filter_investors.select{ |investor| investor.funding_stage.include?(stage.funding_stage) }
     end
 
+    if params[:query].present?
+      # sql_query = "company_name @@ :query OR company_description @@ :query"
+      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
+      @investors = Investor.search_by_company_name_and_company_description(params[:query])
+    else
+      @investors = Investor.all
+    end
 
   end
 
   def all
-    @investors = Investor.all
+    if params[:query].present?
+      # sql_query = "company_name @@ :query OR company_description @@ :query"
+      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
+      @investors = Investor.search_by_company_name_and_company_description(params[:query])
+    else
+      @investors = Investor.all
+    end
+
   end
 
   def show
@@ -60,7 +62,7 @@ class InvestorsController < ApplicationController
 
   def update
     if @investor.update(investor_params)
-      redirect_to investor_path(@investor)
+      redirect_to all_path
     else
       render :edit, status: :unprocessable_entity
     end

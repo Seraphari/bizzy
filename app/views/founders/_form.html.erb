@@ -1,18 +1,21 @@
-<div class="container founder-form">
-  <%= simple_form_for [@founder] do |f| %>
-    <%= f.input :company_name, placeholder: ''%>
-    <%= f.input :company_description, placeholder: ''%>
-    <%= f.input :company_UEN, label: "Company UEN", placeholder: '123456789H' %>
-    <%= f.input :company_email, placeholder: 'abcd_1234@gmail.com' %>
-    <%= f.input :funding_stage, collection: Founder::STAGE, include_hidden: false, input_html: { data: { controller: "tom-select" }}, placeholder: '' %>
-    <%= f.input :date_incorporated, as: :date, start_year: Date.today.year - 90,
-                                    end_year: Date.today.year, discard_day: false,
-                                    order: [:day, :month, :year]  %>
-    <%= f.association :sectors, include_hidden: false, input_html: { data: { controller: "tom-select" }} %>
-    <%= f.input :photo, as: :file %>
-    <div class="submission-field">
-    <%= f.submit class: "btn btn-outline-primary fw-bold" %>
-  <% end %>
-  <a href="/" class="btn btn-outline-primary fw-bold">Back</a>
+<div class="container-fluid">
+  <div class="row p-5" style="background-color: #397367;">
+    <div class="col-md-8 m-10 mx-auto fw-bold text-white">
+      <%= simple_form_for [@founder] do |f| %>
+        <%= f.input :company_name, placeholder: '' %>
+        <%= f.input :company_description, placeholder: ''%>
+        <%= f.input :company_UEN, label: "Company UEN", placeholder: '123456789H' %>
+        <%= f.input :company_email, placeholder: 'abcd_1234@gmail.com' %>
+        <%= f.input :funding_stage, collection: Founder::STAGE, include_hidden: false, input_html: { data: { controller: "tom-select" }}, placeholder: '' %>
+        <%= f.input :date_incorporated, as: :date, start_year: Date.today.year - 90,
+                                        end_year: Date.today.year, discard_day: false,
+                                        order: [:day, :month, :year]  %>
+        <%= f.association :sectors, include_hidden: false, input_html: { data: { controller: "tom-select" }} %>
+        <%= f.input :photo, as: :file %>
+        <div class="submission-field">
+        <%= f.submit class: "btn btn-outline-primary fw-bold" %>
+      <% end %>
+      <a href="/" class="btn btn-outline-primary fw-bold">Back</a>
+    </div>
   </div>
 </div>
