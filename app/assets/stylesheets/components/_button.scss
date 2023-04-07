@@ -105,3 +105,21 @@
   background-color: $primary-500;
   color: white;
 }
+
+
+// For YL's use only
+
+.btn-sm {
+  color: $shade-0;
+  padding: 12px 20px;
+  background: #023373;
+  box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+
+  // Fonts
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+}
