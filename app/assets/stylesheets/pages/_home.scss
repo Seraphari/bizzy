@@ -69,34 +69,120 @@ footer {
   text-align: center;
   margin-right: 0px;
 
+  .row.justify-content-center.align-items-center {
+    padding-top: 70px;
+    }
 
-.row.justify-content-center.align-items-center {
-  padding-top: 70px;
+  p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: white;
+    align-items: center;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 
-p {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  color: white;
-  align-items: center;
-  text-align: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  h1 {
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 34px;
+    line-height: 41px;
+    align-items: center;
+    text-align: center;
+    padding-top: 20px;
+  }
 }
 
-h1 {
-  color: white;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 800;
-  font-size: 34px;
-  line-height: 41px;
-  align-items: center;
-  text-align: center;
-  padding-top: 20px;
+
+// For YL's use only
+
+// Generic settings
+body {
+  background-color: $neutral-50;
 }
 
+// Styling settings for hero banner
+.hero-wrapper {
+  // Styling for hero banner
+  background-image: image-url("new-background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .hero-section {
+    padding-top: 120px;
+    padding-bottom: 200px;
+    width: 1080px;
+  }
+}
+
+.hero-wrapper {
+  // Styling for hero header and subheader
+  .hero-header {
+    width: 50%;
+  }
+}
+
+// Styling for featured investors section
+
+.featured-investors-wrapper {
+  background-color: $shade-0;
+  // padding: 40px auto 40px auto;
+  width: 1080px;
+  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  margin: -80px auto 0 auto;
+  // align header and cards in middle
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .featured-investors {
+    padding: 40px 0 16px 0;
+    width: 857px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // yeah... i cheated, 857px is to accomodate the card size lol.. sue me
+  .investor-card-deck {
+    width: 857px;
+  }
+}
+
+.investor-card-deck {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+
+  // investor-card contains both image and the words
+  .investor-card {
+    width:275px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
+    border: 1px solid $neutral-300;
+  }
+
+  // investor-card-image MUST BE 275PX for now, else later formatting break then gg
+  .investor-card-image {
+    padding: 0px;
+  }
+
+  // investor-card is the white white portion storing headers and description.. i don't have the brain power to come up with better class names, sue me lol.
+  .investor-card-details {
+    background-color: $shade-0;
+    padding: 20px 25px;
+    margin-top: -44px;
+    border-radius: 10px;
+  }
 }
