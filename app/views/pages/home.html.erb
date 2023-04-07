@@ -25,7 +25,7 @@
   </div>
 
   <%# Iterate and show 3 investors in cards %>
-  <div class="row investor-card-deck">
+  <div class="investor-card-deck">
     <% @investors.first(3).each do |investor| %>
       <div class="investor-card">
         <div class="investor-card-image">
@@ -45,6 +45,76 @@
             <%= investor.company_description %>
           </div>
         </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# Browse-startups frame %>
+<div class="browse-startups-wrapper">
+  <%# Header for browse startups: Display + link to index %>
+  <div class="browse-startups-header">
+    <h1 class="s extra-bold">
+      Browse our startups
+    </h1>
+    <%= link_to "See all startups >", founders_path, class: "caption semi-bold" %>
+  </div>
+
+  <%# Section to display 3 startups %>
+  <div class="startup-card-deck">
+    <% @founders.first(3).each do |founder| %>
+      <div class="startup-card">
+        <div class="startup-card-image">
+          <%= image_tag('featured-startup1.jpg') %>
+        </div>
+
+        <%# Bottom part of card: Header + Description %>
+        <div class="startup-card-details">
+          <div class="startup-bio">
+            <h3 class="startup-name bold">
+              <%= founder.company_name %>
+            </h3>
+            <h4 class="s semi-bold">
+              <%= founder.funding_stage %>
+            </h4>
+          </div>
+          <div class="startup-card-body body-s regular">
+            <%= founder.company_description %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# Marketing/Newsletter frame %>
+<div class="newsletter-wrapper">
+  <%# Banner is to do the formatting for padding... cuz I'm too damn lazy %>
+  <div class="newsletter-banner">
+    <div class="newsletter-copy">
+      <h2 class="extra-bold">
+        Ready to get started?
+      </h2>
+
+      <p class="subheader semi-bold">
+        Join our worldwide community now.
+      </p>
+    </div>
+
+    <% if false %>
+      <%# WORK-IN-PROGRESS: Section for join-newsletter-field %>
+      <div class="join-newsletter">
+        <%= form_with url: "/search", method: :get do |form| %>
+          <%# this thing handles the form field %>
+          <div class="newsletter-input body-s regular">
+            <%= form.text_field :query, placeholder: "Enter your email" %>
+          </div>
+
+          <%# this thing handles the damn button %>
+          <div class="btn-form">
+            <%= form.submit "Join", class: "btn-form" %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
@@ -112,18 +182,19 @@
   </div>
 <% end %>
 
-<div class="container-get-started">
-  <div class="row justify-content-center align-items-center">
-    <h1>Ready to get started?</h1>
-    <p>Join our worldwide community now.</p>
-
-    <form class="example" action="action_page.php">
-    <input type="text" placeholder="Enter your email.." name="Join">
-    <button type="submit" class="btn btn-primary">Join</button>
-    </form>
-</div>
-
+<%# Get started section -backup %>
 <% if false %>
+  <div class="container-get-started">
+    <div class="row justify-content-center align-items-center">
+      <h1>Ready to get started?</h1>
+      <p>Join our worldwide community now.</p>
+
+      <form class="example" action="action_page.php">
+      <input type="text" placeholder="Enter your email.." name="Join">
+      <button type="submit" class="btn btn-primary">Join</button>
+      </form>
+  </div>
+
   <div class="container-fluid">
     <h2>Channels</h2>
     <div class="row mx-auto">

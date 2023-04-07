@@ -107,7 +107,9 @@ body {
   background-color: $neutral-50;
 }
 
+// ***** ***** ***** ***** ***** *****
 // Styling settings for hero banner
+// ***** ***** ***** ***** ***** *****
 .hero-wrapper {
   // Styling for hero banner
   background-image: image-url("new-background.jpg");
@@ -129,7 +131,9 @@ body {
   }
 }
 
+// ***** ***** ***** ***** ***** *****
 // Styling for featured investors section
+// ***** ***** ***** ***** ***** *****
 
 .featured-investors-wrapper {
   background-color: $shade-0;
@@ -137,7 +141,7 @@ body {
   width: 1080px;
   box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  margin: -80px auto 0 auto;
+  margin: -80px auto 80px auto;
   // align header and cards in middle
   display: flex;
   flex-direction: column;
@@ -161,6 +165,7 @@ body {
   margin-bottom: 40px;
   display: flex;
   justify-content: space-between;
+  gap: 16px;
 
   // investor-card contains both image and the words
   .investor-card {
@@ -184,5 +189,127 @@ body {
     padding: 20px 25px;
     margin-top: -44px;
     border-radius: 10px;
+  }
+}
+
+.investor-card-details {
+  .investor-bio {
+    margin-bottom: 24px;
+  }
+}
+
+// ***** ***** ***** ***** ***** *****
+// Styling for browse startups section
+// ***** ***** ***** ***** ***** *****
+
+// Align the startup frame + header
+.browse-startups-wrapper {
+  background-color: $neutral-200;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .browse-startups-header {
+    width: 1080px;
+    padding-top: 58px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .startup-card-deck {
+    width: 1080px;
+  }
+}
+
+.startup-card-deck {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 58px;
+
+  // startup-card also contains both image and words
+  .startup-card {
+    width: 349px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
+    border: 1px solid $neutral-300;
+    background-color: $shade-0;
+  }
+
+  // For startup card, let's just run with 350px... idk...
+  .startup-card-image {
+    padding: 0px;
+  }
+
+  .startup-card-details {
+    background-color: $shade-0;
+    margin-top: -44px;
+    padding:20px 25px;
+    border-radius: 10px;
+  }
+}
+
+.startup-card-details {
+  .startup-bio {
+    margin-bottom: 24px;
+  }
+}
+
+
+
+// ***** ***** ***** ***** ***** *****
+// Styling for browse startups section
+// ***** ***** ***** ***** ***** *****
+
+.newsletter-wrapper {
+  color: $shade-0;
+  background-color: $primary-700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .newsletter-banner {
+    width: 1080px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+
+  .join-newsletter {
+  }
+}
+
+.newsletter-banner {
+  .newsletter-copy {
+    // margin-bottom: 40px;
+
+  }
+}
+
+// this is just to make a small separation between the header and tagline... idk why i need another scss  config lol
+.newsletter-copy {
+  h2 {
+    margin-bottom: 16px;
+  }
+}
+
+.join-newsletter form {
+  display: flex;
+  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
+  border: none;
+
+  .newsletter-input {
+    width: 281px;
+    padding: 16px;
+    background-color: $shade-0;
+    border-radius: 8px 0px 0px 8px;
   }
 }
