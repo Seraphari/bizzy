@@ -105,8 +105,8 @@ h1 {
   }
 
   &.bold {
-    font-family: $font-family;
-    font-size: $font-style;
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 700;
     font-size: 48px;
     line-height: 58px;
@@ -192,10 +192,10 @@ h2.s {
 
   .extra-bold {
     font-family: 'Inter';
-  font-style: normal;
-  font-weight: 800;
-  font-size: 24px;
-  line-height: 29px;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
   }
 }
 
