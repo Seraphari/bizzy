@@ -1,22 +1,56 @@
-<% if false %>
-<div class="container">
+<%# PLEASE DONT REMOVE THIS LINE %>
+<% if @founder.user == current_user %>
+<div class="container-fluid" style="background-color: #8DB1AB;">
   <div class="row">
-    <%# Founder/CURRENT USER own profile %>
-    <div class="col-6">
-      <h1 class="extra-bold">Lee Do-Hyun</h1>
-      <p class="subheader bold">Yuehua Entertainment</p>
-    </div>
+    <div class="col-md-4 d-md-block d-sm-none " data-controller="favorite">
+      <div class="vh-100 text-white" style="background-color: #587792;">
 
-    <%# RECOMMENDED INVESTORS + FOUNDERS %>
-    <div class="col-6">
+      </div>
     </div>
+    <div class="col-md-8 h-100">
+
+  <div class="col-md-4 founder" >
+    <%# <div class="cards-founders"> %>
+
+
+    <div class="d-flex flex-column">
+      <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
+      <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
+      <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
+      <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
+    </div><hr>
+
+    <p><strong><%= @founder.user.first_name%>'s followers:</strong></p>
+      <% current_user.founder.followers.each do |founder| %>
+      <p><%= link_to founder.user.email, founder_path(founder) %> <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
+      <% end %>
+    <h3><strong>My Favourites (Investors)</strong></h3>
+      <ul data-favorite-target="savelist">
+        <% current_user.all_favorited.each do |favorite| %>
+          <p><%= link_to favorite.company_name, investor_path(favorite) %></p>
+        <p><%= link_to "Chat", investor_chatrooms_path(favorite.id) %></p>
+        <% end %>
+      </ul>
   </div>
 </div>
 <% end %>
+<%# PLEASE DONT REMOVE THIS LINE %>
 
-<div class="container">
-  <div class="row">
-    <%# SHOW ON @FOUNDER %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <% if @founder != current_user.founder %>
       <p>Current_connection between you and <%= @founder.user.first_name %>:</p>
         <% if current_user.founder.following?(@founder)%>
@@ -36,42 +70,11 @@
         <%= button_to "Decline", decline_path(request.followerable) %>
       <% end %>
     <% end %>
-  </div>
-</div>
 
-<%# PLEASE DONT REMOVE THIS LINE %>
-<% if @founder.user == current_user %>
-  <div class="main-container">
-    <div class="row">
-      <div class="col-md-4 founder" data-controller="favorite">
-        <%# <div class="cards-founders"> %>
-        <h3><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h3>
-        <h3><strong>Company:</strong> <%= @founder.company_name %></h3><br>
-        <p><strong>Description:</strong> <%= @founder.company_description %></p>
 
-        <div class="d-flex flex-column">
-          <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
-          <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
-          <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
-          <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
-        </div><hr>
 
-        <p><strong><%= @founder.user.first_name%>'s followers:</strong></p>
-          <% current_user.founder.followers.each do |founder| %>
-          <p><%= link_to founder.user.email, founder_path(founder) %> <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
-          <% end %>
-        <h3><strong>My Favourites (Investors)</strong></h3>
-          <ul data-favorite-target="savelist">
-            <% current_user.all_favorited.each do |favorite| %>
-              <p><%= link_to favorite.company_name, investor_path(favorite) %></p>
-            <p><%= link_to "Chat", investor_chatrooms_path(favorite.id) %></p>
-            <% end %>
-          </ul>
-      </div>
-    </div>
-  </div>
-<% end %>
-<%# PLEASE DONT REMOVE THIS LINE %>
+
+
 
 <%# PLEASE DONT REMOVE THIS LINE %>
 <% if @founder.user == current_user %>
@@ -139,4 +142,3 @@
   </div>
 </div>
 <% end %>
-
