@@ -39,7 +39,7 @@ class InvestorsController < ApplicationController
   # end
 
   def edit
-
+    @investor = Investor.find(params[:id])
   end
 
   def update
@@ -63,6 +63,6 @@ class InvestorsController < ApplicationController
   end
 
   def investor_params
-    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, sector_ids: [] )
+    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, :photo, sector_ids: [] )
   end
 end
