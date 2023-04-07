@@ -11,22 +11,28 @@
   width: 110px;
 }
 
+<<<<<<< HEAD
 // .navbar.navbar-expand-sm.navbar-light.navbar-lewagon {
 //   width: 100%;
 //   z-index: 999;
 // } deleted by wankoon
+=======
+.navbar.navbar-expand-sm.navbar-light.navbar-lewagon {
+  width: 100%;
+  z-index: 999;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+>>>>>>> master
 
-// .logo-small {
-//   width: 100%;
-// }
+.nav-link {
+  color: black;
+  margin-right: 20px;
+}
 
-// .navbar-home {
-//   position: absolute;
-//   width: 100%;
-//   background: transparent;
-//   box-shadow: none;
-//   .navbar-wagon-link {
-//     color: white;
-//     font-weight: bold;
-//   }
-// }
+.nav-link:hover {
+  color: $primary-500;
+}

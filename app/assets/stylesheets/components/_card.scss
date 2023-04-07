@@ -105,6 +105,11 @@ border-radius: 8px;
 display: grid;
 justify-content: center;
 font-family: $body-font;
+text-align: center;
+}
+
+.card-body:hover {
+  background-color: #EFF6FF;
 }
 
 .card-text {
@@ -146,11 +151,16 @@ justify-content: space-between;
 .col-md-8.founder {
   padding-top: 30px;
   padding-left: 40px;
+  overflow-y: scroll;
+  max-height: 700px;
 }
 
 .col-md-4.founder {
   padding-top: 30px;
   padding-left: 40px;
+  height: 700px;
+  overflow-y: auto;
+
 }
 
 .container {
@@ -164,4 +174,19 @@ justify-content: space-between;
 
 .card-body h5 {
   padding-bottom: 16px;
+}
+
+.card-body.startup {
+  height: 250px;
+.card-footer {
+  background-color: white;
+  border-top: 0;
+
+  a {
+    margin-bottom: 8px;
+  }
+}
+
+.sector-card {
+  padding: 0;
 }

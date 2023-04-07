@@ -10,29 +10,93 @@ footer {
   margin-top: auto;
 }
 
-.banners {
-  width: auto;
-  height: 600px;
-  padding-top: 150px;
-}
-
-.container.home {
-  margin-top: 50px;
-  margin-bottom: 64px;
-}
-
-h1.home {
-  font-weight: 900;
-  letter-spacing: 2px;
-  margin-bottom: 25px;
-}
-
-p.home {
-  letter-spacing: 1.5px;
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+  text-align: left;
 }
 
 .pagination {
   margin-top: 20px;
   display: flexbox;
   justify-content: flex-end;
+}
+
+#hover {
+  --s: 0.1em;   /* the thickness of the line */
+  --c: #0D6EFD; /* the color */
+
+  color: #0000;
+  padding-bottom: var(--s);
+  background:
+    linear-gradient(90deg,var(--c) 50%,#000 0) calc(100% - var(--_p,0%))/200% 100%,
+    linear-gradient(var(--c) 0 0) 0% 100%/var(--_p,0%) var(--s) no-repeat;
+  -webkit-background-clip: text,padding-box;
+          background-clip: text,padding-box;
+  transition: 0.8s;
+}
+
+#hover:hover {--_p: 100%}
+
+.container-investor {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  height: 600px;
+  max-width: 800px;
+  margin: -80px 50px 50px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px gray;
+}
+
+.container-startup {
+  padding-bottom: 80px;
+  padding-top: 80px;
+  padding-left: 150px;
+  padding-right: 150px;
+  background-color: #CBD5E1;
+  margin-top: -80px;
+}
+
+.container-get-started {
+  height: 60vh;
+  background-color: $primary-900;
+  text-align: center;
+  margin-right: 0px;
+
+
+.row.justify-content-center.align-items-center {
+  padding-top: 70px;
+  }
+
+p {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: white;
+  align-items: center;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+h1 {
+  color: white;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 34px;
+  line-height: 41px;
+  align-items: center;
+  text-align: center;
+  padding-top: 20px;
+}
+
 }
