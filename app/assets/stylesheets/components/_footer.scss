@@ -5,3 +5,25 @@
 .footer-info {
   margin-top: 32px;
 }
+
+// For YL's use only
+
+.footer-bizzy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1320px;
+  padding: 0px;
+  background-color: hsba(213, 10%, 88%, 1);
+
+  .footer-nav-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 88px 400px;
+
+    // Separator in footer
+    border-bottom: 1px solid $neutral-300;
+  }
+}
