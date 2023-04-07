@@ -2,18 +2,20 @@
   <div class="footer-nav-wrapper">
     <div class="footer-details">
       <%# Col-1: Image + tagline %>
-      <div class="footer-col">
-        <%= image_tag(asset_path('bizzy-logo3.png'), class: "") %>
-        <p class="caption large">Be the next unicorn in Singapore</p>
+      <div class="footer-col-1">
+        <%= image_tag(asset_path('bizzy-logo3.png'), class: "footer-logo") %>
+        <p class="caption semi-bold">Be the next unicorn in Singapore</p>
       </div>
       <%# Col-2: Who we are %>
       <div class="footer-col">
+        <p class="footer semi-bold">Who we are</p>
         <%= link_to "About us", "#", class: "footer regular" %>
         <%= link_to "Contact us", "#", class: "footer regular" %>
       </div>
 
       <%# Col-3: Useful links %>
       <div class="footer-col">
+        <p class="footer semi-bold">Useful links</p>
         <%= link_to "Startup SG Network", "#", class: "footer regular" %>
         <%= link_to "Y-Combinator", "#", class: "footer regular" %>
         <%= link_to "FAQs", "#", class: "footer regular" %>
@@ -21,12 +23,15 @@
 
       <%# Col-4: Navigation %>
       <div class="footer-col">
+        <p class="footer semi-bold">Navigation</p>
         <%= link_to "Resources", "#", class: "footer regular" %>
         <%= link_to "Investors", "#", class: "footer regular" %>
         <%= link_to "Founders", "#", class: "footer regular" %>
       </div>
     </div>
   </div>
+  <%# Separator in footer - idk how to use border bottom, that's why %>
+  <hr>
   <div class="copyright-wrapper">
     <p class="caption-s regular">© 2023 Copyright: Bizzy Group Ltd.</p>
   </div>
