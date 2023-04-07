@@ -406,7 +406,7 @@ h6.s {
 }
 
 .subheader {
-  .regular {
+  &.regular {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -414,7 +414,7 @@ h6.s {
     line-height: 24px;
   }
 
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -422,7 +422,7 @@ h6.s {
     line-height: 24px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -432,7 +432,7 @@ h6.s {
 }
 
 .subheader-s {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -440,7 +440,7 @@ h6.s {
     line-height: 17px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -448,7 +448,7 @@ h6.s {
     line-height: 17px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -458,7 +458,7 @@ h6.s {
 }
 
 .body {
-  .regular {
+  &.regular {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -466,7 +466,7 @@ h6.s {
     line-height: 19px;
   }
 
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -476,7 +476,7 @@ h6.s {
 }
 
 .body-s {
-  .regular {
+  &.regular {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -484,7 +484,7 @@ h6.s {
     line-height: 17px;
   }
 
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -494,7 +494,7 @@ h6.s {
 }
 
 .caption {
-  .regular {
+  &.regular {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -502,7 +502,7 @@ h6.s {
     line-height: 15px;
   }
 
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -510,7 +510,7 @@ h6.s {
     line-height: 15px;
   }
 
-  .semi-bold-cap {
+  &.semi-bold-cap {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -521,7 +521,7 @@ h6.s {
 }
 
 .caption-s {
-  .regular {
+  &.regular {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -529,7 +529,7 @@ h6.s {
     line-height: 13px;
   }
 
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -537,7 +537,7 @@ h6.s {
     line-height: 13px;
   }
 
-  .semi-bold-cap {
+  &.semi-bold-cap {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -548,7 +548,7 @@ h6.s {
 }
 
 .footer {
-  .regular {
+  &.regular {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -556,7 +556,7 @@ h6.s {
     line-height: 12px;
   }
 
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -564,7 +564,7 @@ h6.s {
     line-height: 12px;
   }
 
-  .semi-bold-cap {
+  &.semi-bold-cap {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;

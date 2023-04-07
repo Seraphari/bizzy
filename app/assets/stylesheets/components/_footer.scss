@@ -5,3 +5,61 @@
 .footer-info {
   margin-top: 32px;
 }
+
+// For YL's use only
+
+.footer-bizzy {
+  background-color: $neutral-50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  background-color: hsba(213, 10%, 88%, 1);
+
+  .footer-nav-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 48px 0px;
+    max-width: 1320px;
+  }
+
+  hr {
+    border: 0.5px solid $neutral-300;
+    width: 100%;
+    margin: 0px;
+  }
+}
+
+.footer-details {
+  display: flex;
+  padding: 0px;
+  justify-content: space-between;
+
+  .footer-col-1 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-right: 108px;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+}
+
+.footer-logo {
+  width: 80%;
+}
+
+.copyright-wrapper {
+  p {
+  padding-top: 16px;
+  width: 1320px;
+  }
+}
