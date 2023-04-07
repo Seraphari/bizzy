@@ -10,6 +10,9 @@ application.register("chatroom-subscription", ChatroomSubscriptionController)
 import FavoriteController from "./favorite_controller"
 application.register("favorite", FavoriteController)
 
+import FocusController from "./focus_controller"
+application.register("focus", FocusController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

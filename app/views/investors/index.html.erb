@@ -1,10 +1,6 @@
 <%= render "shared/investor_navbar" if user_signed_in? %>
 
 <div class="container">
-  <div class="col-md-6 text-end">
-    <a class="btn btn-ghost" href="investors/all">See all investors</a>
-  </div>
-
   <% if current_user.nil? %>
     <div class="row">
       <% @investors.each do |investor| %>

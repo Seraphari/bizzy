@@ -1,21 +1,44 @@
-<nav class="navbar navbar-expand-lg sticky-top h-75" style="background-color: #AABA9E;">
-  <div class="container-fluid" >
+<nav class="navbar navbar-expand-lg sticky-top h-75 " style="background-color: #AABA9E;" data-controller="focus">
+  <div class="container-fluid collapse navbar-collapse" id="navbarNav">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mt-4">
       <p class="text-white">Your sectors: &nbsp &nbsp</p>
         <% @current_user.founder.sectors.each do | sector | %>
           <li class="breadcrumb-item">
-            <span class="fw-bold default-button"><a href= <%= "/?sector=#{sector.name}" %>><%= sector.name %></a></span>
+            <span class="fw-bold default-button"><a href= <%= "/?sector=#{sector.name}"%> ><%= sector.name %></a></span>
           </li>
         <% end %>
-         &nbsp
-         &nbsp
-         &nbsp
+        &nbsp
+        &nbsp
+        &nbsp
       <p class="text-white">Your stage: &nbsp &nbsp</p>
         <li class="breadcrumb-item">
           <span class="fw-bold default-button"><a href= <%= "/?funding_stage=#{@current_user.founder.funding_stage}" %>><%= @current_user.founder.funding_stage %></a></span>
         </li>
+        &nbsp
+        &nbsp
+        &nbsp
+        &nbsp
+        &nbsp
+        &nbsp
+        &nbsp
+        &nbsp
+        &nbsp
+      <p></p>
+        <li class="breadcrumb-item">
+          <span class="fw-bold default-button"><a href="investors/all">See all investors</a></span>
+        </li>
       </ol>
+        <button
+    class="navbar-toggler"
+    type="button"
+    data-mdb-toggle="collapse"
+    data-mdb-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  > <i class="fas fa-bars"></i>
+  </button>
     </nav>
   </div>
 </nav>
