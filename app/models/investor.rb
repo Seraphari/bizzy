@@ -12,6 +12,8 @@ class Investor < ApplicationRecord
 
   has_many :investor_sectors, dependent: :destroy
   has_many :sectors, through: :investor_sectors
+  has_one :chatroom
+  has_one_attached :photo
 
   include PgSearch::Model
   pg_search_scope :search_by_company_name_and_company_description,

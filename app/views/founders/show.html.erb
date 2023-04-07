@@ -1,3 +1,19 @@
+<% if false %>
+<div class="container">
+  <div class="row">
+    <%# Founder/CURRENT USER own profile %>
+    <div class="col-6">
+      <h1 class="extra-bold">Lee Do-Hyun</h1>
+      <p class="subheader bold">Yuehua Entertainment</p>
+    </div>
+
+    <%# RECOMMENDED INVESTORS + FOUNDERS %>
+    <div class="col-6">
+    </div>
+  </div>
+</div>
+<% end %>
+
 <div class="container">
   <div class="row">
     <%# SHOW ON @FOUNDER %>
@@ -25,77 +41,37 @@
 
 <%# PLEASE DONT REMOVE THIS LINE %>
 <% if @founder.user == current_user %>
-<div class="main-container" data_controller="insert-in-list" >
-  <div class="row">
-    <div class="col-md-4 founder" data-insert-in-list-target="favourite investors" data-insert-in-list-position-value="beforebegin">
-      <%# <div class="cards-founders"> %>
-      <h3><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h3>
-      <h3><strong>Company:</strong> <%= @founder.company_name %></h3><br>
-      <p><strong>Description:</strong> <%= @founder.company_description %></p>
+  <div class="main-container">
+    <div class="row">
+      <div class="col-md-4 founder" data-controller="favorite">
+        <%# <div class="cards-founders"> %>
+        <h3><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h3>
+        <h3><strong>Company:</strong> <%= @founder.company_name %></h3><br>
+        <p><strong>Description:</strong> <%= @founder.company_description %></p>
 
-      <div class="d-flex flex-column">
-        <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
-        <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
-        <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
-        <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
-      </div><hr>
+        <div class="d-flex flex-column">
+          <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
+          <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
+          <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
+          <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
+        </div><hr>
 
-      <p><strong><%= @founder.user.first_name%>'s followers:</strong></p>
-        <% current_user.founder.followers.each do |founder| %>
-        <p><%= link_to founder.user.email, founder_path(founder) %> <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
-        <% end %>
-
-      <h3><strong>My Favourites</strong></h3>
-      <p>It is a long established fact that a reader will be distracted by the
-      readable content of a page when looking at its layout. The point of using
-      Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-      as opposed to using 'Content here, content here', making it look like
-      readable English. Many desktop publishing packages and web page editors
-      </p><br><br>
-    </div>
-<% end %>
-
-<% if @founder.user == current_user %>
-    <div class="col-md-8 founder">
-        <div class="container">
-          <div class="row text-center">
-            <h3>Recommendations (Investors'profile) based on your sectors below:</h3><br><br>
-            <div class="col d-flex justify-content-around">
-              <% @founder.sectors.each do |sector| %>
-                <a class="btn btn-ghost" href="#"><%= sector.name %></a>
-              <% end %>
-            </div>
-          </div>
-
-          <div class="row row-cols-1 row-cols-md-3 g-3 m-2">
-            <% @filter_investors.take(6).each do |investor| %>
-              <div class="col">
-                <div class="card h-100">
-                  <%# <img src="..." class="card-img-top" alt="..."> %>
-                  <div class="card-body" data-controller="favorite">
-
-                    <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-                    <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="bookmark"></i>
-                    <% end %>
-
-                    <h5 class="card-title"><%= investor.company_name %></h5>
-                    <p class="card-text"><%= investor.company_description %></p>
-                    <ul>
-                      <% investor.sectors.each do |sector| %>
-                        <li><p><%= sector.name %></p></li>
-                      <% end %>
-                    </ul>
-                    <a class="btn btn-flat" href=<%= "/investors/#{investor.id}" %>>Read more</a>
-                  </div>
-                </div>
-              </div>
+        <p><strong><%= @founder.user.first_name%>'s followers:</strong></p>
+          <% current_user.founder.followers.each do |founder| %>
+          <p><%= link_to founder.user.email, founder_path(founder) %> <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
+          <% end %>
+        <h3><strong>My Favourites (Investors)</strong></h3>
+          <ul data-favorite-target="savelist">
+            <% current_user.all_favorited.each do |favorite| %>
+              <p><%= link_to favorite.company_name, investor_path(favorite) %></p>
+            <p><%= link_to "Chat", investor_chatrooms_path(favorite.id) %></p>
             <% end %>
-          </div>
-        </div>
+          </ul>
+      </div>
     </div>
   </div>
-</div>
 <% end %>
+<%# PLEASE DONT REMOVE THIS LINE %>
 
 <%# PLEASE DONT REMOVE THIS LINE %>
 <% if @founder.user == current_user %>

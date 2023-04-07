@@ -17,6 +17,7 @@ class FoundersController < ApplicationController
 
     founders = Founder.all
     @filter_founders = founders.to_a.keep_if { |founder| founder != current_user.founder}
+
   end
 
   def new
@@ -33,7 +34,7 @@ class FoundersController < ApplicationController
     @founder = Founder.new(founder_params)
     @founder.user = current_user
     if @founder.save!
-        redirect_to  founder_path(@founder) #go to the recommendation page
+        redirect_to  investors_path #go to the recommendation page
     else
         render :new, status: :unprocessable_entity
     end

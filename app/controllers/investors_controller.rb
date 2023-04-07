@@ -1,6 +1,6 @@
 class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show, :edit, :update]
-  before_action :authenticate_user!, only: :toggle_favorite
+  # before_action :authenticate_user!, only: :toggle_favorite
 
   def index
     @investors = Investor.all
@@ -12,6 +12,19 @@ class InvestorsController < ApplicationController
       @investors = Investor.search_by_company_name_and_company_description(params[:query])
     else
       @investors = Investor.all
+    end
+
+    if current_user.nil?
+      @investors = Investor.all
+    else
+      recommendations = []
+      current_user.founder.sectors.each do |sector|
+        sector.investors.each do |investor|
+          recommendations << investor
+        end
+        recommendations
+      end
+      @investors = recommendations.uniq
     end
   end
 

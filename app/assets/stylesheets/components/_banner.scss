@@ -1,23 +1,36 @@
 .banner {
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 350px;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), image-url("banner-home.jpg");
+  position: static;
+  background-image: image-url("new-background.jpg");
   background-size: cover;
+  width: 100%;
+  height: 120vh;
+
 
   h1 {
-    color: white;
-    font-weight: bold;
-    font-size: 45px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 63px;
+  display: flex-start;
+  align-items: start;
+  color: #000000;
+  width: 600px;
+  text-align: left;
+  padding-top: 50px;
   }
 
   p {
-    color: white;
+    color: black;
     opacity: 0.9;
     font-size: 25px;
     font-weight: lighter;
     margin-bottom: 30px;
+    padding-top: 50px;
+    text-align: left;
   }
 }

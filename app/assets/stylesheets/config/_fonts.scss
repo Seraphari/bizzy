@@ -1,7 +1,7 @@
 // Import Google fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script&family=East+Sea+Dokdo&family=Merriweather+Sans&family=Phudu&family=Public+Sans&family=Satisfy&family=Space+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"');
 
 // :root {
 //     --primary: blue
@@ -11,83 +11,630 @@
 
 // }
 
-$body-font: "Inter", "sans-serif";
+$body-font: 'Inter', 'sans-serif';
 $headers-font: "Inter", "sans-serif";
 
+// Generic typography definitions
+$font-family: 'Inter', 'sans-serif';
+$font-style: normal;
 
-
-footer, footer.semi-bold, .display-1, .display-1-bold,
- .display-2, .display-2-bold, h1, h1.bold, h2, h2.bold, h3, h3.bold, h4, h4.bold,
-  h5 {
-    font-family: $headers-font;
-    font-style: normal;
-    color: #000000;
-}
+// footer, footer.semi-bold, .display-1, .display-1-bold,
+//  .display-2, .display-2-bold, h1, h1.bold, h2, h2.bold, h3, h3.bold, h4, h4.bold,
+//   h5 {
+//     font-family: $headers-font;
+//     font-style: normal;
+//     color: #000000;
+// }
 
 body {
-    font-family: $body-font;
+    font-family: 'Inter', 'sans-serif';
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
   }
 
-// body.small {
-//     font-weight: 400;
-//     font-size: 14px;
-//     line-height: 17px;
-// }
-
-.footer {
+body.small {
     font-weight: 400;
     font-size: 14px;
-    line-height: 22px;
+    line-height: 17px;
 }
 
+// *******************************************
+// Typography (for YL's refactoring in future)
+// *******************************************
+
 .display-1 {
+  &.semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
     font-size: 60px;
     line-height: 73px;
+  }
+
+  &.bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 73px;
+  }
+
+  &.extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 60px;
+    line-height: 73px;
+  }
 }
 
 .display-2 {
+  &.semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
     font-size: 52px;
     line-height: 63px;
-}
+  }
 
-.bold {
-  font-weight: 700;
+  &.bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 63px;
+  }
+
+  &.extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 63px;
+  }
 }
 
 h1 {
+  &.semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
     font-size: 48px;
     line-height: 58px;
+  }
+
+  &.bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 58px;
+  }
+
+  &.extra-bold {
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 58px;
+  }
 }
 
-h2 {
+h1.s {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
     font-size: 34px;
     line-height: 41px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 41px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 34px;
+    line-height: 41px;
+  }
 }
 
+h2 {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 41px;
+  }
 
-h3 {
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 41px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 34px;
+    line-height: 41px;
+  }
+}
+
+h2.s {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
     font-size: 24px;
     line-height: 29px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+  }
 }
 
+h3 {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+  }
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+  }
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+  }
+}
 
-h4 {
+h3.s {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+  }
 }
 
+h4 {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+  }
 
-h5 {
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+h4.s {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 19px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 19px;
+  }
 }
+
+h5 {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+h5.s {
+  .semi-bold {
+    font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+h6 {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+h6.s {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.subheader {
+  .regular {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.subheader-s {
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .extra-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.body {
+  .regular {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.body-s {
+  .regular {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.caption {
+  .regular {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .semi-bold-cap {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+  }
+}
+
+.caption-s {
+  .regular {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .semi-bold-cap {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 11px;
+    line-height: 13px;
+    letter-spacing: 0.15em;
+  }
+}
+
+.footer {
+  .regular {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  .semi-bold {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  .semi-bold-cap {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.1em;
+  }
+}
+
+// .footer {
+//   // font-weight: 400;
+//   // font-size: 14px;
+//   // line-height: 22px;
+
+//   .regular {
+//     font-family: "Inter";
+//     font-style: normal;
+//     font-size: 10px;
+//     line-height: 12px;
+//     line-height: 100%;
+//     align: left;
+//     vertical-align: top;
+//   }
+// }
+
+// .display-1 {
+//     font-weight: 600;
+//     font-size: 60px;
+//     line-height: 73px;
+// }
+
+// .display-2 {
+//     font-weight: 600;
+//     font-size: 52px;
+//     line-height: 63px;
+// }
+
+// .bold {
+//   font-weight: 700;
+// }
+
+// h1 {
+//     font-weight: 600;
+//     font-size: 48px;
+//     line-height: 58px;
+// }
+
+// h2 {
+//     font-weight: 600;
+//     font-size: 34px;
+//     line-height: 41px;
+// }
+
+
+// h3 {
+//     font-weight: 600;
+//     font-size: 24px;
+//     line-height: 29px;
+// }
+
+
+// h4 {
+//     font-weight: 600;
+//     font-size: 20px;
+//     line-height: 24px;
+// }
+
+
+// h5 {
+//     font-weight: 600;
+//     font-size: 16px;
+//     line-height: 19px;
+// }

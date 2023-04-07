@@ -2,15 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="favorite"
 export default class extends Controller {
-  static targets = ["bookmark"]
-  // , "FavoritesList"
+  static targets = ["heart"]
+
   connect() {
+    console.dir(this.savelistTarget)
+
   }
 
   update() {
-    if (this.bookmarkTarget.classList.value.includes("fa-regular")) {
-      this.bookmarkTarget.classList.remove("fa-regular")
-      this.bookmarkTarget.classList.add("fa-solid")
+    if (this.heartTarget.classList.value.includes("fa-regular")) {
+      this.heartTarget.classList.remove("fa-regular")
+      this.heartTarget.classList.add("fa-solid")
     } else {
       this.bookmarkTarget.classList.remove("fa-solid")
       this.bookmarkTarget.classList.add("fa-regular")
