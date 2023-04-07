@@ -1,52 +1,151 @@
-<div class="container" data-controller="search-investors">
-  <div class="row flex justify-content-between my-3">
-    <div class="col-md-6">
-      <%= form_with url: investors_path, method: :get, html: {class:
-          "d-flex w-80", data: {search_investors_target: "form"}} do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Find an investor",
-        data: {
-          search_investors_target: "input",}
-      %>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-    <% if params[:query].present? %>
-      <p><%= Investor.search_by_company_name_and_company_description(params[:query]).count %>
-      <%= Investor.search_by_company_name_and_company_description(params[:query]).count > 1 ? "results" : "result" %> for
-      "<%= params[:query] %>"
-      </p>
-    <% end %>
+<%# Wrapper for the entire investors index page %>
+<div class="investors-heading-wrapper">
+
+  <%# Includes display title for investors index page %>
+  <div class="heading-info">
+    <h1 class="extra-bold">
+      Meet our investors
+    </h1>
   </div>
 
-  <div class="row" data-search-investors-target="list">
-    <% @investors.each do |investor| %>
-      <div class="col-sm-4 g-2">
-        <div class="card h-100">
-          <% if user_signed_in? %>
-          <div class="card-body" data-controller="favorite">
-            <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-              <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
-            <% end %>
-          <% end %>
-            <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-            <p class="card-text"><%= investor.company_description %></p>
-            <%# <p class="card-text text-warning">
-            <% investor.sectors.take(1).each do |sector| %>
-              <%# <strong><%= sector.name %>
-            <div class="card-bottom flex text-center">
-              <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
-              <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
-            </div>
-          </div>
+  <%# Includes search field %>
+  <div class="search-investor">
+
+    <%# Search field for investor index page %>
+    <div class="search-field">
+      <%= form_with url: investors_path, method: :get, html: {
+        class: "", data: {search_investors_target: "form"}
+      } do %>
+        <%# Text field in search bar %>
+        <%= text_field_tag :query,
+        params[:query],
+        class: "",
+        placeholder: "Find an investor",
+        data: {
+          search_investors_target: "input"
+        } %>
+
+        <%# Submit button %>
+        <%= submit_tag "Search", class: "" %>
+      <% end %>
+    </div>
+
+  </div>
+
+  <%# Includes acquisition banner (guest) or sector display (logged-in) %>
+  <div class="custom-call-to-action">
+    <% if user_signed_in? %>
+      <div class="search-filter">
+        <div class="body-s semi-bold">
+          <p>Sector(s) that your company is in:</p>
+        </div>
+        <div class="search-filter-tags">
+          <p class="caption-s semi-bold">Enterprise</p>
         </div>
       </div>
+    <% else %>
+      <div class="acquisition-banner body-s semi-bold">
+        <i class="fa-regular fa-circle-exclamation"></i>
+        <p>
+          <%= link_to "Sign up", new_user_registration_path %>
+          or
+          <%= link_to "Sign in", new_user_session_path %>
+          to see a personalised list of recommended investors
+        </p>
+      </div>
+      <%# Display acquisition banner if logged-out %>
+      <div class="acquisition-banner"></div>
     <% end %>
   </div>
 </div>
 
+<%# Section to display all investors.. if there are any %>
+<div class="investors-show-wrapper">
+  <div class="investors-show">
+    <%# TBC - Counting number of results, e.g. "0 result for 'Enterprise' " %>
+    <div class="investors-count caption-s semi-bold">
+      <p>
+        Showing <%= @investors.count %> investors
+      </p>
+    </div>
 
+    <%# Display investors %>
+    <div class="investors-card-deck" data-search-investors-target="list">
+      <% @investors.each do |investor| %>
+        <div class="investor-card">
 
-<%# <%= pagy_nav(@pagy) %>
+          <%# idfk what the hell is this %>
+          <div class="investor-card-fav" data-controller="favorite">
+            <% if user_signed_in? %>
+              <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="investor-card-profile">
+            <div class="investor-card-img">
+              <%= image_tag('featured-investor1.jpg')%>
+            </div>
+
+            <%# this is to store the damn investor name and title %>
+            <div class="investor-card-title">
+              <h3 class="s extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>
+              <p class="body semi-bold"><%= investor.company_name %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if false %>
+  <div class="container" data-controller="search-investors">
+    <div class="row flex justify-content-between my-3">
+      <div class="col-md-6">
+        <%= form_with url: investors_path, method: :get, html: {class:
+            "d-flex w-80", data: {search_investors_target: "form"}} do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Find an investor",
+          data: {
+            search_investors_target: "input",}
+        %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      <% if params[:query].present? %>
+        <p><%= Investor.search_by_company_name_and_company_description(params[:query]).count %>
+        <%= Investor.search_by_company_name_and_company_description(params[:query]).count > 1 ? "results" : "result" %> for
+        "<%= params[:query] %>"
+        </p>
+      <% end %>
+    </div>
+    <div class="row" data-search-investors-target="list">
+      <% @investors.each do |investor| %>
+        <div class="col-sm-4 g-2">
+          <div class="card h-100">
+            <% if user_signed_in? %>
+            <div class="card-body" data-controller="favorite">
+              <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+              <% end %>
+            <% end %>
+              <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+              <p class="card-text"><%= investor.company_description %></p>
+              <%# <p class="card-text text-warning">
+              <% investor.sectors.take(1).each do |sector| %>
+                <%# <strong><%= sector.name %>
+              <div class="card-bottom flex text-center">
+                <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
+                <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
