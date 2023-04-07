@@ -31,6 +31,12 @@
               <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
             <% end %>
           <% end %>
+
+          <% if investor.photo.key.nil? %>
+            <img src=“https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1” alt=“”>
+          <% else %>
+            <%= cl_image_tag investor.photo.key, height: 300, width: 530, crop: :fill %>
+          <% end %>
             <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
             <p class="card-text"><%= investor.company_description %></p>
             <%# <p class="card-text text-warning">

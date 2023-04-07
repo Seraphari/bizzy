@@ -10,6 +10,11 @@
   </div>
   <div class="row">
     <div class="col flex justify-content-between">
+      <% if @investor.photo.attached? %>
+        <%= cl_image_tag @investor.photo.key, height: 300, width: 530, crop: :fill %>
+      <% else %>
+        <p>No photo available</p>
+      <% end %>
       <p><strong>Investor's name:</strong> <%= @investor.first_name %> <%= @investor.last_name %></p>
       <p><strong>Company Email:</strong> <%= @investor.company_email %></p>
       <p><strong>Description:</strong> <%= @investor.company_description %></p>

@@ -19,6 +19,11 @@
             <img class="card-img-top" src="<%= asset_path('featured-investor1.jpg')%>" alt="Card image">
 
             <div class="card-body">
+              <% if @investor.photo.attached? %>
+                <%= cl_image_tag @investor.photo.key, height: 300, width: 530, crop: :fill %>
+              <% else %>
+                <p>No photo available</p>
+              <% end %>
               <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
               <p class="card-text"><%= investor.company_description %></p>
             </div>
