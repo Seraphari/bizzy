@@ -78,3 +78,48 @@
   background-color: $primary-900;
   color: white;
 }
+
+.btn.btn-login {
+  background-color: white;
+  color: $primary-500;
+  border: 1px solid $primary-500;
+  font-weight: 700;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.btn.btn-login:hover {
+  background-color: $neutral-100;
+  color: $primary-700;
+}
+
+.btn.btn-register {
+  background-color: $primary-700;
+  color: white;
+  border: 1px solid black;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+.btn.btn-register:hover {
+  background-color: $primary-500;
+  color: white;
+}
+
+
+// For YL's use only
+
+.btn-sm {
+  color: $shade-0;
+  padding: 12px 20px;
+  background: #023373;
+  box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+
+  // Fonts
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+}

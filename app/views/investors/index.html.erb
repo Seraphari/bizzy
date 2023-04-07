@@ -22,29 +22,31 @@
   </div>
 
   <div class="row" data-search-investors-target="list">
-  <% @investors.each do |investor| %>
-    <div class="col-sm-4 g-2">
-      <div class="card h-100">
-        <% if user_signed_in? %>
-        <div class="card-body" data-controller="favorite">
-          <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-            <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+    <% @investors.each do |investor| %>
+      <div class="col-sm-4 g-2">
+        <div class="card h-100">
+          <% if user_signed_in? %>
+          <div class="card-body" data-controller="favorite">
+            <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+              <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+            <% end %>
           <% end %>
-        <% end %>
-          <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-          <p class="card-text"><%= investor.company_description %></p>
-          <%# <p class="card-text text-warning">
-          <% investor.sectors.take(1).each do |sector| %>
-            <%# <strong><%= sector.name %>
-          <div class="card-bottom flex text-center">
-            <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
-            <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+            <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+            <p class="card-text"><%= investor.company_description %></p>
+            <%# <p class="card-text text-warning">
+            <% investor.sectors.take(1).each do |sector| %>
+              <%# <strong><%= sector.name %>
+            <div class="card-bottom flex text-center">
+              <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
+              <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
   </div>
 </div>
+
+
 
 <%# <%= pagy_nav(@pagy) %>
