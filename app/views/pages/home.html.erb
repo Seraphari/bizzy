@@ -1,52 +1,50 @@
 <% content_for(:navbar_class, "navbar-home") %>
 <div class="banner">
-  <div class="banner-content text-center">
-    <h1 class="home">Discover, Identify and Connect!</h1>
-    <p class="home">Browse Through Our Network Today</p>
-    <%= link_to "Start now", new_user_session_path, class: "btn btn-lg btn-primary"  %>
+  <div class="container flex">
+    <h1 class="home">Be the next unicorn in Singapore</h1>
+    <p class="home">We'll help you discover opportunities that await you</p>
   </div>
 </div>
 
-<div class="container home">
-  <div class="container investor-header">
-    <h2>Featured investors</h2>
-    <%= link_to "View all investors >", investors_path %>
-  </div>
-  <div class="row d-flex align-self-stretch">
-  <% @investors.first(3).each do |investor| %>
-    <div class="col-sm-4 g-3">
-      <div class="card text-center card-featured h-100">
-        <div class="card-body">
-          <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-          <p class="card-text"><%= investor.company_description %></p>
-        </div>
-        <div class="card-footer">
-        </div>
-        <div class="card-footer">
-          <a href= <%= investor_path(investor) %> class="btn btn-primary card-button">Know more</a>
-        </div>
-      </div>
+<div class="container d-flex justify-content-center">
+  <div class="container-investor">
+    <div class="container investor-header">
+      <h2 id="hover">Featured investors</h2>
+      <%= link_to "View all investors >", investors_path %>
     </div>
-  <% end %>
-  </div>
-<%== pagy_bootstrap_nav(@pagy) %>
-</div>
+    <div class="row d-flex align-self-stretch">
+      <% @investors.first(3).each do |investor| %>
+        <div class="col-sm-4 g-3">
+          <div class="card text-center card-featured h-100">
+            <img class="card-img-top" src="<%= asset_path('featured-investor1.jpg')%>" alt="Card image">
 
-<div class="container featured-startups">
+            <div class="card-body">
+              <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+              <p class="card-text"><%= investor.company_description %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <!--<%== pagy_bootstrap_nav(@pagy) %>-->
+  </div>
+ </div>
+
+<div class="container-startup">
   <div class="d-flex justify-content-between align-items-center">
-    <h2>Featured startups</h2>
+    <h2 id="hover">Browse our startups</h2>
     <%= link_to "See all startups >", founders_path %>
   </div>
   <%# YL: Sector WIP - ignore for now %>
-  <div class="row">
-    <% @founders.each do |founder| %>
-      <div class="col-sm-6 g-3">
+  <div class="row align-items-center">
+    <% @sectors.first(3).each do |sector| %>
+      <div class="col-4 col-lg-4 g-3">
         <div class="card text-center card-featured">
-          <div class="card-body sector-card">
-            <h5 class="card-title"><%= founder.company_name %></h5>
-          </div>
-          <div class="card-bottom">
-            <a href= <%= founder_path(founder) %> class="btn btn-primary">Know more</a>
+          <img class="card-img-top" src="<%= asset_path('featured-startup1.jpg')%>" alt="Card image" style="width: 330px; height: 150px;">
+
+          <div class="card-body startup">
+            <h5 class="card-title"><%= sector.name %></h5>
+           <!--<a href= <%= sector_path(sector) %> class="btn btn-primary">Know more</a>-->
           </div>
         </div>
       </div>
@@ -54,13 +52,25 @@
   </div>
 </div>
 
-<div class="container-fluid">
-  <h2>Channels</h2>
-  <div class="row mx-auto">
-    <% @chatrooms.each do |chatroom| %>
-      <div class="col-md-6">
-          <p># <%= link_to chatroom.name, chatroom_path(chatroom) %></p>
-      </div>
-    <% end %>
+<div class="container-get-started">
+  <div class="row justify-content-center align-items-center">
+    <h1>Ready to get started?</h1>
+    <p>Join our worldwide community now.</p>
+
+    <form class="example" action="action_page.php">
+    <input type="text" placeholder="Enter your email.." name="Join">
+    <button type="submit" class="btn btn-primary">Join</button>
+    </form>
+
+<% if false %>
+  <div class="container-fluid">
+    <h2>Channels</h2>
+    <div class="row mx-auto">
+      <% @chatrooms.each do |chatroom| %>
+        <div class="col-md-6">
+            <p># <%= link_to chatroom.name, chatroom_path(chatroom) %></p>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
