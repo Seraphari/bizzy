@@ -97,9 +97,11 @@ body.small {
 
 h1 {
   &.semi-bold {
-    font-family: $font-family;
-    font-style: $font-style;
-    font-weight
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 58px;
   }
 
   &.bold {
