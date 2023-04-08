@@ -83,3 +83,32 @@
     color: #000000;
   }
 }
+
+
+.col-md-4.text-on-image {
+
+  h1 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 60px;
+    line-height: 73px;
+    color: #FFFFFF;
+    margin-top: 80px;
+    margin-bottom: 30px;
+  }
+
+  p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+  }
+
+  a {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+}
