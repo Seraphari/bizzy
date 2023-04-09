@@ -68,25 +68,11 @@ class InvestorsController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
-=======
-  def all
-    if params[:query].present?
-      # sql_query = "company_name @@ :query OR company_description @@ :query"
-      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
-      @investors = Investor.search_by_company_name_and_company_description(params[:query])
-    else
-      @investors = Investor.all
-    end
-
-  end
-
   # def destroy
   #   @listing.destroy
   #   redirect_to investors_path, status: :see_other, alert: "Listing was deleted successfully"
   # end
 
->>>>>>> master
   private
 
 

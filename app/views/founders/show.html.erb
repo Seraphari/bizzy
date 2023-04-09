@@ -209,13 +209,15 @@
         <% end %>
         <br><br>
           <p><strong><%= @founder.company_name %>(<%= @founder.user.last_name %> <%= @founder.user.first_name %>)</strong></p>
-            <% if current_user.founder.following?(@founder)%>
-              <%= button_to "Unfollow", unfollow_path(@founder) %>
-            <% elsif current_user.founder.sent_follow_request_to?(@founder) %>
-              <%= button_to "Cancel follow request", cancel_path(@founder) %>
-            <% else %>
-              <%= button_to "Follow", follow_path(@founder) %> <span class="fw-bold" style="color:#E1DD8F;">*Follow him/her to know more...</span>
-            <% end %>
+
+              <% if current_user.founder.following?(@founder)%>
+                <%= link_to "Unfollow", unfollow_path(@founder), class:"btn btn-success text-dark fw-bold" %>
+              <% elsif current_user.founder.sent_follow_request_to?(@founder) %>
+                <%= link_to "Cancel follow request", cancel_path(@founder), class:"btn btn-success text-dark fw-bold" %>
+              <% else %>
+                <%= link_to "Follow", follow_path(@founder), class:"btn btn-success text-dark fw-bold" %> <span class="fw-bold" style="color:#E1DD8F;">*Follow him/her to know more...</span>
+              <% end %>
+
         <br><br>
       </div>
         <%# PLEASE DONT REMOVE THIS LINE %>
@@ -275,6 +277,10 @@
         <% else %>
           <p class="text-center fw-bold display-7" style="color:#E1DD8F;">Follow him/her to know more...</p>
         <% end %>
+
+      <hr>
+
+      <canvas id="barChart"></canvas>
       </div>
     </div>
   </div>
