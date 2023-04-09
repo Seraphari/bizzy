@@ -1,282 +1,152 @@
-<div class="container-fluid" style="background-color: #335145;">
-  <%# ONLY SHOWN BEFORE LOGIN %>
-  <% if current_user.nil? %>
-    <div class="container">
-      <div class="row pt-5">
-        <div class="col-md-4 d-md-block d-sm-none d-none">
-          <img
-            src="https://images.pexels.com/photos/7989135/pexels-photo-7989135.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt="Trendy Pants and Shoes"
-            class="img-fluid"
-          />
-        </div>
-        <div class="col-md-8 d-md-block d-sm-none d-none" style="color: #335145;">
-          <div class="p-3" style="background-color: white;">
-            <h1 class="display-4">Value We Give To You</h1>
-            <ul class="fw-bold">
-              <li>Bizzy established its presence in the international investment world.</li>
-              <li>Bizzy offering a modernized approach to investing.</li>
-              <li>Over the years, Bizzy has become a leader in the industry.</li>
-            </ul>
-          </div>
+<%# Wrapper for the entire investors index page %>
+<div class="investors-heading-wrapper">
 
-          <section class="text-center text-white">
-            <div class="row">
-              <div class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative d-md-block d-sm-none d-none">
-                <img class="w-100" src="https://1739752386.rsc.cdn77.org/data/images/full/247790/lee-do-hyun-2021-tma.jpg?w=600?w=430" alt="">
-                <%# <i class="fas fa-cubes fa-3x text-white mb-4"></i> %>
-                <br><br>
-                <h5 class="text-white fw-bold mb-3">5000+</h5>
-                <h6 class="fw-normal mb-0">Start-up <br> Founders</h6>
-                <div class="vr vr-blurry position-absolute my-0 h-100 d-none d-md-block top-0 end-0"></div>
-              </div>
+  <%# Includes display title for investors index page %>
+  <div class="heading-info">
+    <h1 class="extra-bold">
+      Meet our investors
+    </h1>
+  </div>
 
-              <div class="col-lg-3 col-md-6 mb-5 mb-md-5 mb-lg-0 position-relative d-md-block d-sm-none d-none">
-                <img class="w-100" src="https://1739752386.rsc.cdn77.org/data/images/full/247790/lee-do-hyun-2021-tma.jpg?w=600?w=430" alt="">
-                <%# <i class="fas fa-layer-group fa-3x text-white mb-4"></i> %>
-                <br><br>
-                <h5 class="text-white fw-bold mb-3">6000+</h5>
-                <h6 class="fw-normal mb-0">Potential <br> Investors</h6>
-                <div class="vr vr-blurry position-absolute my-0 h-100 d-none d-md-block top-0 end-0"></div>
-              </div>
+  <%# Includes search field %>
+  <div class="search-investor">
 
-              <div class="col-lg-3 col-md-6 mb-5 mb-md-0 position-relative d-md-block d-sm-none d-none">
-                <img class="w-100" src="https://1739752386.rsc.cdn77.org/data/images/full/247790/lee-do-hyun-2021-tma.jpg?w=600?w=430" alt="">
-                <%# <i class="fas fa-image fa-3x text-white mb-4"></i> %>
-                <br><br>
-                <h5 class="text-white fw-bold mb-3">10000+</h5>
-                <h6 class="fw-normal mb-0">Close <br> Files</h6>
-                <div class="vr vr-blurry position-absolute my-0 h-100 d-none d-md-block top-0 end-0"></div>
-              </div>
+    <%# Search field for investor index page %>
+    <div class="search-field">
+      <%= form_with url: investors_path, method: :get, html: {
+        class: "", data: {search_investors_target: "form"}
+      } do %>
+        <%# Text field in search bar %>
+        <%= text_field_tag :query,
+        params[:query],
+        class: "",
+        placeholder: "Find an investor",
+        data: {
+          search_investors_target: "input"
+        } %>
 
-              <div class="col-lg-3 col-md-6 mb-5 mb-md-0 position-relative d-md-block d-sm-none d-none">
-                <img class="w-100" src="https://1739752386.rsc.cdn77.org/data/images/full/247790/lee-do-hyun-2021-tma.jpg?w=600?w=430" alt="">
-                <%# <i class="fas fa-plug fa-3x text-white mb-4"></i> %>
-                <br><br>
-                <h5 class="text-white fw-bold mb-3">55+</h5>
-                <h6 class="fw-normal mb-0">Oversea <br> Country</h6>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
+        <%# Submit button %>
+        <%= submit_tag "Search", class: "" %>
+      <% end %>
     </div>
-  <% end %>
 
-  <% if current_user.nil? %>
-  <!-- Team -->
-    <section id="team" class="pb-5">
-      <div class="container" style="background-color: #B5DDA4;">
-        <h5 class="section-title text-end"><hr><%= link_to "ALL INVESTORS", all_path %><div class="vr mx-3" style="height: 30px;"></div><%= link_to "HOME", home_path %></h5>
-          <div class="row">
-              <!-- Investor -->
-          <% @investors.take(39).each do |investor| %>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" >
-                    <div class="mainflip flip-0">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                <% if investor.photo.key.nil? %>
-                                  <p><img class=" img-fluid" src="https://i.pinimg.com/564x/c3/40/46/c340466f2fc0b35dd436ebdd25fed6a1.jpg" alt=""></p>
-                                <% else %>
-                                  <%= cl_image_tag investor.photo.key, height: 300, width: 530, crop: :fill %>
-                                <% end %>
-                                    <%# <p><img class=" img-fluid" src="" alt="card image"> %>
-                                    <h4 class="card-title"><%= investor.company_name %></h4>
-                                    <p class="card-text">
-                                      <% investor.sectors.each do |sector| %>
-                                        <i class="fa-solid fa-vector-square fa-spin text-warning"></i> <%= sector.name %>
-                                      <% end %>
-                                    </p>
-                                    <p class="card-text">
-                                      <a class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i></a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title"><%= investor.last_name %> <%= investor.first_name %></h4>
-                                    <p class="card-text"><%= investor.company_description %></p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa-solid fa-building"></i></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa-solid fa-envelope"></i></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa-brands fa-linkedin"></i></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa-solid fa-map-pin"></i></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          <% end %>
-          <!-- Investor -->
-          </div>
-      </div>
-    </section>
+  </div>
 
-    <p class="text-white text-center"><i class="fa-solid fa-robot fa-beat-fade"></i><br>
-    <%= link_to "Log in", new_user_session_path, class:"text-white" %> / <%= link_to "Sign up", new_user_registration_path, class:"text-white" %> to see more</p>
-  <!-- Team -->
-  <%# ONLY SHOWN BEFORE LOGIN %>
-
-  <% else %>
-    <div class="row">
-      <% @current_user.founder.sectors.each do | sector | %>
-        <div class="col-md-3 text-center p-5">
-          <a class="btn btn-primary text-white fw-bold" href= <%= "/?sector=#{sector.name}" %>><%= sector.name %></a>
+  <%# Includes acquisition banner (guest) or sector display (logged-in) %>
+  <div class="custom-call-to-action">
+    <% if user_signed_in? %>
+      <div class="search-filter">
+        <div class="body-s semi-bold">
+          <p>Sector(s) that your company is in:</p>
         </div>
-      <% end %>
-        <div class="col-md-3 text-center p-5">
-          <a class="btn btn-primary text-white fw-bold" href= <%= "/?stage=#{@current_user.founder.funding_stage}" %>><%= @current_user.founder.funding_stage %></a>
-        </div>
-    <%# FILTERING FOR SECTORS %>
-    <% if params[:sector].present? %>
-    <section id="team" class="pb-5">
-      <div class="container" style="background-color: #B5DDA4;">
-        <h5 class="section-title text-end">
-          <%= link_to "ALL INVESTORS", all_path %>
-            <div class="vr mx-3" style="height: 30px;"></div>
-          <%= link_to "FAVORITES", founder_path(current_user.founder) %>(<%= current_user.all_favorited.empty? ? 0 : current_user.all_favorited.count %>)
-            <div class="vr mx-3" style="height: 30px;"></div>
-          <%= link_to "HOME", home_path %>
-        </h5>
-        <div class="row">
-          <!-- Investor -->
-          <% @sector_investors.each do |investor| %>
-            <%= render "modal", investor: investor %>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-              <div class="image-flip" >
-                <div class="mainflip flip-0">
-                  <div class="frontside">
-                    <div class="card">
-                      <div class="card-body text-center">
-                        <% if investor.photo.key.nil? %>
-                          <p><img class=" img-fluid" src="https://i.pinimg.com/564x/c3/40/46/c340466f2fc0b35dd436ebdd25fed6a1.jpg" alt=""></p>
-                        <% else %>
-                          <%= cl_image_tag investor.photo.key, height: 300, width: 530, crop: :fill %>
-                        <% end %>
-                        <h4 class="card-title"><%= investor.company_name %></h4>
-                        <p class="card-text">
-                          <% investor.sectors.each do |sector| %>
-                            <i class="fa-solid fa-vector-square fa-spin text-warning"></i> <%= sector.name %>
-                          <% end %>
-                        </p>
-                        <div class="card-text" data-controller="favorite">
-                          <% investor.funding_stage.split(",").each do |stage| %>
-                            <i class="fa-solid fa-ranking-star text-danger"></i></i> <%= stage %>
-                          <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="backside">
-                    <div class="card">
-                      <div class="card-body text-center mt-4" data-controller="favorite">
-                        <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-                          <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
-                        <% end %>
-                        <h4 class="card-title"><%= investor.last_name %> <%= investor.first_name %></h4>
-                        <p class="card-text"><%= investor.company_description %></p>
-                          <ul class="list-inline">
-                              <li class="list-inline-item">
-                                  <a class="social-icon text-xs-center" target="_blank" href="#">
-                                      <i class="fa-solid fa-building"></i></i>
-                                  </a>
-                              </li>
-                              <li class="list-inline-item">
-                                  <a class="social-icon text-xs-center" target="_blank" href="#">
-                                      <i class="fa-solid fa-envelope"></i></i>
-                                  </a>
-                              </li>
-                              <li class="list-inline-item">
-                                  <a class="social-icon text-xs-center" target="_blank" href="#">
-                                      <i class="fa-brands fa-linkedin"></i></i>
-                                  </a>
-                              </li>
-                              <li class="list-inline-item">
-                                  <a class="social-icon text-xs-center" target="_blank" href="#">
-                                      <i class="fa-solid fa-map-pin"></i></i>
-                                  </a>
-                              </li>
-                          </ul>
-                        <p class="card-text text-white">
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
+        <div class="search-filter-tags">
+          <p class="caption-s semi-bold">Enterprise</p>
         </div>
       </div>
-    </section>
-    <%# FILTERING FOR SECTORS %>
-    <% elsif params[:stage].present? %>
-      <% @stage_investors.each do |investor| %>
-        <%= render "modal", investor: investor %>
-          <div class="col-sm-4 g-2">
-            <div class="card h-100">
-              <% if user_signed_in? %>
-              <div class="card-body" data-controller="favorite">
-                <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-                  <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
-                <% end %>
-              <% end %>
-                <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-                <p class="card-text"><%= investor.company_description %></p>
-                <div class="card-bottom flex text-center">
-                  <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target= <%= "#investor-#{investor.id}" %>>Know more</a>
-                  <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
-                </div>
-              </div>
-            </div>
-          </div>
-      <% end %>
-
     <% else %>
-
-      <% @filter_investors.each do |investor| %>
-        <%= render "modal", investor: investor %>
-          <div class="col-sm-4 g-2">
-            <div class="card h-100">
-              <div class="card-body" data-controller="favorite">
-                <% if user_signed_in? %>
-                  <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
-                    <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
-                  <% end %>
-                <% end %>
-                <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-                <p class="card-text"><%= investor.company_description %></p>
-                <div class="card-bottom flex text-center">
-                  <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target= <%= "#investor-#{investor.id}" %>>Know more</a>
-                </div>
-              </div>
-            </div>
-          </div>
-      <% end %>
-    </div>
+      <div class="acquisition-banner body-s semi-bold">
+        <i class="fa-regular fa-circle-exclamation"></i>
+        <p>
+          <%= link_to "Sign up", new_user_registration_path %>
+          or
+          <%= link_to "Sign in", new_user_session_path %>
+          to see a personalised list of recommended investors
+        </p>
+      </div>
+      <%# Display acquisition banner if logged-out %>
+      <div class="acquisition-banner"></div>
     <% end %>
   <% end %>
   <a class="btn-outline-light text-white text-end fs-5" role="button" href="#top"><i class="fa-solid fa-arrow-up-from-bracket"></i></a>
 </div>
+
+<%# Section to display all investors.. if there are any %>
+<div class="investors-show-wrapper">
+  <div class="investors-show">
+    <%# TBC - Counting number of results, e.g. "0 result for 'Enterprise' " %>
+    <div class="investors-count caption-s semi-bold">
+      <p>
+        Showing <%= @investors.count %> investors
+      </p>
+    </div>
+
+    <%# Display investors %>
+    <div class="investors-card-deck" data-search-investors-target="list">
+      <% @investors.each do |investor| %>
+        <div class="investor-card">
+
+          <%# idfk what the hell is this %>
+          <div class="investor-card-fav" data-controller="favorite">
+            <% if user_signed_in? %>
+              <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="investor-card-profile">
+            <div class="investor-card-img">
+              <%= image_tag('featured-investor1.jpg')%>
+            </div>
+
+            <%# this is to store the damn investor name and title %>
+            <div class="investor-card-title">
+              <h3 class="s extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>
+              <p class="body semi-bold"><%= investor.company_name %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if false %>
+  <div class="container" data-controller="search-investors">
+    <div class="row flex justify-content-between my-3">
+      <div class="col-md-6">
+        <%= form_with url: investors_path, method: :get, html: {class:
+            "d-flex w-80", data: {search_investors_target: "form"}} do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Find an investor",
+          data: {
+            search_investors_target: "input",}
+        %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      <% if params[:query].present? %>
+        <p><%= Investor.search_by_company_name_and_company_description(params[:query]).count %>
+        <%= Investor.search_by_company_name_and_company_description(params[:query]).count > 1 ? "results" : "result" %> for
+        "<%= params[:query] %>"
+        </p>
+      <% end %>
+    </div>
+    <div class="row" data-search-investors-target="list">
+      <% @investors.each do |investor| %>
+        <div class="col-sm-4 g-2">
+          <div class="card h-100">
+            <% if user_signed_in? %>
+            <div class="card-body" data-controller="favorite">
+              <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+              <% end %>
+            <% end %>
+              <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+              <p class="card-text"><%= investor.company_description %></p>
+              <%# <p class="card-text text-warning">
+              <% investor.sectors.take(1).each do |sector| %>
+                <%# <strong><%= sector.name %>
+              <div class="card-bottom flex text-center">
+                <a href= <%= "/investors/#{investor.id}" %> class="btn btn-primary">Know more</a>
+                <a href= <%= "/investors/#{investor.id}/edit" %> class="btn btn-primary">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

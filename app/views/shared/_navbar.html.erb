@@ -35,7 +35,7 @@
           <%= link_to "Add your company", "/founders/new" %>
         <% else %>
           <%# If got company, should display a button with label "Edit profile" %>
-          <%= link_to "My profile", "/founders/#{current_user.founder.id}", class: "btn-sm" %>
+          <%= link_to "Edit Profile", "/founders/#{current_user.founder.id}", class: "btn-sm solid" %>
         <% end %>
 
         <%# Display that yandao face as avatar %>
@@ -52,10 +52,10 @@
         <div class="navbar-right-useractions">
           <ul>
             <li>
-              <%= link_to "Log In", new_user_session_path %>
+              <%= link_to "Log In", new_user_session_path, class: "btn-sm outline" %>
             </li>
             <li>
-              <%= link_to "Register", new_user_registration_path %>
+              <%= link_to "Register", new_user_registration_path, class: "btn-sm solid" %>
             </li>
           </ul>
         </div>
