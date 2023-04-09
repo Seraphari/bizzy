@@ -122,7 +122,7 @@ h1 {
 }
 
 h1.s {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -130,7 +130,7 @@ h1.s {
     line-height: 41px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -138,7 +138,7 @@ h1.s {
     line-height: 41px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -148,7 +148,7 @@ h1.s {
 }
 
 h2 {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -156,7 +156,7 @@ h2 {
     line-height: 41px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -164,7 +164,7 @@ h2 {
     line-height: 41px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -174,7 +174,7 @@ h2 {
 }
 
 h2.s {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -182,7 +182,7 @@ h2.s {
     line-height: 29px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -190,7 +190,7 @@ h2.s {
     line-height: 29px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -200,21 +200,21 @@ h2.s {
 }
 
 h3 {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
     line-height: 29px;
   }
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 29px;
   }
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -224,7 +224,7 @@ h3 {
 }
 
 h3.s {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -232,7 +232,7 @@ h3.s {
     line-height: 24px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -240,7 +240,7 @@ h3.s {
     line-height: 24px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -250,7 +250,7 @@ h3.s {
 }
 
 h4 {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -258,7 +258,7 @@ h4 {
     line-height: 24px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -266,7 +266,7 @@ h4 {
     line-height: 24px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -276,7 +276,7 @@ h4 {
 }
 
 h4.s {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -284,7 +284,7 @@ h4.s {
     line-height: 19px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -292,7 +292,7 @@ h4.s {
     line-height: 19px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -302,7 +302,7 @@ h4.s {
 }
 
 h5 {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -310,7 +310,7 @@ h5 {
     line-height: 19px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -318,7 +318,7 @@ h5 {
     line-height: 19px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -328,15 +328,15 @@ h5 {
 }
 
 h5.s {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -344,7 +344,7 @@ h5.s {
     line-height: 17px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -354,7 +354,7 @@ h5.s {
 }
 
 h6 {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -362,7 +362,7 @@ h6 {
     line-height: 19px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -370,7 +370,7 @@ h6 {
     line-height: 19px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -380,7 +380,7 @@ h6 {
 }
 
 h6.s {
-  .semi-bold {
+  &.semi-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -388,7 +388,7 @@ h6.s {
     line-height: 17px;
   }
 
-  .bold {
+  &.bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -396,7 +396,7 @@ h6.s {
     line-height: 17px;
   }
 
-  .extra-bold {
+  &.extra-bold {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;

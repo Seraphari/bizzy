@@ -38,8 +38,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  max-width: 1320px;
-  margin-top: 16px;
+  width: 1080px;
+  padding-left: 0px;
+  padding-right: 0px;
+  // margin-top: 16px;
 
   .navbar-left {
     display: flex;
@@ -67,6 +69,7 @@
     align-items: center;
     margin-bottom: 0px;
     gap: 16px;
+    white-space: nowrap;
   }
 
   ul {
