@@ -3,17 +3,6 @@ class InvestorsController < ApplicationController
   # before_action :authenticate_user!, only: :toggle_favorite
 
   def index
-    @investors = Investor.all
-    @favorite_investors = current_user.favorited_by_type('Investor')
-
-    if params[:query].present?
-      # sql_query = "company_name @@ :query OR company_description @@ :query"
-      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
-      @investors = Investor.search_by_company_name_and_company_description(params[:query])
-    else
-      @investors = Investor.all
-    end
-
     if current_user.nil?
       @investors = Investor.all
     else
@@ -24,7 +13,25 @@ class InvestorsController < ApplicationController
         end
         recommendations
       end
-      @investors = recommendations.uniq
+      @filter_investors = recommendations.uniq
+    end
+
+    if params[:sector].present?
+      sector = Sector.find_by("name ILIKE ?", "%#{params[:sector]}%")
+      @sector_investors = @filter_investors.select{ |investor| investor.sectors.include?(sector) }
+    end
+
+    if params[:stage].present?
+      founder = Founder.find_by("funding_stage ILIKE ?", "%#{params[:stage]}%")
+      @stage_investors = @filter_investors.select{ |investor| investor.funding_stage.split(", ").include?(founder.funding_stage) }
+    end
+
+    if params[:query].present?
+      # sql_query = "company_name @@ :query OR company_description @@ :query"
+      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
+      @investors = Investor.search_by_company_name_and_company_description(params[:query])
+    else
+      @investors = Investor.all
     end
   end
 
@@ -72,6 +79,17 @@ class InvestorsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def all
+    if params[:query].present?
+      # sql_query = "company_name @@ :query OR company_description @@ :query"
+      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
+      @investors = Investor.search_by_company_name_and_company_description(params[:query])
+    else
+      @investors = Investor.all
+    end
+
   end
 
   # def destroy

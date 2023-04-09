@@ -22,7 +22,7 @@
 
 .btn-flat:hover {
   background: $primary-700;
-  color: #3B71CA;
+  color: white;
 }
 
 .btn-gradient {
@@ -110,9 +110,7 @@
 // For YL's use only
 
 .btn-sm {
-  color: $shade-0;
   padding: 12px 20px;
-  background: #023373;
   box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 
@@ -122,4 +120,23 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;
+
+  &.solid {
+    background: $primary-700;
+    color: $shade-0;
+  }
+
+  &.outline {
+    background: $shade-0;
+    color: $primary-700;
+    border: 1px solid $primary-700;
+  }
+}
+
+.btn-form {
+  background: $primary-500;
+  border-radius: 0px 8px 8px 0px;
+  padding: 16px;
+  width: 57px;
+  height: 47px;
 }

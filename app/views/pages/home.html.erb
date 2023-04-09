@@ -1,55 +1,48 @@
-<% content_for(:navbar_class, "navbar-home") %>
-<div class="banner">
-  <div class="container flex">
-    <h1 class="home">Be the next unicorn in Singapore</h1>
-    <p class="home">We'll help you discover opportunities that await you</p>
+<% if false %>
+  <% content_for(:navbar_class, "navbar-home") %>
+<% end %>
+
+<%# Hero wrapper + display text %>
+<div class="hero-wrapper">
+  <div class="container hero-section">
+    <p class="hero-header display-2 extra-bold">
+      Be the next unicorn in Singapore.
+    </p>
+    <p class="hero-text subheader semi-bold">
+      We'll help you discover opportunities.
+    </p>
   </div>
 </div>
 
-<div class="container d-flex justify-content-center">
-  <div class="container-investor">
-    <div class="container investor-header">
-      <h2 id="hover">Featured investors</h2>
-      <%= link_to "View all investors >", investors_path %>
-    </div>
-    <div class="row d-flex align-self-stretch">
-      <% @investors.first(3).each do |investor| %>
-        <div class="col-sm-4 g-3">
-          <div class="card text-center card-featured h-100">
-            <img class="card-img-top" src="<%= asset_path('featured-investor1.jpg')%>" alt="Card image">
+<%# Featured-investors card %>
+<div class="featured-investors-wrapper">
+  <%# Header for featured investors: Title + 'See all investors' %>
+  <div class="featured-investors">
+    <h1 class="s extra-bold">
+      Featured investors
+    </h1>
+    <%= link_to "See all investors >", investors_path, class: "caption semi-bold" %>
+  </div>
 
-            <div class="card-body">
-              <% if @investor.photo.attached? %>
-                <%= cl_image_tag @investor.photo.key, height: 300, width: 530, crop: :fill %>
-              <% else %>
-                <p>No photo available</p>
-              <% end %>
-              <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
-              <p class="card-text"><%= investor.company_description %></p>
-            </div>
-          </div>
+  <%# Iterate and show 3 investors in cards %>
+  <div class="investor-card-deck">
+    <% @investors.first(3).each do |investor| %>
+      <div class="investor-card">
+        <div class="investor-card-image">
+          <%= image_tag('featured-investor1.jpg')%>
         </div>
-      <% end %>
-    </div>
-    <!--<%== pagy_bootstrap_nav(@pagy) %>-->
-  </div>
- </div>
-
-<div class="container-startup">
-  <div class="d-flex justify-content-between align-items-center">
-    <h2 id="hover">Browse our startups</h2>
-    <%= link_to "See all startups >", founders_path %>
-  </div>
-  <%# YL: Sector WIP - ignore for now %>
-  <div class="row align-items-center">
-    <% @sectors.first(3).each do |sector| %>
-      <div class="col-4 col-lg-4 g-3">
-        <div class="card text-center card-featured">
-          <img class="card-img-top" src="<%= asset_path('featured-startup1.jpg')%>" alt="Card image" style="width: 330px; height: 150px;">
-
-          <div class="card-body startup">
-            <h5 class="card-title"><%= sector.name %></h5>
-           <!--<a href= <%= sector_path(sector) %> class="btn btn-primary">Know more</a>-->
+        <div class="investor-card-details">
+          <%# `card-bio` is to configure the spacing between investor name and company %>
+          <div class="investor-bio">
+            <h3 class="investor-name bold">
+              <%= investor.first_name %> <%= investor.last_name %>
+            </h3>
+            <h4 class="s semi-bold">
+              <%= investor.company_name %>
+            </h4>
+          </div>
+          <div class="investor-card-body body-s regular">
+            <%= investor.company_description %>
           </div>
         </div>
       </div>
@@ -57,17 +50,151 @@
   </div>
 </div>
 
-<div class="container-get-started">
-  <div class="row justify-content-center align-items-center">
-    <h1>Ready to get started?</h1>
-    <p>Join our worldwide community now.</p>
+<%# Browse-startups frame %>
+<div class="browse-startups-wrapper">
+  <%# Header for browse startups: Display + link to index %>
+  <div class="browse-startups-header">
+    <h1 class="s extra-bold">
+      Browse our startups
+    </h1>
+    <%= link_to "See all startups >", founders_path, class: "caption semi-bold" %>
+  </div>
 
-    <form class="example" action="action_page.php">
-    <input type="text" placeholder="Enter your email.." name="Join">
-    <button type="submit" class="btn btn-primary">Join</button>
-    </form>
+  <%# Section to display 3 startups %>
+  <div class="startup-card-deck">
+    <% @founders.first(3).each do |founder| %>
+      <div class="startup-card">
+        <div class="startup-card-image">
+          <%= image_tag('featured-startup1.jpg') %>
+        </div>
 
+        <%# Bottom part of card: Header + Description %>
+        <div class="startup-card-details">
+          <div class="startup-bio">
+            <h3 class="startup-name bold">
+              <%= founder.company_name %>
+            </h3>
+            <h4 class="s semi-bold">
+              <%= founder.funding_stage %>
+            </h4>
+          </div>
+          <div class="startup-card-body body-s regular">
+            <%= founder.company_description %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# Marketing/Newsletter frame %>
+<div class="newsletter-wrapper">
+  <%# Banner is to do the formatting for padding... cuz I'm too damn lazy %>
+  <div class="newsletter-banner">
+    <div class="newsletter-copy">
+      <h2 class="extra-bold">
+        Ready to get started?
+      </h2>
+
+      <p class="subheader semi-bold">
+        Join our worldwide community now.
+      </p>
+    </div>
+
+    <% if false %>
+      <%# WORK-IN-PROGRESS: Section for join-newsletter-field %>
+      <div class="join-newsletter">
+        <%= form_with url: "/search", method: :get do |form| %>
+          <%# this thing handles the form field %>
+          <div class="newsletter-input body-s regular">
+            <%= form.text_field :query, placeholder: "Enter your email" %>
+          </div>
+
+          <%# this thing handles the damn button %>
+          <div class="btn-form">
+            <%= form.submit "Join", class: "btn-form" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# Hero wrapper - backup %>
 <% if false %>
+  <div class="banner">
+    <div class="container flex">
+      <h1 class="home">Be the next unicorn in Singapore</h1>
+      <p class="home">We'll help you discover opportunities that await you</p>
+    </div>
+  </div>
+<% end %>
+
+<%# Featured investors - backup %>
+<% if false %>
+  <div class="container d-flex justify-content-center">
+    <div class="container-investor">
+      <div class="container investor-header">
+        <h2 id="hover">Featured investors</h2>
+        <%= link_to "View all investors >", investors_path %>
+      </div>
+      <div class="row d-flex align-self-stretch">
+        <% @investors.first(3).each do |investor| %>
+          <div class="col-sm-4 g-3">
+            <div class="card text-center card-featured h-100">
+              <img class="card-img-top" src="<%= asset_path('featured-investor1.jpg')%>" alt="Card image">
+
+              <div class="card-body">
+                <h5 class="card-title"><strong><%= investor.company_name %></strong></h5>
+                <p class="card-text"><%= investor.company_description %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <!--<%== pagy_bootstrap_nav(@pagy) %>-->
+    </div>
+  </div>
+<% end %>
+
+<%# Featured startups - backup %>
+<% if false %>
+  <div class="container-startup">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2 id="hover">Browse our startups</h2>
+      <%= link_to "See all startups >", founders_path %>
+    </div>
+    <%# YL: Sector WIP - ignore for now %>
+    <div class="row align-items-center">
+      <% @sectors.first(3).each do |sector| %>
+        <div class="col-4 col-lg-4 g-3">
+          <div class="card text-center card-featured">
+            <img class="card-img-top" src="<%= asset_path('featured-startup1.jpg')%>" alt="Card image" style="width: 330px; height: 150px;">
+
+            <div class="card-body startup">
+              <h5 class="card-title"><%= sector.name %></h5>
+            <!--<a href= <%= sector_path(sector) %> class="btn btn-primary">Know more</a>-->
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%# Get started section -backup %>
+<% if false %>
+  <div class="container-get-started">
+    <div class="row justify-content-center align-items-center">
+      <h1>Ready to get started?</h1>
+      <p>Join our worldwide community now.</p>
+
+      <form class="example" action="action_page.php">
+      <input type="text" placeholder="Enter your email.." name="Join">
+      <button type="submit" class="btn btn-primary">Join</button>
+      </form>
+  </div>
+
   <div class="container-fluid">
     <h2>Channels</h2>
     <div class="row mx-auto">

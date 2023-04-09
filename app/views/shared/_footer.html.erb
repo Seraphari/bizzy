@@ -1,147 +1,38 @@
-<!-- Remove the container if you want to extend the Footer to full width. -->
-<%# <div class="container"> %>
-  <!-- Footer -->
-  <footer class="text-center text-lg-start text-white footer-wrap">
-    <!-- Grid container -->
-    <%# <div class="container p-4 pb-0"> %>
-      <!-- Section: Links -->
-      <section class="footer-info">
-        <!--Grid row-->
-        <div class="d-flex">
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">
-              Bizzy
-            </h6>
-            <p>
-              Stay up to date on Singapore's Latest Startup Ecosystem News and Happenings
-            </p>
-          </div>
-          <!-- Grid column -->
+<div class="footer-bizzy">
+  <div class="footer-nav-wrapper">
+    <div class="footer-details">
+      <%# Col-1: Image + tagline %>
+      <div class="footer-col-1">
+        <%= image_tag(asset_path('bizzy-logo3.png'), class: "footer-logo") %>
+        <p class="caption semi-bold">Be the next unicorn in Singapore</p>
+      </div>
+      <%# Col-2: Who we are %>
+      <div class="footer-col">
+        <p class="footer semi-bold">Who we are</p>
+        <%= link_to "About us", "#", class: "footer regular" %>
+        <%= link_to "Contact us", "#", class: "footer regular" %>
+      </div>
 
-          <hr class="w-100 clearfix d-md-none" />
+      <%# Col-3: Useful links %>
+      <div class="footer-col">
+        <p class="footer semi-bold">Useful links</p>
+        <%= link_to "Startup SG Network", "#", class: "footer regular" %>
+        <%= link_to "Y-Combinator", "#", class: "footer regular" %>
+        <%= link_to "FAQs", "#", class: "footer regular" %>
+      </div>
 
-          <!-- Grid column -->
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">Who We Are</h6>
-            <p>
-              <a href="#" class="text-white">About Us</a>
-            </p>
-            <p>
-              <a href="#" class="text-white">News</a>
-            </p>
-            <p>
-              <a href="#" class="text-white">Events</a>
-            </p>
-            <p>
-              <a href="#" class="text-white">Contact Us</a>
-            </p>
-          </div>
-          <!-- Grid column -->
-
-          <hr class="w-100 clearfix d-md-none" />
-
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">
-              Useful links
-            </h6>
-            <p>
-              <a href="#" class="text-white">For Startups & Founders</a>
-            </p>
-            <p>
-              <a href="#" class="text-white">For Investors</a>
-            </p>
-            <p>
-              <a href="#" class="text-white">Privacy</a>
-            </p>
-            <p>
-              <a href="#" class="text-white">FAQ</a>
-            </p>
-          </div>
-
-          <!-- Grid column -->
-          <hr class="w-100 clearfix d-md-none" />
-
-          <!-- Grid column -->
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-            <p><i class="fas fa-home mr-3"></i> 20 Collyer Quay, Level 23, <br> Singapore 049319 </p>
-            <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-            <p><i class="fas fa-phone mr-3"></i> + 65 6747 8888</p>
-            <p><i class="fas fa-print mr-3"></i> + 65 6747 8899</p>
-          </div>
-          <!-- Grid column -->
-        </div>
-        <!--Grid row-->
-      </section>
-      <!-- Section: Links -->
-
-      <hr class="my-3">
-
-      <!-- Section: Copyright -->
-      <section class="p-3 pt-0">
-        <div class="row d-flex align-items-center">
-          <!-- Grid column -->
-          <div class="col-md-7 col-lg-8 text-center text-md-start">
-            <!-- Copyright -->
-            <div class="p-3">
-              © 2023 Copyright:
-              <a class="text-white" href="https://mdbootstrap.com/"
-                 >Bizzy Group.com</a
-                >
-            </div>
-            <!-- Copyright -->
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
-            <!-- Back to top -->
-            <a
-               class="btn btn-outline-light btn-floating m-1"
-               class="text-white"
-               role="button"
-               href="#top"
-               ><i class="fa-solid fa-arrow-up-from-bracket"></i
-              ></a>
-            <!-- Facebook -->
-            <a
-               class="btn btn-outline-light btn-floating m-1"
-               class="text-white"
-               role="button"
-               ><i class="fab fa-facebook-f"></i
-              ></a>
-
-            <!-- Twitter -->
-            <a
-               class="btn btn-outline-light btn-floating m-1"
-               class="text-white"
-               role="button"
-               ><i class="fab fa-twitter"></i
-              ></a>
-
-            <!-- Google -->
-            <a
-               class="btn btn-outline-light btn-floating m-1"
-               class="text-white"
-               role="button"
-               ><i class="fab fa-google"></i
-              ></a>
-
-            <!-- Instagram -->
-            <a
-               class="btn btn-outline-light btn-floating m-1"
-               class="text-white"
-               role="button"
-               ><i class="fab fa-instagram"></i
-              ></a>
-          </div>
-          <!-- Grid column -->
-        </div>
-      </section>
-      <!-- Section: Copyright -->
-    <%# </div> %>
-    <!-- Grid container -->
-  </footer>
-  <!-- Footer -->
+      <%# Col-4: Navigation %>
+      <div class="footer-col">
+        <p class="footer semi-bold">Navigation</p>
+        <%= link_to "Resources", "#", class: "footer regular" %>
+        <%= link_to "Investors", "#", class: "footer regular" %>
+        <%= link_to "Founders", "#", class: "footer regular" %>
+      </div>
+    </div>
+  </div>
+  <%# Separator in footer - idk how to use border bottom, that's why %>
+  <hr>
+  <div class="copyright-wrapper">
+    <p class="caption-s regular">© 2023 Copyright: Bizzy Group Ltd.</p>
+  </div>
+</div>
