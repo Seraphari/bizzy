@@ -1,16 +1,111 @@
-<!-- _modal.html.erb -->
-<div class="modal fade" id="modal-<%= modal_id %>" tabindex="-1" role="dialog" aria-labelledby="modalLabel-<%= modal_id %>">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel-<%= modal_id %>">Modal <%= modal_id %></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<div class="modal fade" id=<%= "investor-#{investor.id}" %> tabindex="-1" aria-labelledby=<%= "Investor#{investor.id}ModalLabel" %> aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <%# Wrapper for entire investor modal%>
+    <div class="investor-modal-wrapper">
+
+      <%# Wrapper for left side of modal, i.e. personal profile + favorite CTA %>
+      <div class="investor-modal-profile">
+        <div class="investor-modal-intro">
+          <div class="investor-modal-image">
+              <%= image_tag('featured-investor1.jpg')%>
+          </div>
+          <div class="investor-modal-details">
+            <h3 class="extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>
+            <p class="caption semi-bold"><%= investor.company_name %></p>
+          </div>
+        </div>
+
+        <%# TODO: WILL NEED TO ADAPT TO FAVOURITO  %>
+        <div class="investor-modal-cta">
+          <p class="caption semi-bold">Favourite</p>
+        </div>
       </div>
-      <div class="modal-body">
-        Modal <%= modal_id %> content
+
+      <%# Wrapper for right side of modal, i.e. company intro + sectors invested + description %>
+      <div class="investor-modal-company">
+        <div class="about-company">
+          <h3 class="extra-bold">
+            About Running Investments
+          </h3>
+        </div>
+        <div class="sectors-invested">
+          <h5 class="s bold">
+            Sectors invested
+          </h5>
+          <div class="investor-modal-sectors">
+            <% investor.sectors.each do |sector| %>
+             <span class="badge rounded-pill text-bg-primary"><%= sector.name %></span>
+            <% end %></p>
+          </div>
+        </div>
+        <div class="description">
+          <%= investor.company_description %>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<% if false %>
+<div class="modal fade" id= <%= "investor-#{investor.id}" %> tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #92AC86;">
+        <h5 class="modal-title text-white display-6" id= <%= "investor-#{investor.id}" %> ><%= investor.company_name %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background-color: #A7D49B;">
+        <div class="container mt-4">
+          <div class="row d-flex align-items-center justify-content-around">
+            <div class="col-md-4">
+              <img class="avatar-square w-75" alt="avatar-square" src="https://i.mydramalist.com/6PlYW_5_c.jpg" />
+                <div class="row mt-2">
+                  <button type="button" class="btn btn-dark w-25 mx-auto">Connect</button>
+                </div>
+            </div>
+            <div class="col-md-8">
+              <h5 class="fw-bold fw-light" style="color: #214E34;">Company Details</h5>
+              <div class="row">
+                <h4 class="text-white fw-normal"><%= investor.company_description%></h4>
+              </div>
+              <br>
+              <div class="row d-flex align-items-center justify-content-between">
+                <div class="col-md-3">
+                  <h5 class="fw-bold fw-light" style="color: #214E34;">Company UEN</h5>
+                  <h4 class="text-white fw-normal"><%= investor.company_UEN %></h4>
+                </div>
+                <div class="col-md-5">
+                  <h5 class="fw-bold fw-light" style="color: #214E34;">Company Email</h5>
+                  <h4 class="text-white fw-normal"><%= investor.company_email %></h4>
+                </div>
+                <div class="col-md-4">
+                  <h5 class="fw-bold fw-light" style="color: #214E34;">Company Ticket Size</h5>
+                  <h4 class="text-white fw-normal"><%= investor.ticket_size %></h4>
+                </div>
+              </div>
+              <br>
+              <div class="row d-flex align-items-center justify-content-between">
+                <div class="col-md-3">
+                  <h5 class="fw-bold fw-light" style="color: #214E34;">Sectors: </h5>
+                </div>
+                  <% investor.sectors.each do |sector|%>
+                    <p class="col-md-3"><button type="button" class="btn btn-investor btn-rounded"><%= sector.name %></button></p>
+                  <% end %>
+              </div>
+              <div class="row d-flex align-items-center">
+                <div class="col-md-3">
+                  <h5 class="fw-bold fw-light" style="color: #214E34;">Funding_stages: </h5>
+                </div>
+                  <% investor.funding_stage.split(",").each do |stage|%>
+                    <p class="col-md-3"><button type="button" class="btn btn-investor btn-rounded"><%= stage %></button></p>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

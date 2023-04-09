@@ -17,30 +17,57 @@
 
   .search-investor {
     width: 1080px;
-    padding-bottom: 16px;
+    padding-bottom: 24px;
   }
 
   .custom-call-to-action {
     width: 1080px;
-    padding: 15px 40px;
-    border-radius: 10px;
-    background-color: $secondary-50;
+
+    // p {
+    //   margin-bottom: 0px;
+    // }
   }
 }
 
 // I'm opening this just to make sure that damn banner is center-aligned.. wth
 .custom-call-to-action {
-  p {
-    margin-bottom: 0px;
-  }
-
   .acquisition-banner {
     display: flex;
     align-items: center;
     gap: 16px;
+    background-color: $secondary-50;
+    padding: 15px 40px;
+    border-radius: 10px;
+  }
+
+  p {
+    margin-bottom: 0px;
+  }
+
+  .search-filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
   }
 }
 
+.search-filter {
+  p {
+    margin-right: 16px;
+  }
+  .search-tag {
+    background-color: $primary-700;
+    color: $shade-0;
+    padding: 4px 10px;
+    border-radius: 8px;
+  }
+}
+
+.search-tag {
+  a {
+    color: $shade-0;
+  }
+}
 
 // ***** ***** ***** ***** ***** *****
 // Styling for the investor index frame
@@ -70,20 +97,82 @@
 .investors-card-deck {
   .investor-card {
     width: 257px;
+    height: 330px;
+    border-radius: 8px;
+    background-color: $shade-0
   }
 }
 
 .investor-card-profile {
-  box-shadow: 1px 5px 8px 2px rgba(0, 0, 0, 0.2);
+  // box-shadow: 1px 5px 8px 2px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 
   .investor-card-title {
-    padding-left: 24px;
-    padding-top: 16px;
+    padding: 16px 24px;
     display: flex;
     gap: 0px;
     flex-direction: column;
     border-radius: 8px;
     background-color: $shade-0;
   }
+
+  .investor-card-sectors {
+    background-color: $shade-0;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    display: flex;
+    border-radius: 8px;
+    flex-wrap: wrap;
+  }
+}
+
+.investor-card-title {
+  p {
+    margin-bottom: 8px;
+  }
+}
+
+.investor-card-sectors {
+  .sector-tag {
+    background-color: $primary-700;
+    color: $shade-0;
+    padding: 4px 10px;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    border-radius: 8px;
+    white-space: nowrap;
+
+    // TODO: See if can make the tag don't wrap the label
+    display: flex;
+    // flex-wrap: nowrap;
+  }
+}
+
+// YL's experiment
+
+form {
+  display: flex;
+  gap: 0px;
+}
+
+input {
+  box-shadow: 1px 5px 8px 2px rgba(0, 0, 0, 0.2);
+}
+
+input#query {
+  padding: 16px 0px 16px 32px;
+  border-radius: 8px 0px 0px 8px;
+  border: none;
+  width: 350px;
+  font-family: FontAwesome;
+}
+
+.btn-submit-search {
+  background-color: $neutral-300;
+  color: $shade-100;
+  border-radius: 0px 8px 8px 0px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: none;
 }

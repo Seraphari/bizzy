@@ -53,17 +53,17 @@ investors.each do |investor|
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
 
-  Investor.create!(
-    first_name: first_name,
-    last_name: last_name,
-    company_name: investor["Name"],
-    company_description: investor["Description"],
-    company_email: "#{investor["Name"].gsub(/\s/, "").downcase}@gmail.com",
-    company_UEN: "202#{rand(2...3)}#{rand(9)}#{rand(9)}#{rand(9)}#{rand(9)}#{rand(9)}X",
-    funding_stage: investor["Stages"],
-    ticket_size: investor["Minimum Check Size"].empty? ? "$100,000" : investor["Minimum Check Size"],
-    sectors: ["Education", "Enterprise", "SaaS", "Big Data & Analytics", "Productivity", "Cybersecurity", "Supply Chain & Logistics", "Consumer", "Food & Beverage", "Future of Work", "Transportation", "Travel & Hospitality", "Healthcare", "AR & VR", "Health & Wellness", "Insuretech", "Aerospace & Space", "Climate & Sustainability"].sample(3)
-  )
+    Investor.create!(
+      first_name: first_name,
+      last_name: last_name,
+      company_name: investor["Name"],
+      company_description: investor["Description"],
+      company_email: "#{investor["Name"].gsub(/\s/, "").downcase}@gmail.com",
+      company_UEN: "202#{rand(2...3)}#{rand(9)}#{rand(9)}#{rand(9)}#{rand(9)}#{rand(9)}X",
+      funding_stage: investor["Stages"],
+      ticket_size: investor["Minimum Check Size"].empty? ? "$100,000" : investor["Minimum Check Size"],
+      sectors: ["Education", "Enterprise", "SaaS", "Big Data & Analytics", "Productivity", "Cybersecurity", "Supply Chain & Logistics", "Consumer", "Food & Beverage", "Future of Work", "Transportation", "Travel & Hospitality", "Healthcare", "AR & VR", "Health & Wellness", "Insuretech", "Aerospace & Space", "Climate & Sustainability"].sample(3)
+    )
 
   puts "#{first_name} created!"
 end
