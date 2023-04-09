@@ -3,6 +3,7 @@ require 'faker'
 
 puts " Cleaning database..."
 
+Chatroom.destroy_all
 Founder.destroy_all
 Investor.destroy_all
 Sector.destroy_all
@@ -17,16 +18,40 @@ user = User.create!(
   password:"testing"
 )
 
-Founder.create!(
+# TODO: Creating 5 sectors
+sectors = [
+  Sector.create!(name: "Education"),
+  Sector.create!(name: "Enterprise"),
+  Sector.create!(name: "SaaS"),
+  Sector.create!(name: "Big Data & Analytics"),
+  Sector.create!(name: "Productivity"),
+  Sector.create!(name: "Cybersecurity"),
+  Sector.create!(name: "Supply Chain & Logistics"),
+  Sector.create!(name: "Consumer"),
+  Sector.create!(name: "Food & Beverage"),
+  Sector.create!(name: "Future of Work"),
+  Sector.create!(name: "Transportation"),
+  Sector.create!(name: "Travel & Hospitality"),
+  Sector.create!(name: "Healthcare"),
+  Sector.create!(name: "AR & VR"),
+  Sector.create!(name: "Health & Wellness"),
+  Sector.create!(name: "InsurTech"),
+  Sector.create!(name: "Aerospace & Space"),
+  Sector.create!(name: "Climate & Sustainability")
+]
+founder = Founder.new(
   user: user,
   company_name: "CP Ventures",
   company_description: "Autio is an app that entertains listeners with bite-sized audio stories about history, landmarks, culture, and natural wonders for travel. Users can explore nearby stories based on their current location once they enable location access. When users are not driving, they can view a map of the United States and select stories based on theirinterests. The app also offers entertaining and educational content for RVers to enjoy while traveling across the country.",
   company_email: "info@autio.com",
   company_UEN: "202345789X",
   funding_stage: "Seed",
-  date_incorporated: "01.12.2023"
+  date_incorporated: "01.12.2023",
 )
 
+founder.sectors = sectors.sample(3)
+
+founder.save!
 # TODO: Creating 5 investors (investor_profile)
 # load the investors.json file into memory
 investors_json = File.read(File.join(__dir__, 'investors.json'))
@@ -53,7 +78,7 @@ investors.each do |investor|
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
 
-  Investor.create!(
+  inv = Investor.new(
     first_name: first_name,
     last_name: last_name,
     company_name: investor["Name"],
@@ -62,28 +87,14 @@ investors.each do |investor|
     company_UEN: "202#{rand(2...3)}#{rand(9)}#{rand(9)}#{rand(9)}#{rand(9)}#{rand(9)}X",
     funding_stage: investor["Stages"],
     ticket_size: investor["Minimum Check Size"].empty? ? "$100,000" : investor["Minimum Check Size"],
-    sectors: ["Education", "Enterprise", "SaaS", "Big Data & Analytics", "Productivity", "Cybersecurity", "Supply Chain & Logistics", "Consumer", "Food & Beverage", "Future of Work", "Transportation", "Travel & Hospitality", "Healthcare", "AR & VR", "Health & Wellness", "Insuretech", "Aerospace & Space", "Climate & Sustainability"].sample(3)
+    # sectors: ["Education", "Enterprise", "SaaS", "Big Data & Analytics", "Productivity", "Cybersecurity", "Supply Chain & Logistics", "Consumer", "Food & Beverage", "Future of Work", "Transportation", "Travel & Hospitality", "Healthcare", "AR & VR", "Health & Wellness", "Insuretech", "Aerospace & Space", "Climate & Sustainability"].sample(3)
   )
+
+  
+
+  inv.sectors = sectors.sample(3)
+
+  inv.save!
 
   puts "#{first_name} created!"
 end
-
-# TODO: Creating 5 sectors
-Sector.create!(name: "Education")
-Sector.create!(name: "Enterprise")
-Sector.create!(name: "SaaS")
-Sector.create!(name: "Big Data & Analytics")
-Sector.create!(name: "Productivity")
-Sector.create!(name: "Cybersecurity")
-Sector.create!(name: "Supply Chain & Logistics")
-Sector.create!(name: "Consumer")
-Sector.create!(name: "Food & Beverage")
-Sector.create!(name: "Future of Work")
-Sector.create!(name: "Transportation")
-Sector.create!(name: "Travel & Hospitality")
-Sector.create!(name: "Healthcare")
-Sector.create!(name: "AR & VR")
-Sector.create!(name: "Health & Wellness")
-Sector.create!(name: "InsurTech")
-Sector.create!(name: "Aerospace & Space")
-Sector.create!(name: "Climate & Sustainability")

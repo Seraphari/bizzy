@@ -21,9 +21,9 @@ class InvestorsController < ApplicationController
       @sector_investors = @filter_investors.select{ |investor| investor.sectors.include?(sector) }
     end
 
-    if params[:funding_stage].present?
-      stage = Founder.find_by("funding_stage ILIKE ?", "%#{params[:funding_stage]}%")
-      @stage_investors = @filter_investors.select{ |investor| investor.funding_stage.include?(stage.funding_stage) }
+    if params[:stage].present?
+      founder = Founder.find_by("funding_stage ILIKE ?", "%#{params[:stage]}%")
+      @stage_investors = @filter_investors.select{ |investor| investor.funding_stage.split(", ").include?(founder.funding_stage) }
     end
 
     if params[:query].present?
@@ -76,6 +76,6 @@ class InvestorsController < ApplicationController
   end
 
   def investor_params
-    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, sector_ids: [] )
+    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :photo, :ticket_size, sector_ids: [] )
   end
 end

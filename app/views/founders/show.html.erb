@@ -1,143 +1,343 @@
 <%# PLEASE DONT REMOVE THIS LINE %>
 <% if @founder.user == current_user %>
-<div class="container-fluid" style="background-color: #8DB1AB;">
+<div class="container-fluid" style="background-color: #C7AA74;">
   <div class="row">
-    <div class="col-md-4 d-md-block d-sm-none " data-controller="favorite">
-      <div class="vh-100 text-white" style="background-color: #587792;">
-
-      </div>
-    </div>
-    <div class="col-md-8 h-100">
-
-  <div class="col-md-4 founder" >
-    <%# <div class="cards-founders"> %>
-
-
-    <div class="d-flex flex-column">
-      <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
-      <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
-      <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
-      <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
-    </div><hr>
-
-    <p><strong><%= @founder.user.first_name%>'s followers:</strong></p>
-      <% current_user.founder.followers.each do |founder| %>
-      <p><%= link_to founder.user.email, founder_path(founder) %> <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
-      <% end %>
-    <h3><strong>My Favourites (Investors)</strong></h3>
-      <ul data-favorite-target="savelist">
-        <% current_user.all_favorited.each do |favorite| %>
-          <p><%= link_to favorite.company_name, investor_path(favorite) %></p>
-        <p><%= link_to "Chat", investor_chatrooms_path(favorite.id) %></p>
+    <div class="col-md-4 m-10 p-5" data-controller="favorite">
+      <div class="position-sticky top-0">
+        <div class="text-white text-center g-5 shadow-5">
+          <% if current_user.founder.photo.key.nil? %>
+            <p><img src="https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt=""></p>
+          <% else %>
+            <%= cl_image_tag current_user.founder.photo.key, height: 350, width: 350, crop: :fill %>
+          <% end %>
+          <br><br>
+          <a href="#detail"><strong>Company Details</strong></a>
+          <br><br>
+          <a href="#favorite"><strong>Favorites (Investors)</strong></a>
+          <br><br>
+          <a href="#follow"><strong>Followings (Founder)</strong></a>
+          <br><br>
+          <a href="#recommendation"><strong>Recommendations (Founders)</strong></a>
+        </div>
+        <hr>
+        <div>
+          <p class="text-white text-center fw-bold">Followers:</p>
+          <ul>
+            <% current_user.founder.followers.each do |founder| %>
+              <li>
+                <%= link_to founder.company_email, founder_path(founder) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <hr>
+        <div>
+          <p class="text-white text-center fw-bold">Upcoming Request:</p>
+        <%# SHOW ON CURRENT_USER.FOUNDER %>
+          <% if current_user.founder %>
+            <% current_user.founder.follow_requests.each do |request| %>
+              <%= request.followerable.user.email %> wants to follow you
+              <%= button_to "Accept", accept_path(request.followerable) %>
+              <%= button_to "Decline", decline_path(request.followerable) %>
+            <% end %>
+          <% end %>
+        </div>
+        <%# PLEASE DONT REMOVE THIS LINE %>
+        <% if @founder != current_user.founder %>
+          <p>Current_connection between you and <%= @founder.user.first_name %>:</p>
+            <% if current_user.founder.following?(@founder)%>
+              <%= button_to "Unfollow", unfollow_path(@founder) %>
+            <% elsif current_user.founder.sent_follow_request_to?(@founder) %>
+              <%= button_to "Cancel follow request", cancel_path(@founder) %>
+            <% else %>
+              <%= button_to "Follow", follow_path(@founder) %>
+            <% end %>
         <% end %>
-      </ul>
-  </div>
-</div>
-<% end %>
-<%# PLEASE DONT REMOVE THIS LINE %>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <% if @founder != current_user.founder %>
-      <p>Current_connection between you and <%= @founder.user.first_name %>:</p>
-        <% if current_user.founder.following?(@founder)%>
-          <%= button_to "Unfollow", unfollow_path(@founder) %>
-        <% elsif current_user.founder.sent_follow_request_to?(@founder) %>
-          <%= button_to "Cancel follow request", cancel_path(@founder) %>
-        <% else %>
-          <%= button_to "Follow", follow_path(@founder) %>
-        <% end %>
-    <% end %>
-
-    <%# SHOW ON CURRENT_USER.FOUNDER %>
-    <% if current_user.founder %>
-      <% current_user.founder.follow_requests.each do |request| %>
-        <%= request.followerable.user.email %> wants to follow you
-        <%= button_to "Accept", accept_path(request.followerable) %>
-        <%= button_to "Decline", decline_path(request.followerable) %>
-      <% end %>
-    <% end %>
-
-
-
-
-
-
-<%# PLEASE DONT REMOVE THIS LINE %>
-<% if @founder.user == current_user %>
-      <div style="text-align: center;">
-        <h3>Recommendations | Others' founder profile</h3>
-      </div>
-        <div class="row row-cols-1 row-cols-md-3 g-3 m-2">
-          <% @founders = Founder.all %>
-          <%# <% @founders.to_a.keep_if { |founder| founder.id != current_user.founder.id} %>
-          <% @founders.each do |founder| %>
-            <div class="col">
-              <div class="card h-100">
-                <%# <img src="..." class="card-img-top" alt="..."> %>
-                <%# <%= cl_image_tag(asset_path(founder.photo.key), class:"avatar-founder") %>
-                <% if founder.photo.key.nil? %>
-                  <img src="https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-                <% else %>
-                  <%= cl_image_tag founder.photo.key, height: 300, width: 530, crop: :fill %>
-                <% end %>
-                <div class="card-body">
-                  <h5 class="card-title"><%= founder.company_name %></h5>
-                  <p class="card-text"><%= founder.company_description %></p>
-                    <ul>
-                    <% founder.sectors.each do |sector| %>
-                      <li><p><%= sector.name %></p></li>
-                    <% end %>
-                    </ul>
-                <div class="button-founder">
-                  <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Read more</a>
-                  <a class="btn btn-flat founder" href=<%= "/founders/#{founder.id}" %>>Connect</a>
-                </div>
-          </div>
         </div>
       </div>
-    <% end %>
+    <div class="col-md-8 m-10 align-items-center" data-controller="favorite">
+
+      <div class="row vh-50" id="detail">
+        <section class="py-5 gy-5 my-5 text-center text-white shadow-5">
+          <h2>Company Details</h2>
+          <hr>
+          <p class="card-text text-center"><strong><span style="color:#482728;">Company Description</span></strong><br>
+          <%= @founder.company_description %></p>
+            <div class="d-flex justify-content-between">
+              <p class="card-text text-center"><strong><span style="color:#482728;">Company UEN</span></strong><br>
+              <%= @founder.company_UEN %></p>
+              <p class="card-text text-center"><strong><span style="color:#482728;">Company Funding Stage</strong></span><br>
+              <%= @founder.funding_stage %></p>
+              <p class="card-text text-center"><strong><span style="color:#482728;">Company UEN</strong></span><br>
+              <%= @founder.company_UEN %></p>
+            </div>
+              <p class="card-text text-center"><strong><span style="color:#482728;">Company Date Incorporated</strong></span><br>
+              <%= @founder.date_incorporated %></p>
+        </section>
+      </div>
+
+      <div class="row vh-50" id="favorite">
+        <section class="py-5 gy-5 my-5 text-center text-white shadow-5">
+              <h2>Favorites (Investors)</h2>
+              <hr>
+              <% unless !(current_user.all_favorited.empty?) %>
+                <p class="text-end fw-bold"><%= link_to "See All", all_path, class:"text-white" %></p>
+              <% end %>
+              <% if current_user.all_favorited.empty? %>
+                <p class="fw-bold display-7">Oh No, you dont have favorite investors! <br>
+                <%= link_to "See All Investors Here", all_path %></p>
+              <% else %>
+                <div class="row g-3 text-dark">
+                  <% current_user.all_favorited.each do |favorite| %>
+                    <div class="col-md-4">
+                      <div class="card h-100 d-flex align-items-center my-3 py-3 bg-neutral">
+                        <% if favorite.photo.key.nil? %>
+                          <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
+                        <% else %>
+                          <%= cl_image_tag favorite.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
+                        <% end %>
+                        <br>
+                        <p><%= favorite.company_name %>(<%= favorite.first_name %>)</p>
+                        <span class="btn btn-primary fw-bold text-white"><%= link_to "Chat", investor_chatrooms_path(favorite.id), class: "text-white"%></span>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+        </section>
+
+      </div>
+
+      <div class="row vh-50" id="follow">
+        <section class="py-5 gy-5 my-5 text-center text-white shadow-5">
+          <h2>Following (Founders)</h2>
+          <hr>
+          <% if current_user.founder.followers.empty? %>
+            <p class="fw-bold display-7">Oh No, you dont have any followers/following</p>
+          <% else %>
+            <div class="row g-3">
+              <% current_user.founder.followers.each do |founder| %>
+                <div class="col-md-4">
+                  <div class="card h-100 d-flex align-items-center">
+                    <% if founder.photo.key.nil? %>
+                      <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
+                    <% else %>
+                      <%= cl_image_tag founder.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
+                    <% end %>
+                    <br>
+                    <p><%= link_to founder.user.email, founder_path(founder) %> <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
+                    <span class="btn btn-primary fw-bold text-white"><%= link_to "Chat", investor_chatrooms_path(favorite.id) %></span>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </section>
+      </div>
+
+      <div class="row vh-50" id="recommendation">
+        <section class="py-5 gy-5 my-5 text-center text-white shadow-5">
+          <h2>Also visit</h2>
+          <hr>
+            <div class="row g-3">
+              <% @filter_founders.each do |founder| %>
+                <div class="col-md-4">
+                  <div class="card h-100 w-100 text-dark" style="width: 18rem;">
+                    <% if founder.photo.key.nil? %>
+                      <img class="card-img-top" style="height: 200px; width: 400px"src="https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Card image cap">
+                    <% else %>
+                      <%= cl_image_tag founder.photo.key, height: 200, width: 200, class: "card-img-top"%>
+                    <% end %>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= founder.company_name %></h5>
+                      <ul>
+                      <% founder.sectors.each do |sector| %>
+                        <li><p><%= sector.name %></p></li>
+                      <% end %>
+                      </ul>
+                      <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Read more</a>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+        </section>
+      </div>
+    </div>
   </div>
 </div>
 <% end %>
+
 
 <%# PLEASE DONT REMOVE THIS LINE %>
 <% if @founder.user != current_user %>
-<div class="main-container">
+  <div class="container-fluid" style="background-color: #C7AA74;">
   <div class="row">
-    <div class="col-md-4 founder">
-      <%# <div class="cards-founders"> %>
-      <h3><strong>Founder's Name: </strong><%= @founder.user.first_name %> <%= @founder.user.last_name %></h3>
-      <h3><strong>Company:</strong> <%= @founder.company_name %></h3><br>
-      <p><strong>Description:</strong> <%= @founder.company_description %></p>
+    <div class="col-md-4 m-10 p-5" data-controller="favorite">
+      <div class="position-sticky top-0">
+        <div class="text-white text-center g-5 shadow-5">
+          <% if current_user.founder.photo.key.nil? %>
+            <p><img src="https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt=""></p>
+          <% else %>
+            <%= cl_image_tag current_user.founder.photo.key, height: 350, width: 350, crop: :fill %>
+          <% end %>
+          <br><br>
+          <a href="#detail"><strong>Company Details</strong></a>
+          <br><br>
+          <a href="#favorite"><strong>Favorites (Investors)</strong></a>
+          <br><br>
+          <a href="#follow"><strong>Followings (Founder)</strong></a>
+          <br><br>
+          <a href="#recommendation"><strong>Recommendations (Founders)</strong></a>
+        </div>
+        <hr>
+        <div>
+          <p class="text-white text-center fw-bold">Followers:</p>
+          <ul>
+            <% current_user.founder.followers.each do |founder| %>
+              <li>
+                <%= link_to founder.company_email, founder_path(founder) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <hr>
+        <div>
+          <p class="text-white text-center fw-bold">Upcoming Request:</p>
+        <%# SHOW ON CURRENT_USER.FOUNDER %>
+          <% if current_user.founder %>
+            <% current_user.founder.follow_requests.each do |request| %>
+              <%= request.followerable.user.email %> wants to follow you
+              <%= button_to "Accept", accept_path(request.followerable) %>
+              <%= button_to "Decline", decline_path(request.followerable) %>
+            <% end %>
+          <% end %>
+        </div>
+        <%# PLEASE DONT REMOVE THIS LINE %>
+        <% if @founder != current_user.founder %>
+          <p>Current_connection between you and <%= @founder.user.first_name %>:</p>
+            <% if current_user.founder.following?(@founder)%>
+              <%= button_to "Unfollow", unfollow_path(@founder) %>
+            <% elsif current_user.founder.sent_follow_request_to?(@founder) %>
+              <%= button_to "Cancel follow request", cancel_path(@founder) %>
+            <% else %>
+              <%= button_to "Follow", follow_path(@founder) %>
+            <% end %>
+        <% end %>
 
-      <div class="d-flex flex-column">
-        <p><strong>Company Email:</strong> <%= @founder.company_email %></p>
-        <p><strong>Company UEN: </strong> <%= @founder.company_UEN %></p>
-        <p><strong>Company Funding Stage:</strong> <%= @founder.funding_stage %></p>
-        <p><strong>Company Date Incorporated:</strong> <%= @founder.date_incorporated %></p>
-      </div><hr>
 
-      <h3><strong>My Favourites</strong></h3>
-      <p>It is a long established fact that a reader will be distracted by the
-      readable content of a page when looking at its layout. The point of using
-      Lorem Ipsum is that it has a more-or-less normal distribution of letters,
-      as opposed to using 'Content here, content here', making it look like
-      readable English. Many desktop publishing packages and web page editors
-      </p><br><br>
+        </div>
+      </div>
+    <div class="col-md-8 m-10 align-items-center" data-controller="favorite">
+
+      <div class="row vh-50" id="detail">
+        <section class="py-5 gy-5 my-5 text-center text-white shadow-5">
+          <h2>Company Details</h2>
+          <hr>
+          <p class="card-text text-center"><strong><span style="color:#482728;">Company Description</span></strong><br>
+          <%= @founder.company_description %></p>
+            <div class="d-flex justify-content-between">
+              <p class="card-text text-center"><strong><span style="color:#482728;">Company UEN</span></strong><br>
+              <%= @founder.company_UEN %></p>
+              <p class="card-text text-center"><strong><span style="color:#482728;">Company Funding Stage</strong></span><br>
+              <%= @founder.funding_stage %></p>
+              <p class="card-text text-center"><strong><span style="color:#482728;">Company UEN</strong></span><br>
+              <%= @founder.company_UEN %></p>
+            </div>
+              <p class="card-text text-center"><strong><span style="color:#482728;">Company Date Incorporated</strong></span><br>
+              <%= @founder.date_incorporated %></p>
+        </section>
+      </div>
+
+      <div class="row vh-50" id="favorite">
+        <section class="py-5 gy-5 my-5 text-center text-white shadow-5">
+              <h2>Favorites (Investors)</h2>
+              <hr>
+              <% unless !(current_user.all_favorited.empty?) %>
+                <p class="text-end fw-bold"><%= link_to "See All", all_path, class:"text-white" %></p>
+              <% end %>
+              <% if current_user.all_favorited.empty? %>
+                <p class="fw-bold display-7">Oh No, you dont have favorite investors! <br>
+                <%= link_to "See All Investors Here", all_path %></p>
+              <% else %>
+                <div class="row g-3 text-dark">
+                  <% current_user.all_favorited.each do |favorite| %>
+                    <div class="col-md-4">
+                      <div class="card h-100 d-flex align-items-center my-3 py-3 bg-neutral">
+                        <% if favorite.photo.key.nil? %>
+                          <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
+                        <% else %>
+                          <%= cl_image_tag favorite.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
+                        <% end %>
+                        <br>
+                        <p><%= favorite.company_name %>(<%= favorite.first_name %>)</p>
+                        <span class="btn btn-primary fw-bold text-white"><%= link_to "Chat", investor_chatrooms_path(favorite.id), class: "text-white"%></span>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+        </section>
+
+      </div>
+
+      <div class="row vh-50" id="follow">
+        <section class="py-5 gy-5 my-5 text-center text-white shadow-5">
+          <h2>Following (Founders)</h2>
+          <hr>
+          <% if current_user.founder.followers.empty? %>
+            <p class="fw-bold display-7">Oh No, you dont have any followers/following</p>
+          <% else %>
+            <div class="row g-3">
+              <% current_user.founder.followers.each do |founder| %>
+                <div class="col-md-4">
+                  <div class="card h-100 d-flex align-items-center">
+                    <% if founder.photo.key.nil? %>
+                      <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
+                    <% else %>
+                      <%= cl_image_tag founder.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
+                    <% end %>
+                    <br>
+                    <p><%= link_to founder.user.email, founder_path(founder) %> <%= button_to "Unfollow this user", unfollow_path(founder) %></p>
+                    <span class="btn btn-primary fw-bold text-white"><%= link_to "Chat", investor_chatrooms_path(favorite.id) %></span>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </section>
+      </div>
+
+      <div class="row vh-50" id="recommendation">
+        <section class="py-5 gy-5 my-5 text-center text-white shadow-5">
+          <h2>Also visit</h2>
+          <hr>
+            <div class="row g-3">
+              <% @filter_founders.each do |founder| %>
+                <div class="col-md-4">
+                  <div class="card h-100 w-100 text-dark" style="width: 18rem;">
+                    <% if founder.photo.key.nil? %>
+                      <img class="card-img-top" style="height: 200px; width: 400px"src="https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Card image cap">
+                    <% else %>
+                      <%= cl_image_tag founder.photo.key, height: 200, width: 200, class: "card-img-top"%>
+                    <% end %>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= founder.company_name %></h5>
+                      <ul>
+                      <% founder.sectors.each do |sector| %>
+                        <li><p><%= sector.name %></p></li>
+                      <% end %>
+                      </ul>
+                      <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Read more</a>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+        </section>
+      </div>
     </div>
   </div>
 </div>

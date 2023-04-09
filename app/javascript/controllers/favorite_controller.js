@@ -2,10 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="favorite"
 export default class extends Controller {
-  static targets = ["heart","savelist"]
+  static targets = ["heart"]
 
   connect() {
-    console.dir(this.savelistTarget)
+    // console.dir(this.savelistTarget)
 
   }
 

@@ -8,7 +8,7 @@ class Founder < ApplicationRecord
              too_long: "%{count} characters is the maximum allowed" }
   validates :company_UEN, uniqueness: true
   validates :company_email, confirmation: true
-  STAGE = ["Seed", "Pre-seed", "Series A", "Series B", "Series C", "Early Stage", "Growth", "Late Stage"]
+  STAGE = ["Seed", "Pre-Seed", "Series A", "Series B", "Series C", "Early Stage", "Growth", "Late Stage"]
   validates :funding_stage, inclusion: { in: STAGE }
 
   belongs_to :user, dependent: :destroy

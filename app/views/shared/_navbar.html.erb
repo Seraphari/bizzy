@@ -35,7 +35,7 @@
           <%= link_to "Add your company", "/founders/new" %>
         <% else %>
           <%# If got company, should display a button with label "Edit profile" %>
-          <%= link_to "Edit Profile", "/founders/#{current_user.founder.id}", class: "btn-sm" %>
+          <%= link_to "My profile", "/founders/#{current_user.founder.id}", class: "btn-sm" %>
         <% end %>
 
         <%# Display that yandao face as avatar %>
