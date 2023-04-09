@@ -30,9 +30,4 @@ Rails.application.routes.draw do
       post 'favorite', to: "investors#toggle_favorite"
     end
   end
-  # resources :founders do
-  #   member do
-  #     post 'favorite', to: "founders#toggle_favorite"
-  #   end
-  # end
 end
