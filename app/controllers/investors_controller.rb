@@ -28,6 +28,17 @@ class InvestorsController < ApplicationController
     end
   end
 
+  def all
+    if params[:query].present?
+      # sql_query = "company_name @@ :query OR company_description @@ :query"
+      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
+      @investors = Investor.search_by_company_name_and_company_description(params[:query])
+    else
+      @investors = Investor.all
+    end
+
+  end
+
   def show
 
   end
