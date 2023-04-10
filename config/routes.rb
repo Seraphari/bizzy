@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   root to: "investors#index"
   get '/home', to: 'pages#home'
+  get 'investors/all', to: 'investors#all', as: 'all'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :founders, except: [:destroy]
 

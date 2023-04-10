@@ -8,7 +8,8 @@
       <div class="investor-modal-profile">
         <div class="investor-modal-intro">
           <div class="investor-modal-image">
-              <%= image_tag('featured-investor1.jpg')%>
+              <%# <%= image_tag('featured-investor1.jpg')%>
+              <%= cl_image_tag investor.photo.key %>
           </div>
           <div class="investor-modal-details">
             <h3 class="extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>

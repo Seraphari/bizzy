@@ -1,6 +1,6 @@
 class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show, :edit, :update]
-  skip_before_action :authenticate_user!, only: :index
+  # before_action :authenticate_user!, only: :toggle_favorite
 
   def index
     if current_user.nil?
@@ -35,6 +35,17 @@ class InvestorsController < ApplicationController
     end
   end
 
+  def all
+    if params[:query].present?
+      # sql_query = "company_name @@ :query OR company_description @@ :query"
+      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
+      @investors = Investor.search_by_company_name_and_company_description(params[:query])
+    else
+      @investors = Investor.all
+    end
+
+  end
+
   def show
 
   end
@@ -59,7 +70,7 @@ class InvestorsController < ApplicationController
   # end
 
   def edit
-
+    @investor = Investor.find(params[:id])
   end
 
   def update
@@ -94,6 +105,6 @@ class InvestorsController < ApplicationController
   end
 
   def investor_params
-    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, sector_ids: [] )
+    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, :photo, sector_ids: [] )
   end
 end

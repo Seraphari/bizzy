@@ -1,6 +1,8 @@
 class Investor < ApplicationRecord
   acts_as_favoritable
 
+
+  has_one_attached :photo
   validates :first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, presence: true
   validates :company_description , length: { maximum: 350,
   too_long: "%{count} characters is the maximum allowed" }
@@ -20,4 +22,6 @@ class Investor < ApplicationRecord
       tsearch: { prefix: true } # <-- now `superman batm` will return something!
     }
 
+  # @investor.photo.attached?
+  # @investor.photo.purge
 end
