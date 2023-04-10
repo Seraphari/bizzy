@@ -14,6 +14,10 @@ class InvestorsController < ApplicationController
         recommendations
       end
       @filter_investors = recommendations.uniq
+      if params[:query].present?
+        @investors = Investor.search_by_company_name_and_company_description(params[:query])
+        @filter_investors = @investors
+      end
     end
 
     if params[:sector].present?
@@ -27,8 +31,6 @@ class InvestorsController < ApplicationController
     end
 
     if params[:query].present?
-      # sql_query = "company_name @@ :query OR company_description @@ :query"
-      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
       @investors = Investor.search_by_company_name_and_company_description(params[:query])
     else
       @investors = Investor.all

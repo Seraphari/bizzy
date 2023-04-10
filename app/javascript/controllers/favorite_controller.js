@@ -2,11 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="favorite"
 export default class extends Controller {
-  static targets = ["heart","savelist"]
+  static targets = ["heart"]
 
   connect() {
-    console.dir(this.savelistTarget)
-
+    // console.dir(this.Target)
   }
 
   update(event) {
@@ -14,7 +13,7 @@ export default class extends Controller {
     if (this.heartTarget.classList.value.includes("fa-regular")) {
       this.heartTarget.classList.remove("fa-regular")
       this.heartTarget.classList.add("fa-solid")
-      this.savelistTarget.insertAdjacentHTML("beforeend", `<p><a href="/investors/${event.params.id}">${event.params.name}</a></p>`)
+      // this.savelistTarget.insertAdjacentHTML("beforeend", `<p><a href="/investors/${event.params.id}">${event.params.name}</a></p>`)
 
     } else {
       this.heartTarget.classList.remove("fa-solid")
