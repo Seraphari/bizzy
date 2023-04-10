@@ -86,6 +86,10 @@
           <% end %>
         </p>
       </div>
+    <% end %>
+  <a class="btn-outline-light text-white text-end fs-5" role="button" href="#top"><i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+</div>
+<%# Wrapper for the entire investors index page %>
 
       <%# Merge with WK - Display investors %>
       <%# Handling for logged-out view %>
@@ -105,11 +109,50 @@
                         <%= image_tag('featured-investor1.jpg')%>
                       </div>
 
-                      <%# this is to store the damn investor name and title %>
-                      <div class="investor-card-title">
-                        <h3 class="s extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>
-                        <p class="body semi-bold"><%= investor.company_name %></p>
-                      </div>
+<%# Section to display all investors.. if there are any %>
+<div class="investors-show-wrapper">
+  <div class="investors-show">
+    <%# TBC - Counting number of results, e.g. "0 result for 'Enterprise' " %>
+    <div class="investors-count caption-s semi-bold">
+      <p>
+        <% if user_signed_in? %>
+          Showing <%= @filter_investors.count %> investors
+        <% else %>
+          Showing <%= @investors.count %> investors
+        <% end %>
+      </p>
+    </div>
+
+    <%# Merge with WK - Display investors %>
+    <%# Handling for logged-out view %>
+    <% if current_user.nil? %>
+      <div class="investors-card-deck">
+        <% @investors.take(30).each do |investor| %>
+          <div class="image-flip">
+            <div class="mainflip flip-0">
+
+              <%# Structure for frontside of each investor card %>
+              <div class="frontside">
+                <div class="investor-card">
+                  <div class="investor-card-profile">
+
+                    <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                    <% if investor.photo.key.nil? %>
+                      <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+                    <% else %>
+                      <% investor_img = cl_image_path(investor.photo.key)  %>
+                    <% end %>
+                  <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                    <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
+                      <%#= image_tag('featured-investor1.jpg')%>
+                    </div>
+
+                    <%# this is to store the damn investor name and title %>
+                    <div class="investor-card-title">
+                      <h3 class="s extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>
+                      <p class="body semi-bold"><%= investor.company_name %></p>
+                    </div>
 
                       <%# this is to store the sectors of each investor %>
                       <div class="investor-card-sectors">
@@ -136,8 +179,46 @@
                 </div>
               </div>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
+      </div>
+
+    <%# Handling for logged-in view %>
+    <% else %>
+
+        <%# Handlings for user search for sector %>
+        <% if params[:sector].present? %>
+          <div class="investors-card-deck">
+            <% @sector_investors.each do |investor| %>
+              <%= render "modal", investor: investor %>
+
+              <%# Start of individual card layout %>
+              <a data-bs-toggle="modal" data-bs-target=<%= "#investor-#{investor.id}" %>>
+                <div class="image-flip">
+                  <div class="mainflip flip-0">
+
+                    <%# Structure for frontside of each investor card %>
+                    <div class="frontside">
+                      <div class="investor-card">
+                        <div class="investor-card-profile">
+
+                          <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                            <% if investor.photo.key.nil? %>
+                              <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+                            <% else %>
+                              <% investor_img = cl_image_path(investor.photo.key)  %>
+                            <% end %>
+                          <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                            <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
+                              <%#= image_tag('featured-investor1.jpg')%>
+                            </div>
+
+                          <%# this is to store the damn investor name and title %>
+                          <div class="investor-card-title">
+                            <h3 class="s extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>
+                            <p class="body semi-bold"><%= investor.company_name %></p>
+                          </div>
 
       <%# Handling for logged-in view %>
       <% else %>
@@ -199,10 +280,44 @@
                       </div>
                     </div>
                   </div>
-                </a>
-                <%# End of individual card layout %>
-              <% end %>
-            </div>
+                </div>
+              </a>
+              <%# End of individual card layout %>
+            <% end %>
+          </div>
+
+        <% elsif params[:stage].present? %>
+          <div class="investors-card-deck">
+            <% @stage_investors.each do |investor| %>
+              <%= render "modal", investor: investor %>
+
+               <%# Start of individual card layout %>
+              <a data-bs-toggle="modal" data-bs-target=<%= "#investor-#{investor.id}" %>>
+                <div class="image-flip">
+                  <div class="mainflip flip-0">
+
+                    <%# Structure for frontside of each investor card %>
+                    <div class="frontside">
+                      <div class="investor-card">
+                        <div class="investor-card-profile">
+
+                          <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                          <% if investor.photo.key.nil? %>
+                            <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+                          <% else %>
+                            <% investor_img = cl_image_path(investor.photo.key)  %>
+                          <% end %>
+                          <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                          <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
+                            <%#= image_tag('featured-investor1.jpg')%>
+                          </div>
+
+                          <%# this is to store the damn investor name and title %>
+                          <div class="investor-card-title">
+                            <h3 class="s extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>
+                            <p class="body semi-bold"><%= investor.company_name %></p>
+                          </div>
 
           <% elsif params[:stage].present? %>
             <div class="investors-card-deck" data-search-investors-target="list">
@@ -262,9 +377,39 @@
                   </div>
                 </a>
                 <%# End of individual card layout %>
+            <% end %>
+          </div>
 
-              <% end %>
-            </div>
+        <% else %>
+          <div class="investors-card-deck">
+            <% @filter_investors.each do |investor| %>
+              <%= render "modal", investor: investor %>
+
+              <%# Start of individual card layout %>
+              <a data-bs-toggle="modal" data-bs-target=<%= "#investor-#{investor.id}" %>>
+                <div class="image-flip">
+                  <div class="mainflip flip-0">
+
+                    <%# Structure for frontside of each investor card %>
+                    <div class="frontside">
+                      <div class="investor-card">
+                        <div class="investor-card-profile">
+                            <% if investor.photo.key.nil? %>
+                              <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+                            <% else %>
+                              <% investor_img = cl_image_path(investor.photo.key)  %>
+                            <% end %>
+                          <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                          <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
+                            <%#= image_tag('featured-investor1.jpg')%>
+                          </div>
+
+                          <%# this is to store the damn investor name and title %>
+                          <div class="investor-card-title">
+                            <h3 class="s extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>
+                            <p class="body semi-bold"><%= investor.company_name %></p>
+                          </div>
 
           <% else %>
             <div class="investors-card-deck" data-search-investors-target="list">
@@ -326,6 +471,18 @@
                 <%# End of individual card layout %>
 
               <% end %>
+            <% end %>
+          </div>
+
+          <div class="investor-card-profile">
+            <% if investor.photo.key.nil? %>
+              <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+            <% else %>
+              <% investor_img = cl_image_path(investor.photo.key)  %>
+            <% end %>
+
+            <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
             </div>
 
           <% end %>

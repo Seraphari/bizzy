@@ -18,18 +18,16 @@ Rails.application.routes.draw do
     resources :messages, only: :create
   end
 
+  get 'investors/all', to: 'investors#all', as: 'all'
+
   resources :investors do
     resource :chatrooms, only: :show
   end
+
 
   resources :investors do
     member do
       post 'favorite', to: "investors#toggle_favorite"
     end
   end
-  # resources :founders do
-  #   member do
-  #     post 'favorite', to: "founders#toggle_favorite"
-  #   end
-  # end
 end

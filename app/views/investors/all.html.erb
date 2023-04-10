@@ -1,0 +1,94 @@
+<div class="investors-heading-wrapper">
+  <div class="heading-info">
+    <h1 class="extra-bold">
+      Meet our investors
+    </h1>
+  </div>
+
+  <div class="search-investor">
+    <%# Search field for investor index page %>
+    <div class="search-field">
+      <%= form_with url: investors_path, method: :get, html: {
+        class: "", data: {search_investors_target: "form"}
+      } do %>
+        <%# Text field in search bar %>
+
+        <%= text_field_tag :query,
+          params[:query],
+          class: "searchbar-test subheader-s semi-bold",
+          placeholder: '  Search',
+          data: {
+            search_investors_target: "input"
+        } %>
+
+        <%# Submit button %>
+        <%= submit_tag "Search", class: "btn-submit-search subheader-s bold" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="investors-show-wrapper">
+  <div class="investors-show">
+    <div class="investors-count caption-s semi-bold">
+      <p>
+          Showing <%= @investors.count %> investors
+      </p>
+    </div>
+
+    <div class="investors-card-deck">
+      <% @investors.each do |investor| %>
+        <%= render "modal", investor: investor %>
+
+        <%# Start of individual card layout %>
+        <a data-bs-toggle="modal" data-bs-target=<%= "#investor-#{investor.id}" %>>
+          <div class="image-flip">
+            <div class="mainflip flip-0">
+
+              <%# Structure for frontside of each investor card %>
+              <div class="frontside">
+                <div class="investor-card">
+                  <div class="investor-card-profile">
+
+                    <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                    <div class="investor-card-img">
+                      <%= image_tag('featured-investor1.jpg')%>
+                    </div>
+
+                    <%# this is to store the damn investor name and title %>
+                    <div class="investor-card-title">
+                      <h3 class="s extra-bold"><%= investor.first_name %> <%= investor.last_name %></h3>
+                      <p class="body semi-bold"><%= investor.company_name %></p>
+                    </div>
+
+                    <%# this is to store the sectors of each investor %>
+                    <div class="investor-card-sectors">
+                      <% investor.sectors.each do |sector| %>
+                        <div class="sector-tag caption-s semi-bold">
+                          <%= sector.name %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <%# Structure for backside of each investor card %>
+              <div class="backside">
+                <div class="investor-card">
+                  <div class="investor-card-profile">
+                    <div class="investor-card-title">
+                      <h3 class="s extra-bold"><%= investor.company_name %></h3>
+                      <p class="body regular"><%= investor.company_description %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <%# End of individual card layout %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -34,7 +34,7 @@ class FoundersController < ApplicationController
     @founder = Founder.new(founder_params)
     @founder.user = current_user
     if @founder.save!
-        redirect_to  investors_path #go to the recommendation page
+        redirect_to  founder_path(@founder) #go to the recommendation page
     else
         render :new, status: :unprocessable_entity
     end
@@ -64,7 +64,7 @@ class FoundersController < ApplicationController
 
     @founder.unfollow(current_user.founder) if @founder.mutual_following_with?(current_user.founder)
     current_user.founder.unfollow(@founder)
-    redirect_to founder_path(current_user.founder)
+    redirect_to founder_path(@founder)
   end
 
   def accept
@@ -75,7 +75,7 @@ class FoundersController < ApplicationController
 
     @founder.accept_follow_request_of(current_user.founder)
     # make_it_a_friend_request
-    redirect_to founder_path(@founder)
+    redirect_to founder_path(current_user.founder)
   end
 
   def decline
@@ -89,7 +89,22 @@ class FoundersController < ApplicationController
   def cancel
     @founder = Founder.find(params[:id])
     current_user.founder.remove_follow_request_for(@founder)
-    redirect_to founder_path(@founder)
+    redirect_to founder_path(current_user.founder)
+  end
+
+  def toggle_favorite
+    @founder = Founder.find(params[:id])
+    current_user.favorited?(@founder) ? current_user.unfavorite(@founder) : current_user.favorite(@founder)
+
+    # respond_to do |format|
+    #   if toggle_favorite.save
+    #     format.html { redirect_to founder_path(@founder) }
+    #     format.json
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json
+    #   end
+    # end
   end
 
   private

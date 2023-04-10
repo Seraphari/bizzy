@@ -10,12 +10,16 @@
       <ul class="navbar-left-links">
         <%# Display About link %>
         <li>
-          <%= link_to "About", "#", class: "nav-link" %>
+          <%= link_to "Home", "/home", class: "nav-link" %>
         </li>
 
         <%# Display Investor link %>
         <li>
-            <%= link_to "Investor", "#", class: "nav-link" %>
+            <% if user_signed_in? %>
+              <%= link_to "Investor", "/investors/all", class: "nav-link" %>
+            <% else %>
+              <%= link_to "Investor", "#", class: "nav-link" %>
+            <% end %>
         </li>
 
         <%# Display Founder link %>
@@ -35,12 +39,16 @@
           <%= link_to "Add your company", "/founders/new" %>
         <% else %>
           <%# If got company, should display a button with label "Edit profile" %>
-          <%= link_to "Edit Profile", "/founders/#{current_user.founder.id}", class: "btn-sm solid" %>
+          <%= link_to "My Profile", "/founders/#{current_user.founder.id}", class: "btn-sm solid" %>
         <% end %>
 
         <%# Display that yandao face as avatar %>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-        <%# Dropdown under avatar %>
+        <% if current_user.photo.key.nil? %>
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <% else %>
+          <%= cl_image_tag current_user.photo.key, height: 300, width: 400, crop: :fill, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false%>
+        <% end %>
+
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
           <%= link_to "Action", "#", class: "dropdown-item" %>
           <%= link_to "Another action", "#", class: "dropdown-item" %>
@@ -62,4 +70,6 @@
       <% end %>
     </div>
   </div>
+
+
 </div>
