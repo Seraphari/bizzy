@@ -104,8 +104,15 @@
                   <div class="investor-card-profile">
 
                     <%# CHANGE THIS - IT'S STATIC IMG ATM %>
-                    <div class="investor-card-img">
-                      <%= image_tag('featured-investor1.jpg')%>
+                    <% if investor.photo.key.nil? %>
+                      <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+                    <% else %>
+                      <% investor_img = cl_image_path(investor.photo.key)  %>
+                    <% end %>
+                  <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                    <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
+                      <%#= image_tag('featured-investor1.jpg')%>
                     </div>
 
                     <%# this is to store the damn investor name and title %>
@@ -162,9 +169,16 @@
                         <div class="investor-card-profile">
 
                           <%# CHANGE THIS - IT'S STATIC IMG ATM %>
-                          <div class="investor-card-img">
-                            <%= image_tag('featured-investor1.jpg')%>
-                          </div>
+                            <% if investor.photo.key.nil? %>
+                              <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+                            <% else %>
+                              <% investor_img = cl_image_path(investor.photo.key)  %>
+                            <% end %>
+                          <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                            <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
+                              <%#= image_tag('featured-investor1.jpg')%>
+                            </div>
 
                           <%# this is to store the damn investor name and title %>
                           <div class="investor-card-title">
@@ -218,8 +232,15 @@
                         <div class="investor-card-profile">
 
                           <%# CHANGE THIS - IT'S STATIC IMG ATM %>
-                          <div class="investor-card-img">
-                            <%= image_tag('featured-investor1.jpg')%>
+                          <% if investor.photo.key.nil? %>
+                            <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+                          <% else %>
+                            <% investor_img = cl_image_path(investor.photo.key)  %>
+                          <% end %>
+                          <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+                          <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
+                            <%#= image_tag('featured-investor1.jpg')%>
                           </div>
 
                           <%# this is to store the damn investor name and title %>
@@ -273,10 +294,15 @@
                     <div class="frontside">
                       <div class="investor-card">
                         <div class="investor-card-profile">
-
+                            <% if investor.photo.key.nil? %>
+                              <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+                            <% else %>
+                              <% investor_img = cl_image_path(investor.photo.key)  %>
+                            <% end %>
                           <%# CHANGE THIS - IT'S STATIC IMG ATM %>
-                          <div class="investor-card-img">
-                            <%= image_tag('featured-investor1.jpg')%>
+                          <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
+                            <%#= image_tag('featured-investor1.jpg')%>
                           </div>
 
                           <%# this is to store the damn investor name and title %>
@@ -336,8 +362,14 @@
           </div>
 
           <div class="investor-card-profile">
-            <div class="investor-card-img">
-              <%= image_tag('featured-investor1.jpg')%>
+            <% if investor.photo.key.nil? %>
+              <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+            <% else %>
+              <% investor_img = cl_image_path(investor.photo.key)  %>
+            <% end %>
+
+            <div class="investor-card-img" style="background-image: url(<%= investor_img %>);">
+
             </div>
 
             <%# this is to store the damn investor name and title %>

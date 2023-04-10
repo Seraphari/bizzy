@@ -1,6 +1,6 @@
 class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show, :edit, :update]
-  skip_before_action :authenticate_user!, only: :index
+  # before_action :authenticate_user!, only: :toggle_favorite
 
   def index
     if current_user.nil?
@@ -81,6 +81,10 @@ class InvestorsController < ApplicationController
   end
 
   def investor_params
+<<<<<<< HEAD
     params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :photo, :ticket_size, sector_ids: [] )
+=======
+    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, :photo, sector_ids: [] )
+>>>>>>> master
   end
 end
