@@ -81,10 +81,6 @@ class InvestorsController < ApplicationController
   end
 
   def investor_params
-<<<<<<< HEAD
     params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :photo, :ticket_size, sector_ids: [] )
-=======
-    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, :photo, sector_ids: [] )
->>>>>>> master
   end
 end
