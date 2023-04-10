@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["heart"]
 
   connect() {
-    console.dir(this.savelistTarget)
+    // console.dir(this.savelistTarget)
 
   }
 

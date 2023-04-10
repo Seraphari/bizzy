@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_one :founder
   has_one :investor
   has_many :messages
+  has_one_attached :photo
 
   # validates_uniqueness_of :email
   # scope :all_except, ->(user) { where.not(id: user) }

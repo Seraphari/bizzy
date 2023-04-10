@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   root to: "investors#index"
   get '/home', to: 'pages#home'
-  get 'investors/all', to: 'investors#all', as: 'all'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :founders, except: [:destroy]
 
@@ -19,18 +18,16 @@ Rails.application.routes.draw do
     resources :messages, only: :create
   end
 
+  get 'investors/all', to: 'investors#all', as: 'all'
+
   resources :investors do
     resource :chatrooms, only: :show
   end
+
 
   resources :investors do
     member do
       post 'favorite', to: "investors#toggle_favorite"
     end
   end
-  # resources :founders do
-  #   member do
-  #     post 'favorite', to: "founders#toggle_favorite"
-  #   end
-  # end
 end

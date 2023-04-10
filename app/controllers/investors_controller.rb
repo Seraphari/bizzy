@@ -33,6 +33,7 @@ class InvestorsController < ApplicationController
     else
       @investors = Investor.all
     end
+
   end
 
   def all
@@ -55,41 +56,16 @@ class InvestorsController < ApplicationController
     current_user.favorited?(@investor) ? current_user.unfavorite(@investor) : current_user.favorite(@investor)
   end
 
-  # def new
-  #   @investor= Investor.new
-  # end
-
-  # def create
-  #   @investor = Investor.new(investor_params)
-
-  #   if @investor.save
-  #       redirect_to  investor_path(@investor)
-  #   else
-  #       render :new, status: :unprocessable_entity
-  #   end
-  # end
-
   def edit
-    @investor = Investor.find(params[:id])
+
   end
 
   def update
     if @investor.update(investor_params)
-      redirect_to investor_path(@investor)
+      redirect_to all_path
     else
       render :edit, status: :unprocessable_entity
     end
-  end
-
-  def all
-    if params[:query].present?
-      # sql_query = "company_name @@ :query OR company_description @@ :query"
-      # @investors = Investor.where(sql_query, query: "%#{params[:query]}%")
-      @investors = Investor.search_by_company_name_and_company_description(params[:query])
-    else
-      @investors = Investor.all
-    end
-
   end
 
   # def destroy
@@ -105,6 +81,6 @@ class InvestorsController < ApplicationController
   end
 
   def investor_params
-    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :ticket_size, :photo, sector_ids: [] )
+    params.require(:investor).permit(:first_name, :last_name, :company_name, :company_description, :company_email, :company_UEN, :funding_stage, :photo, :ticket_size, sector_ids: [] )
   end
 end
