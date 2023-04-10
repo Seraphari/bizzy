@@ -6,13 +6,13 @@ export default class extends Controller {
 
   connect() {
     // console.dir(this.savelistTarget)
-
   }
 
   update() {
     if (this.heartTarget.classList.value.includes("fa-regular")) {
       this.heartTarget.classList.remove("fa-regular")
       this.heartTarget.classList.add("fa-solid")
+      // this.savelistTarget.insertAdjacentHTML("beforeend", `<p><a href="/investors/${event.params.id}">${event.params.name}</a></p>`)
     } else {
       this.bookmarkTarget.classList.remove("fa-solid")
       this.bookmarkTarget.classList.add("fa-regular")
