@@ -10,12 +10,16 @@
       <ul class="navbar-left-links">
         <%# Display About link %>
         <li>
-          <%= link_to "About", "#", class: "nav-link" %>
+          <%= link_to "Home", "/home", class: "nav-link" %>
         </li>
 
         <%# Display Investor link %>
         <li>
-            <%= link_to "Investor", "#", class: "nav-link" %>
+            <% if user_signed_in? %>
+              <%= link_to "Investor", "/investors/all", class: "nav-link" %>
+            <% else %>
+              <%= link_to "Investor", "#", class: "nav-link" %>
+            <% end %>
         </li>
 
         <%# Display Founder link %>
