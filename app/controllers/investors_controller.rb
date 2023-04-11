@@ -1,5 +1,6 @@
 class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show, :edit, :update]
+  skip_before_action :authenticate_user!, only: :index
   # before_action :authenticate_user!, only: :toggle_favorite
 
   def index

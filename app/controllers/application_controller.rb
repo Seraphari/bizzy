@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name])
   end
 
-  def after_sign_in_path_for(resource)
-    new_founder_path if current_user.founder.nil?
+  def after_sign_in_path_for(current_user)
+    if current_user.founder.nil?
+      new_founder_path
+    else
+      investors_path
+    end
   end
 end
