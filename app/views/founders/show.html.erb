@@ -1,10 +1,10 @@
 <%# PLEASE DONT REMOVE THIS LINE %>
 <% if @founder.user == current_user %>
-<div class="container-fluid" style="background-color: #F6F7F8">
+<div class="container-fluid" style="background-color: #294C60; font-family:'Righteous'; font-size: 20px;">
   <div class="row">
     <div class="col-md-4 m-10 p-5" data-controller="favorite">
       <div class="position-sticky top-0">
-        <div class="text-white text-center g-5 shadow-5" style="background-color:white; border-radius: 22% 78% 12% 88% / 92% 11% 89% 8%;">
+        <div class="text-white text-center g-5 shadow-5" style="background-color:white; border-radius: 25% 68% 20% 40% / 92% 20% 70% 15%;">
           <% if current_user.founder.photo.key.nil? %>
             <span style="height:350px; width: 350px"><img src="https://cdn.dribbble.com/users/10288336/screenshots/17227912/media/f1dd5ba3365edf67744b113fe183c7f9.jpg?compress=1&resize=400x300&vertical=top" alt=""></span>
           <% else %>
@@ -15,8 +15,6 @@
           <a href="#detail"><strong>Company Details</strong></a>
           <br><br>
           <a href="#favorite"><strong>Favorites (Investors)</strong></a>
-          <%# <br><br>
-          <a href="#follow"><strong>Followings (Founder)</strong></a> %>
           <br><br>
           <a href="#recommendation"><strong>Recommendations (Founders)</strong></a>
         </div>
@@ -24,13 +22,13 @@
         <% unless current_user.founder.followers.empty? %>
         <hr>
           <div>
-            <p class="text-dark text-center fw-bold">Followers:</p>
+            <p class="text-white text-center fw-bold">Followers:</p>
               <% current_user.founder.followers.each do |founder| %>
                 <div class="notification">
                   <% if founder.photo.key.nil? %>
                     <%= image_tag "https://kitt.lewagon.com/placeholder/users/arthur-littm", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
                   <% else %>
-                    <%= cl_image_tag founder.photo.key, height: 200, width: 200, crop: :fit, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false%>
+                    <%= cl_image_tag founder.photo.key, height: 50, width: 200, crop: :fit, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false%>
                   <% end %>
                   <div class="notification-content">
                     <p><small><%= founder.company_name %> (<%= founder.company_email %>)</small></p>
@@ -45,14 +43,20 @@
           <hr>
           <div>
 
-            <p class="text-dark text-center fw-bold">Upcoming Request:</p>
+            <p class="text-white text-center fw-bold">Upcoming Request:</p>
           <%# SHOW ON CURRENT_USER.FOUNDER %>
             <% unless current_user.founder.follow_requests.empty? %>
               <div class="notification" style="background-color:#6A6262; color:white;">
-                <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+                <% current_user.founder.follow_requests.each do |request| %>
+                  <% if request.followerable.photo.key.nil? %>
+                    <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+                  <% else %>
+                    <%= cl_image_tag request.followerable.photo.key, height: 200, width: 200, crop: :fill, class:"avatar-large" %>
+                  <% end %>
+                <% end %>
                 <div class="notification-content">
                   <% current_user.founder.follow_requests.each do |request| %>
-                    <%= link_to request.followerable.user.email, founder_path(request.followerable), class:"text-white"%> wants to follow you
+                    <%= link_to request.followerable.company_name, founder_path(request.followerable), class:"text-success"%> wants to follow you
                   <% end %>
                 </div>
                 <div class="notification-actions">
@@ -83,38 +87,43 @@
 
     <div class="col-md-8 m-10 align-items-center" data-controller="favorite">
 
-      <div class="row vh-50 w-75 mx-auto" id="detail">
-        <section class="py-5 gy-5 my-5 text-center text-black shadow-5" style="background-color: #D0E1D4; border-radius: 10%">
-          <h2><%= current_user.founder.company_name %></h2>
-          <hr>
-          <p class="card-text text-center"><strong><span style="color: black; text-decoration: underline;">Company Description</span></strong><br>
-          <%= current_user.founder.company_description %></p>
-            <div class="d-flex justify-content-between">
-              <p class="card-text text-center"><strong><span style="color: black; text-decoration: underline;">Company UEN</span></strong><br>
+      <div class="row py-5 vh-100 w-75 mx-auto" id="detail">
+        <section class="py-5 gy-5  text-center text-black shadow-5" style="background-color: #D0E1D4; border-radius: 10%">
+          <div>
+            <h2><%= current_user.founder.company_name %></h2>
+            <hr>
+              <p class="card-text text-center"><strong><span style="color: black;">Company Description</span></strong><br>
+              <%= current_user.founder.company_description %></p>
+              <p class="card-text text-center"><strong><span style="color: black;">Company UEN</span></strong><br>
               <%= current_user.founder.company_UEN %></p>
-              <p class="card-text text-center"><strong><span style="color: black; text-decoration: underline;">Company Funding Stage</strong></span><br>
+              <p class="card-text text-center"><strong><span style="color: black;">Company Funding Stage</strong></span><br>
               <%= current_user.founder.funding_stage %></p>
-              <p class="card-text text-center"><strong><span style="color: black; text-decoration: underline;">Company UEN</strong></span><br>
+              <p class="card-text text-center"><strong><span style="color: black;">Company UEN</strong></span><br>
               <%= current_user.founder.company_UEN %></p>
-            </div>
-              <p class="card-text text-center"><strong><span style="color: black; text-decoration: underline;">Company Date Incorporated</strong></span><br>
+              <p class="card-text text-center"><strong><span style="color: black;">Company Date Incorporated</strong></span><br>
               <%= current_user.founder.date_incorporated %></p>
+              <p class="card-text text-center"><strong><span style="color: black;">Sectors</strong></span><br><p>
+                <div class="row flex justify-content-around">
+                  <% current_user.founder.sectors.each do |sector| %>
+                    <div class="col-md-4"><a class="btn btn-ghost" href="#"><%= sector.name %></a></div>
+                  <% end %>
+                </div>
+          </div>
         </section>
       </div>
 
       <div class="row vh-50 w-75 mx-auto" id="favorite">
-        <section class="py-5 gy-5 my-5 text-center text-white shadow-5" style="background-color: #294C60; border-radius: 10%">
+        <section class="py-5 gy-5 my-5 text-center text-dark shadow-5" style="background-color: #D0E1D4; border-radius: 10%">
               <h2>Favorites (Investors)</h2>
               <hr>
               <% if current_user.all_favorited.empty? %>
-                <p class="fw-bold display-7 text-white">You dont have favorite investors...<br><%= link_to "See All Investors Here", all_path %></p>
+                <p class="fw-bold display-7 text-dark">You dont have favorite investors...<br><%= link_to "See All Investors Here", all_path %></p>
               <% else %>
-              <p class="text-end fw-bold"><%= link_to "See All", all_path, class:"text-white" %></p>
                 <div class="row g-3 text-dark">
                   <span class="text-end text-white"><%= link_to "See All Investors Here", all_path %>
                   <% current_user.all_favorited.each do |favorite| %></span>
                     <div class="col-md-4">
-                      <div class="card h-100 d-flex align-items-center my-3 py-3 bg-neutral">
+                      <div class="card h-100 d-flex align-items-center my-2 py-2 bg-white">
                         <% if favorite.photo.key.nil? %>
                           <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
                         <% else %>
@@ -122,7 +131,7 @@
                         <% end %>
                         <br>
                         <p><%= favorite.company_name %>(<%= favorite.first_name %>)</p>
-                        <span class="btn btn-primary fw-bold text-white"><%= link_to "Chat", investor_chatrooms_path(favorite.id), class: "text-white"%></span>
+                        <span class="btn btn-dark fw-bold text-white"><%= link_to "Chat", investor_chatrooms_path(favorite.id), class: "text-white"%></span>
                       </div>
                     </div>
                   <% end %>
@@ -139,17 +148,19 @@
             <div class="row g-3">
               <% @filter_founders.each do |founder| %>
                 <div class="col-md-4">
-                  <div class="card h-100 w-100 text-dark" style="width: 18rem;">
-                    <% if founder.photo.key.nil? %>
-                      <img class="card-img-top" style="height: 200px; width: 400px"src="https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Card image cap">
-                    <% else %>
-                      <%= cl_image_tag founder.photo.key, height: 200, width: 200, class: "card-img-top"%>
-                    <% end %>
-                    <div class="card-body">
-                      <h5 class="card-title"><%= founder.company_name %></h5>
-                      <a class="btn btn-flat" href=<%= "/founders/#{founder.id}" %>>Read more</a>
+                  <a href= <%= "/founders/#{founder.id}" %>>
+                    <div class="card h-100 w-100 text-dark bg-white" style="width: 18rem; font-family:'Righteous'; font-size: 20px;">
+                      <% if founder.photo.key.nil? %>
+                        <img class="card-img-top" style="height: 200px; width: 400px"src="https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Card image cap">
+                      <% else %>
+                        <%= cl_image_tag founder.photo.key, height: 200, width: 200, class: "card-img-top"%>
+                      <% end %>
+                      <div class="card-body">
+                        <h5 class="card-title"><%= founder.company_name %></h5>
+
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
               <% end %>
             </div>
@@ -245,9 +256,8 @@
             </div>
         </div>
       <% else %>
-        <div class="container bg-white opacity-75">
-          <p class="text-center fw-bold display-7" style="color:#E1DD8F;">Follow him/her to know more...</p>
-        </div>
+        <hr>
+        <p class="text-center fw-bold display-7" style="color:#E1DD8F;">Follow him/her to know more...</p>
       <% end %>
     </div>
   </div>
