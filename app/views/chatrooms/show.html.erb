@@ -1,29 +1,67 @@
-<div class="container chatroom"
-     data-controller="chatroom-subscription"
-     data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
-     data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
-  <h1>#<%= @chatroom.name.capitalize %></h1>
-
-  <div class="messages" data-chatroom-subscription-target="messages">
-    <% @chatroom.messages.each do |message| %>
-      <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
-        <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
-          <%= render "messages/message", message: message %>
+<div class="container-fluid">
+  <div class="row vh-100 flex justify-content-between">
+    <div class="col-md-4 d-sm-none d-md-block">
+      <div class="vh-100 mx-auto p-5 overflow-hidden text-white" style="background-color: #586A6A;">
+        <div class="text-center">
+          <% if current_user.founder.photo.key.nil? %>
+            <span style="height:350px; width: 350px"><img src="https://cdn.dribbble.com/users/10288336/screenshots/17227912/media/f1dd5ba3365edf67744b113fe183c7f9.jpg?compress=1&resize=400x300&vertical=top" alt=""></span>
+          <% else %>
+            <%= cl_image_tag current_user.founder.photo.key, height: 150, width: 150, crop: :fill %>
+          <% end %>
+          <p><%= current_user.founder.company_name %>(You)</p>
+          <hr>
         </div>
-      </div>
-    <% end %>
-  </div>
 
-  <%= simple_form_for [@chatroom, @message],
-  html:
-    { data:
-      { action: "turbo:submit-end->chatroom-subscription#resetForm" },
-        class: "d-flex" } do |f| %>
-    <%= f.input :content,
-      label: false,
-      placeholder: "Message ##{@chatroom.name}",
-      wrapper_html: {class: "flex-grow-1"}
-    %>
-    <%= f.submit "Send", class: "btn btn-primary mb-3" %>
-  <% end %>
+        <% current_user.all_favorited.each do |favorite| %>
+          <div class="notification overflow-hidden">
+            <% if favorite.photo.key.nil? %>
+              <%= image_tag "https://kitt.lewagon.com/placeholder/users/arthur-littm", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% else %>
+              <%= cl_image_tag favorite.photo.key, height: 180, width: 200, crop: :fit, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false%>
+            <% end %>
+            <div class="notification-content">
+              <p><small><%= favorite.company_name %> (<%= favorite.company_email %>)</small></p>
+            </div>
+            <div class="notification-actions">
+              <a href= <%= "/investors/#{favorite.id}/chatrooms" %>>Chat <i class="fa-regular fa-message"></i></a>
+              <a href="">Delete <i class="far fa-trash-alt"></i></a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+    <div class="col-md-8 h-100">
+      <div class="container chatroom"
+          data-controller="chatroom-subscription"
+          data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+          data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
+        <h1>#<%= @chatroom.name.capitalize %></h1>
+
+        <div class="messages" data-chatroom-subscription-target="messages">
+          <% @chatroom.messages.each do |message| %>
+            <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+              <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+                <%= render "messages/message", message: message %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <%= simple_form_for [@chatroom, @message],
+        html:
+          { data:
+            { action: "turbo:submit-end->chatroom-subscription#resetForm" },
+              class: "d-flex" } do |f| %>
+          <%= f.input :content,
+            label: false,
+            placeholder: "Message ##{@chatroom.name}",
+            wrapper_html: {class: "flex-grow-1"}
+          %>
+          <%= f.submit "Send", class: "btn btn-warning mb-3 text-white fw-bold" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

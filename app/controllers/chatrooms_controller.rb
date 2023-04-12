@@ -8,4 +8,5 @@ class ChatroomsController < ApplicationController
     @chatroom = Chatroom.find_or_create_by(investor: investor, name: investor.first_name)
     @message = Message.new
   end
+
 end

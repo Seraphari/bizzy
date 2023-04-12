@@ -4,6 +4,11 @@ class InvestorsController < ApplicationController
   # before_action :authenticate_user!, only: :toggle_favorite
 
   def index
+
+    # if current_user.investor.nil? == false
+    #   redirect_to "investors/#{current_user.investor.id}/chatrooms"
+    # else
+
     if current_user.nil?
       @investors = Investor.all
     else
@@ -36,6 +41,8 @@ class InvestorsController < ApplicationController
     else
       @investors = Investor.all
     end
+
+    # end
 
   end
 
