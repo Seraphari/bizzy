@@ -46,14 +46,23 @@
         <% if current_user.photo.key.nil? %>
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
         <% else %>
-          <%= cl_image_tag current_user.photo.key, height: 300, width: 400, crop: :fill, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false%>
+          <%= cl_image_tag current_user.photo.key, height: 200, width: 200, crop: :fit, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false%>
         <% end %>
 
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <%= link_to "Action", "#", class: "dropdown-item" %>
-          <%= link_to "Another action", "#", class: "dropdown-item" %>
+        <div class="dropdown-menu" style="left:78%" aria-labelledby="navbarDropdown">
+          <% if current_user.founder.nil? %>
+            <%= link_to "Create profile", "/founders/new", class: "dropdown-item" %>
+          <% else %>
+            <%= link_to "Recommedations", "/investors", class: "dropdown-item" %>
+          <% end %>
+          <% if current_user.founder.nil? %>
+            <%= link_to "Add your company", "/founders/new", class: "dropdown-item" %>
+          <% else %>
+            <%= link_to "Edit Profile", "/founders/#{current_user.founder.id}/edit", class: "dropdown-item" %>
+          <% end %>
           <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
         </div>
+
       </ul>
       <% else %>
         <%# If user not logged in, display "Log in" and "Register" button on right of navbar %>

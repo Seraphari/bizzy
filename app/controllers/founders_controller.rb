@@ -80,6 +80,7 @@ class FoundersController < ApplicationController
 
   def decline
     @founder = Founder.find(params[:id])
+
     @user = @founder.user
     current_user.founder.decline_follow_request_of(@founder)
     current_user.founder.decline_follow_request_of(@user)
@@ -88,6 +89,7 @@ class FoundersController < ApplicationController
 
   def cancel
     @founder = Founder.find(params[:id])
+
     current_user.founder.remove_follow_request_for(@founder)
     redirect_to founder_path(current_user.founder)
   end

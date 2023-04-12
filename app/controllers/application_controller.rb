@@ -20,4 +20,17 @@ class ApplicationController < ActionController::Base
       investors_path
     end
   end
+
+
+  # def after_sign_in_path_for(current_user)
+  #   if current_user.investor.nil? == false
+  #     investor_chatrooms
+  #   elsif current_user.founder.nil?
+  #     new_founder_path
+  #   else
+  #     investors_path
+  #   end
+
+  # end
+
 end

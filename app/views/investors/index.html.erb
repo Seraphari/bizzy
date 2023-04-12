@@ -70,7 +70,6 @@
         </p>
       </div>
     <% end %>
-  <a class="btn-outline-light text-white text-end fs-5" role="button" href="#top"><i class="fa-solid fa-arrow-up-from-bracket"></i></a>
 </div>
 <%# Wrapper for the entire investors index page %>
 <div class="investors-show-wrapper">
@@ -192,7 +191,7 @@
                     <div class="backside">
                       <div class="investor-card" data-controller="favorite">
                         <div class="investor-card-profile">
-                          <div class="investor-card-title">
+                          <div class="investor-card-title" >
                             <h3 class="s extra-bold"><%= investor.company_name %></h3>
                             <p class="body regular"><%= investor.company_description %></p>
                           </div>
@@ -267,10 +266,11 @@
             <% end %>
           </div>
            <% else %>
-          <div class="investors-card-deck" data-search-investors-target="list">
+          <div class="investors-card-deck">
             <% @filter_investors.each do |investor| %>
               <%= render "modal", investor: investor %>
-
+              <div class="row g-2 flex justify-content-between" data-search-investors-target="list">
+                <div class="col-md-2">
               <%# Start of individual card layout %>
               <a data-bs-toggle="modal" data-bs-target=<%= "#investor-#{investor.id}" %>>
                 <div class="image-flip">
@@ -310,10 +310,19 @@
                     <div class="backside">
                       <div class="investor-card" data-controller="favorite">
                         <div class="investor-card-profile">
+
                           <div class="investor-card-title">
                             <h3 class="s extra-bold"><%= investor.company_name %></h3>
                             <p class="body regular"><%= investor.company_description %></p>
                           </div>
+                          <div class="text-center py-5">
+                            <%= link_to favorite_investor_path(investor), data: {turbo_method: :post, action: "click->favorite#update"} do %>
+                              <i class="fa-bookmark <%= current_user.favorited?(investor) ? "fa-solid" : "fa-regular" %>" data-favorite-target="heart"></i>
+                            <% end %>
+                          </div>
+
+
+
                         </div>
                       </div>
                     </div>
@@ -321,6 +330,9 @@
                 </div>
               </a>
               <%# End of individual card layout %>
+
+                </div>
+              </div>
 
             <% end %>
           </div>
