@@ -28,9 +28,14 @@
   <div class="investor-card-deck">
     <% @investors.first(3).each do |investor| %>
       <div class="investor-card">
-        <div class="investor-card-image">
-          <%= image_tag('featured-investor1.jpg')%>
-        </div>
+        <% if investor.photo.key.nil? %>
+          <% investor_img = "https://images.pexels.com/photos/209620/pexels-photo-209620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" %>
+        <% else %>
+          <% investor_img = cl_image_path(investor.photo.key)  %>
+        <% end %>
+          <%# CHANGE THIS - IT'S STATIC IMG ATM %>
+          <div class="investor-card-img" style="background-image: url(<%= investor_img %>);"></div>
+
         <div class="investor-card-details">
           <%# `card-bio` is to configure the spacing between investor name and company %>
           <div class="investor-bio">
